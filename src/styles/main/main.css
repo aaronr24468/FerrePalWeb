@@ -1,0 +1,337 @@
+.ferrepal_main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    font-family: local;
+
+    .aside_account {
+        width: 15%;
+        height: 100vh;
+        background: rgb(133, 133, 133);
+        box-shadow: 1px 0 5px black;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0 0 0;
+
+        .logoFerre {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .user {
+            width: 100%;
+            height: 80px;
+            box-shadow: -1px -2px 5px black;
+            position: relative;
+
+
+            .btnUser {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 0 20px 0 20px;
+                gap: 10px;
+                background: rgb(255, 255, 255);
+                border: none;
+
+                .user_Auth_logo {
+                    width: 30px;
+                    height: 30px;
+                }
+
+                &:hover {
+                    box-shadow: inset 0 0 5px black;
+                }
+
+                &:active {
+                    box-shadow: 0 0 5px black;
+                }
+            }
+
+            .hide_Button {
+                position: absolute;
+                top: -30px;
+                width: 100%;
+                height: 30px;
+                border: none;
+                background: white;
+                box-shadow: inset 0 0 5px black;
+                cursor: pointer;
+                transition: opacity 0.2s linear;
+                transform: translateX(-100%);
+                transition: all 0.2s linear;
+
+                &:active {
+                    background: rgb(240, 240, 240);
+                }
+            }
+
+            .hide_Button[show="true"] {
+                transform: translateX(0%);
+            }
+        }
+    }
+
+    .main_screen {
+        width: 100%;
+        height: 100%;
+        padding: 30px 30px 0 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .title_container {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            .title_customers {
+                font-size: 2.5rem;
+                font-weight: 600;
+            }
+
+            .new_Customer_Container {
+                width: 50px;
+                aspect-ratio: 1;
+
+                .btn_new_customer {
+                    width: 100%;
+                    height: 100%;
+                    background: none;
+                    border: none;
+
+                    .plus_logo_customer {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+
+                &:active {
+                    transform: scale(1);
+                }
+            }
+        }
+
+
+        .inputNamesContainer {
+            width: 100%;
+            height: 40px;
+            position: relative;
+            box-shadow: 0 0 5px black;
+            border-radius: 5px;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row;
+
+            .names_Filter_Input {
+                width: 100%;
+                height: 100%;
+                font-size: 1.2rem;
+                padding: 0 10px 0 50px;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .imageSearch {
+                width: 40px;
+                height: 40px;
+
+                .search_image {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 40px;
+                    border-right: 1px solid rgba(0, 0, 0, 0.247);
+                }
+            }
+
+        }
+
+        .containerListCustomers {
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 0 5px black;
+            border-radius: 5px 5px 0 0;
+
+            .data_customers {
+                width: 100%;
+                height: 50px;
+                background: rgb(185, 185, 185);
+                display: flex;
+                flex-direction: row;
+                border-radius: 3px 5px 0 0;
+
+                .data_info {
+                    width: 25%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .data_c {
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+
+            .listUl {
+                width: 100%;
+                height: 100%;
+                overflow-y: auto;
+                scrollbar-width: thin;
+
+                .container_list_li {
+                    width: 100%;
+                    height: 40px;
+                    display: flex;
+
+
+                    .select_Customer {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        background: none;
+                        border: 1px solid rgb(185, 185, 185);
+                        cursor: pointer;
+
+                        .data_list {
+                            width: 25%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        &:hover{
+                            background: rgb(240, 240, 240);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+
+    .modal_customer {
+        width: 550px;
+        height: 500px;
+        background: none;
+        border: none;
+        align-self: center;
+        justify-self: center;
+        border-radius: 10px;
+
+        .container_modal_new_customer {
+            width: 100%;
+            height: 100%;
+            background: white;
+            position: relative;
+            padding: 30px;
+
+            .close_Modal {
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                right: 5px;
+                top: 5px;
+                background: none;
+                border: none;
+
+                .logo_close {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+
+                &:active {
+                    transform: scale(1);
+                }
+            }
+
+            .form_new_customer {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                overflow: hidden;
+                gap: 10px;
+
+                .title_register_customer{
+                    font-size: 2rem;
+                }
+
+                .inputClientContainer{
+                    width: 100%;
+                    height: auto;
+
+                    .title_input{
+                        font-size: 1.2rem;
+                    }
+
+                    .input_Data_customer{
+                        width: 100%;
+                        height: 40px;
+                        border-radius: 5px;
+                        border: 1px solid black;
+                        padding: 0 0 0 10px;
+                        font-size: 1.1rem;
+                        outline: none;
+                    }
+
+                    .address_customer{
+                        width: 100%;
+                        height: 150px;
+                        font-size: 1.1rem;
+                        padding: 4px;
+                    }
+                }
+
+                .buttons_Press{
+                    width: 100%;
+                    height: 40px;
+                    display: flex;
+                    justify-content: end;
+                    gap: 10px;
+
+                    .btn_modal_customer{
+                        width: fit-content;
+                        height: 100%;
+                        padding: 0 10px 0 10px;
+                        border-radius: 10px;
+                        border: none;
+                        font-size: 1.1rem;
+                    }
+
+                    .registar_cliente{
+                        background: rgb(255, 202, 26);
+                        color: white;
+                        text-shadow: 0 0 2px black;
+                    }
+                }
+            }
+        }
+    }
+}
