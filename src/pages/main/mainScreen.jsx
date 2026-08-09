@@ -2,7 +2,7 @@ import plus from '../../assets/plus.svg';
 import search from '../../assets/search.svg';
 import { useNavigate } from 'react-router';
 
-export const MainScreenList = ({ list }) => {
+export const MainScreenList = ({ list, filterByName }) => {
     const navigate = useNavigate();
 
     return (
@@ -18,7 +18,7 @@ export const MainScreenList = ({ list }) => {
             </div>
 
             <div className="inputNamesContainer">
-                <input className='names_Filter_Input' type="text" placeholder='Filtrar por nombre' />
+                <input className='names_Filter_Input' type="text" placeholder='Filtrar por nombre' onChange={filterByName}/>
                 <div className="imageSearch">
                     <img src={search} className='search_image' />
                 </div>

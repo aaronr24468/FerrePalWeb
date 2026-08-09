@@ -1,4 +1,4 @@
-.Customer_Main_container{
+.Customer_Main_container {
     width: 100vw;
     height: 100vh;
     padding: 30px 150px 10px 150px;
@@ -7,22 +7,581 @@
     align-items: center;
     justify-content: center;
     gap: 30px;
+    background: rgb(204, 204, 204);
 
-    .title_Customer_component{
+    .title_Customer_component {
         font-size: 3rem;
     }
 
-    .info_customer{
+    .info_customer {
         width: 500px;
         height: 200px;
         border: 3px solid black;
         border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        padding: 20px;
+        justify-content: center;
+
+
+        .customer_name {
+            font-size: 2rem;
+        }
+
+        .customer_data {
+            width: fit-content;
+            height: auto;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .phone_logo_svg {
+            width: 20px;
+        }
     }
 
-    .credit_history{
+    .credit_history {
         width: 1000px;
         height: 500px;
         border: 3px solid black;
         border-radius: 10px;
+        background: #fff;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .headTitle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px 0 5px;
+
+            .credit_history_title {
+                font-size: 1.5rem;
+            }
+
+            .new_credit_customer {
+                width: 120px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+
+                .img_new_credit {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+        }
+
+
+
+        .credit_list_Container {
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgb(223, 223, 223);
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            flex-direction: column;
+
+            .data_contaniner_credit {
+                width: 100%;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                padding: 5px;
+                border-bottom: 2px solid rgb(223, 223, 223);
+                background: rgba(235, 235, 235, 0.596);
+
+
+                .data_title {
+                    width: 16.6%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    .title_list {
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+
+            .list_credit_customer {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .list_credit {
+                    width: 100%;
+                    height: 40px;
+                    list-style-type: none;
+                    border-bottom: 2px solid rgb(223, 223, 223);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+
+                    .buttons_credit_details {
+                        position: absolute;
+                        right: 0;
+                        width: fit-content;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        padding: 0 5px 0 0;
+
+                        .info_buttons {
+                            width: 18px;
+                            height: 18px;
+                            background: none;
+                            border: none;
+                            cursor: pointer;
+
+                            .svg_buttons {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: contain;
+                                opacity: 0.4;
+                                transition: opacity 0.2s linear;
+
+                                &:hover {
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
+
+                    .data_credit {
+                        width: 16.6%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        padding: 0 0 0 5px;
+
+                        .credit_status {
+                            width: fit-content;
+                            padding: 0 10px 0 10px;
+                            background: green;
+                            color: #fff;
+                            border-radius: 5px;
+                        }
+
+                        .credit_status_payout {
+                            width: fit-content;
+                            padding: 0 10px 0 10px;
+                            background: rgb(192, 192, 192);
+                            color: #fff;
+                            border-radius: 5px;
+                        }
+                    }
+
+                    .historyC {
+                        gap: 5px;
+
+                        .btnList {
+                            width: 25px;
+                            height: 25px;
+                            background: none;
+                            border: none;
+                            opacity: 0.4;
+                            cursor: pointer;
+
+                            .imgList {
+                                width: 100%;
+                                height: 100%;
+                            }
+
+                            &:hover {
+                                opacity: 1;
+                            }
+                        }
+
+                    }
+
+
+                }
+            }
+        }
+    }
+
+
+
+
+    #info_credit {
+        width: auto;
+        height: auto;
+        overflow: hidden;
+        background: white;
+        align-self: center;
+        justify-self: center;
+        border: none;
+        border-radius: 10px;
+
+        .info_credit_Container {
+            width: 650px;
+            height: auto;
+            padding: 30px;
+
+            .info_credit_customer {
+                width: 100%;
+                height: fit-content;
+
+                .data_credit {
+                    font-size: 1.4rem;
+                    font-style: italic;
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-bottom: 3px solid black;
+
+                    .description_info {
+                        font-size: 1.7rem;
+                        padding: 0 10px 0 0;
+                    }
+
+                    .description_credit {
+                        padding: 0 30% 0 0;
+                    }
+                }
+            }
+
+            .info_credit_customer_edit {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 3px solid black;
+
+                .amount_edit {
+                    font-size: 1.7rem;
+                    width: 40%;
+                }
+
+                .current_amount {
+                    font-size: 1.4rem;
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                }
+
+                .amount_money {
+                    font-family: 'local';
+                    font-size: 1.4rem;
+                    border: none;
+                    outline: none;
+                    background: none;
+                    text-align: end;
+                    padding: 0 2px 0 0;
+                    box-shadow: inset 0 0 5px black;
+                }
+
+                .info_description_edit {
+                    width: 100%;
+                    height: 100%;
+                    font-size: 1.2rem;
+                    font-family: 'local';
+                    padding: 10px 5px 10px 5px;
+                    overflow-y: auto;
+                    scrollbar-width: none;
+                    outline: none;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
+
+            }
+
+            .description_edit {
+                width: 100%;
+                height: 300px;
+
+                .none_edit {
+                    border: none;
+                    box-shadow: -2px 0 5px black;
+                }
+            }
+
+            .button_container_save {
+                width: 100%;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: end;
+
+                .edit_data_btn {
+                    width: 150px;
+                    height: 100%;
+                    margin-top: 20px;
+                    font-family: 'local';
+                    font-size: 1.2rem;
+                }
+            }
+        }
+
+
+        .money_credit_Container {
+            width: 700px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            gap: 5px;
+
+            .boxPayment {
+                width: 50%;
+                height: 100%;
+                box-shadow: inset 0 0 5px black;
+                padding: 10px;
+            }
+
+            .installment {
+                border-radius: 10px 0 0 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+
+                .installment_span {
+                    font-size: 2rem;
+                }
+
+                .installment_input {
+                    width: 70%;
+                    height: 40px;
+                    text-align: center;
+                    font-family: 'local';
+                    font-size: 1.3rem;
+                    border: none;
+                    box-shadow: inset 0 0 5px black;
+                    border-radius: 10px;
+                }
+
+                .installment_button {
+                    width: 50%;
+                    height: 30px;
+                    font-family: 'local';
+                    font-size: 1.2rem;
+                }
+            }
+
+            .payout {
+                border-radius: 0 10px 10px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+
+                .payout_span {
+                    font-size: 2rem;
+                }
+
+                .payout_container {
+                    width: 100%;
+                    height: auto;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .payout_total {
+                        font-size: 1.2rem;
+                    }
+
+                    .payout_input {
+                        width: 70%;
+                        height: 40px;
+                        text-align: center;
+                        font-family: 'local';
+                        font-size: 1.3rem;
+                        border: none;
+                        box-shadow: inset 0 0 5px black;
+                        border-radius: 10px;
+                    }
+
+                }
+
+                .payout_button {
+                    width: 50%;
+                    height: 30px;
+                    font-family: 'local';
+                    font-size: 1.2rem;
+                }
+            }
+        }
+
+
+        .new_credit {
+            width: 600px;
+            height: 500px;
+
+            .new_credit_container {
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+
+                .credit_total_amount {
+                    width: 100%;
+                    height: auto;
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: nowrap;
+                    gap: 10px;
+
+                    .credit_amount_title {
+                        font-size: 1.5rem;
+                    }
+
+                    .input_amount_data {
+                        width: 300px;
+                        height: 40px;
+                        font-size: 1.5rem;
+                        border-radius: 10px;
+                        border: none;
+                        box-shadow: inset 0 0 5px black;
+                        padding: 0 10px 0 10px;
+                    }
+                }
+
+                .input_description {
+                    width: 100%;
+                    height: 100%;
+                    font-size: 1.5rem;
+                    padding: 10px;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    scrollbar-width: none;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
+                .btn_create_credit {
+                    width: 200px;
+                    height: 30px;
+                }
+
+            }
+        }
+
+        .installment_history_container {
+            width: 600px;
+            height: 300px;
+            padding: 10px 10px 10px 10px;
+            display: flex;
+            flex-direction: column;
+
+            .title_installment {
+                width: 100%;
+                height: 40px;
+                display: flex;
+                border-bottom: 3px solid black;
+
+                .info_installment_title {
+                    font-size: 1.4rem;
+                    width: 33.33%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+
+            }
+            
+            .data_history_installment {
+                width: 100%;
+                height: 100%;
+                border-bottom: 3px solid black;
+                border-left: 3px solid black;
+                border-right: 3px solid black;
+                overflow-x: hidden;
+                overflow-y: auto;
+                scrollbar-width: thin;
+
+                .no_list{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 2rem;
+                }
+
+                .container_data_installment{
+                    width: 100%;
+                    height: 40px;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    border-bottom: 2px dashed black;
+
+                    .data_credit_installment{
+                        width: 33.33%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+        }
+    }
+
+    #ticket_credit {
+        width: fit-content;
+        height: fit-content;
+        align-self: center;
+        justify-self: center;
+        border: 3px dashed black;
+
+        .container_Ticket {
+            width: 80mm;
+            max-width: 80mm;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+
+            .ticket_Container {
+                width: 80mm;
+                max-width: 80mm;
+                height: fit-content;
+                padding: 4mm;
+                box-sizing: border-box;
+                font-family: monospace;
+                font-size: 12px;
+                line-height: 1.4;
+                display: flex;
+                background: #fff;
+                color: black;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn_ticket {
+                width: 100px;
+                height: 20px;
+            }
+        }
+
+
     }
 }
