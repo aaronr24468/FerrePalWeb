@@ -9,7 +9,7 @@
     .aside_account {
         width: 15%;
         height: 100vh;
-        background: rgb(133, 133, 133);
+        background: rgb(211, 211, 211);
         box-shadow: 1px 0 5px black;
         display: flex;
         justify-content: space-between;
@@ -103,17 +103,27 @@
             }
 
             .new_Customer_Container {
-                width: 50px;
+                width: fit-content;
+                height: 40px;
                 aspect-ratio: 1;
 
                 .btn_new_customer {
-                    width: 100%;
+                    width: 180px;
                     height: 100%;
                     background: none;
                     border: none;
+                    display: flex;
+                    align-items: center;
+                    background: rgb(8, 212, 76);
+                    border-radius: 10px;
+                    justify-content: center;
+                    color: white;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    padding: 0 5px 0 5px;
 
                     .plus_logo_customer {
-                        width: 100%;
+                        width: 30px;
                         height: 100%;
                     }
                 }
@@ -172,7 +182,7 @@
             .data_customers {
                 width: 100%;
                 height: 50px;
-                background: rgb(185, 185, 185);
+                background: rgb(211, 211, 211);
                 display: flex;
                 flex-direction: row;
                 border-radius: 3px 5px 0 0;
@@ -217,6 +227,11 @@
                             display: flex;
                             align-items: center;
                             justify-content: center;
+                            gap: 5px;
+
+                            .logo_user{
+                                width: 20px;
+                            }
                         }
 
                         &:hover{

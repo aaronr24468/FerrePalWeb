@@ -36,6 +36,10 @@
             display: flex;
             align-items: center;
             gap: 5px;
+
+            .info_user_span {
+                color: rgb(3, 150, 52);
+            }
         }
 
         .phone_logo_svg {
@@ -63,19 +67,31 @@
 
             .credit_history_title {
                 font-size: 1.5rem;
+                color: rgba(3, 150, 52, 0.603);
             }
 
             .new_credit_customer {
-                width: 120px;
+                width: fit-content;
                 height: 30px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-
+                gap: 2px;
+                background: rgb(0, 99, 33);
+                color: white;
+                padding: 0 5px 0 5px;
+                font-weight: 600;
+                border-radius: 10px;
+                border: none;
 
                 .img_new_credit {
-                    width: 25px;
-                    height: 25px;
+                    width: 20px;
+                    height: 20px;
+                }
+
+                &:hover{
+                    transform: scale(1.05);
+                    cursor: pointer;
                 }
             }
         }
@@ -245,6 +261,7 @@
                     .description_info {
                         font-size: 1.7rem;
                         padding: 0 10px 0 0;
+                        color: rgb(5, 194, 169);
                     }
 
                     .description_credit {
@@ -263,6 +280,7 @@
                 .amount_edit {
                     font-size: 1.7rem;
                     width: 40%;
+                    color: rgb(5, 194, 169);
                 }
 
                 .current_amount {
@@ -324,6 +342,14 @@
                     margin-top: 20px;
                     font-family: 'local';
                     font-size: 1.2rem;
+                    background: rgb(3, 150, 52);
+                    color: white;
+                    border: none;
+                    border-radius: 10px;
+
+                    &:hover{
+                        transform: scale(1.05);
+                    }
                 }
             }
         }
@@ -352,27 +378,54 @@
                 align-items: center;
                 justify-content: center;
                 gap: 30px;
+                position: relative;
 
                 .installment_span {
                     font-size: 2rem;
                 }
 
-                .installment_input {
-                    width: 70%;
-                    height: 40px;
-                    text-align: center;
-                    font-family: 'local';
-                    font-size: 1.3rem;
-                    border: none;
-                    box-shadow: inset 0 0 5px black;
-                    border-radius: 10px;
+                .abono_container_input {
+                    width: 100%;
+                    height: fit-content;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .installment_input {
+                        width: 70%;
+                        height: 40px;
+                        text-align: center;
+                        font-family: 'local';
+                        font-size: 1.3rem;
+                        border: none;
+                        box-shadow: inset 0 0 5px black;
+                        border-radius: 10px;
+                        outline: none;
+                    }
                 }
+
+
 
                 .installment_button {
                     width: 50%;
                     height: 30px;
                     font-family: 'local';
                     font-size: 1.2rem;
+                    border: none;
+                    background: gray;
+                    color: white;
+                    border-radius: 10px;
+                    text-shadow: 0 0 2px black;
+                    cursor: pointer;
+
+                    &:hover{
+                        transform: scale(1.05);
+                    }
+                }
+
+                .info_installment{
+                    position: absolute;
+                    bottom: 10px;
+                    color: rgba(117, 117, 117, 0.808);
                 }
             }
 
@@ -396,7 +449,8 @@
                     align-items: center;
 
                     .payout_total {
-                        font-size: 1.2rem;
+                        font-size: 1.3rem;
+                        color: rgb(163, 163, 163);
                     }
 
                     .payout_input {
@@ -410,6 +464,15 @@
                         border-radius: 10px;
                     }
 
+                    .total_amount {
+                        font-size: 3rem;
+                        color: rgb(3, 150, 52);
+                        background: rgba(0, 255, 85, 0.336);
+                        padding: 0 5px 0 5px;
+                        border-radius: 10px;
+                        text-shadow: 0 0 1px black;
+                    }
+
                 }
 
                 .payout_button {
@@ -417,6 +480,16 @@
                     height: 30px;
                     font-family: 'local';
                     font-size: 1.2rem;
+                    background: rgb(0, 99, 33);
+                    color: white;
+                    border: none;
+                    border-radius: 10px;
+                    padding: 3px 5px 3px 5px;
+                    cursor: pointer;
+
+                    &:hover {
+                        transform: scale(1.05);
+                    }
                 }
             }
         }
@@ -474,7 +547,16 @@
 
                 .btn_create_credit {
                     width: 200px;
-                    height: 30px;
+                    height: 40px;
+                    font-size: 1rem;
+                    background: rgb(3, 150, 52);
+                    color: white;
+                    border: none;
+                    border-radius: 10px;
+
+                    &:hover{
+                        transform: scale(1.05);
+                    }
                 }
 
             }
@@ -486,12 +568,16 @@
             padding: 10px 10px 10px 10px;
             display: flex;
             flex-direction: column;
+            align-items: center;
+
+            .title_installment_span{
+                font-size: 1.8rem;
+            }
 
             .title_installment {
                 width: 100%;
                 height: 40px;
                 display: flex;
-                border-bottom: 3px solid black;
 
                 .info_installment_title {
                     font-size: 1.4rem;
@@ -500,22 +586,22 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    background: rgb(231, 231, 231);
+                    border: 2px solid rgba(172, 172, 172, 0.377);
                 }
 
 
             }
-            
+
             .data_history_installment {
                 width: 100%;
                 height: 100%;
-                border-bottom: 3px solid black;
-                border-left: 3px solid black;
-                border-right: 3px solid black;
+                border: 2px solid rgba(172, 172, 172, 0.377);
                 overflow-x: hidden;
                 overflow-y: auto;
                 scrollbar-width: thin;
 
-                .no_list{
+                .no_list {
                     width: 100%;
                     height: 100%;
                     display: flex;
@@ -524,21 +610,40 @@
                     font-size: 2rem;
                 }
 
-                .container_data_installment{
+                .container_data_installment {
                     width: 100%;
                     height: 40px;
                     display: flex;
                     flex-direction: row;
                     flex-wrap: nowrap;
-                    border-bottom: 2px dashed black;
+                    border-bottom: 2px solid black;
 
-                    .data_credit_installment{
+                    .data_credit_installment {
                         width: 33.33%;
                         height: 100%;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         font-size: 1.3rem;
+                    }
+
+                    .amount_installment{
+                        font-weight: 600;
+                        font-size: 1.8rem;
+                    }
+
+                    .intallment_status_tag{
+                        background: rgb(3, 150, 52);
+                        padding: 0 10px 0 10px;
+                        color: white;
+                        border-radius: 10px;
+                    }
+
+                    .payout_status_tag{
+                        background: rgb(0, 99, 33);
+                        padding: 0 10px 0 10px;
+                        color: white;
+                        border-radius: 10px;
                     }
                 }
             }

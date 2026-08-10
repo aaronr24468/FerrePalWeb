@@ -51,18 +51,30 @@ export const useCustomerHook = () => {
         }
     }
 
-    const editCredit = async (id_credit, textareaRef) => {
+    const editCredit = async (id_credit, textareaRef, refDescription) => {
         try {
             const id = id_credit;
             const amount = document.getElementById('amount_money').value;
             const description = textareaRef.current.value;
+
+
+            if(refDescription.length === description.length && amount=="+0.00") return(Swal.fire({
+                icon: 'error',
+                title: 'No has realizado ningun cambio',
+                target: document.getElementById('info_credit')
+            }))
+
             const asnwer = await editCreditCustomer(id, amount, description)
+
             if(!asnwer.ok) return setError(asnwer.message || 'Error de servidor');
+
             document.getElementById('info_credit').close()
+
             Swal.fire({
                 icon: 'success',
                 title: 'Se actualizo el credito con exito',
             })
+            
             infoCustomer();
         } catch (error) {
             setError(error.message || "Error de servidor")

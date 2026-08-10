@@ -2,7 +2,7 @@ import { useCustomerHook } from '../../hooks/customerHook';
 import '../../styles/customer/customerStyle.css';
 import phone from '../../assets/phone.svg'
 import address from '../../assets/address.svg'
-import creditImg from '../../assets/credit.svg'
+import creditImg from '../../assets/plusWhite.svg'
 
 
 import { CreditHistory } from './history';
@@ -35,8 +35,8 @@ export const CustomerMain = ({ }) => {
 
             <section className='info_customer'>
                 <span className='customer_name'>{customer.full_name}</span>
-                <span className='customer_data'><img className='phone_logo_svg' src={phone} />Celular: {customer.phone_Number}</span>
-                <span className='customer_data'><img className='phone_logo_svg' src={address} />Direccion: {customer.address}</span>
+                <span className='customer_data'><img className='phone_logo_svg' src={phone} /><span className='info_user_span'>Celular:</span> {customer.phone_Number}</span>
+                <span className='customer_data'><img className='phone_logo_svg' src={address} /><span className='info_user_span'>Direccion:</span> {customer.address}</span>
             </section>
 
             <section className='credit_history'>

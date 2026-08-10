@@ -1,5 +1,6 @@
-import plus from '../../assets/plus.svg';
+import plus from '../../assets/plusWhite.svg';
 import search from '../../assets/search.svg';
+import user from '../../assets/ElUser.svg'
 import { useNavigate } from 'react-router';
 
 export const MainScreenList = ({ list, filterByName }) => {
@@ -13,6 +14,7 @@ export const MainScreenList = ({ list, filterByName }) => {
                 <div className="new_Customer_Container" title='Nuevo cliente'>
                     <button className='btn_new_customer' onClick={() => document.getElementById('new_customer').showModal()} >
                         <img className='plus_logo_customer' src={plus} />
+                        <span>Nuevo cliente</span>
                     </button>
                 </div>
             </div>
@@ -35,7 +37,7 @@ export const MainScreenList = ({ list, filterByName }) => {
                         return (
                             <li key={index} className='container_list_li'>
                                 <button className='select_Customer' onClick={() => navigate(`/FerrePal/cliente/${element.id}`)}>
-                                    <div className="data_list"><span className='list_info'>{element.full_name}</span></div>
+                                    <div className="data_list"><img src={user} className='logo_user'/><span className='list_info'>{element.full_name}</span></div>
                                     <div className="data_list"><span className='list_info'>{element.phone_Number}</span></div>
                                     <div className="data_list"><span className='list_info'>{element.address}</span></div>
                                     <div className="data_list"><span className='list_info'>{element.total_creditos}</span></div>
