@@ -7,7 +7,7 @@ import character from '../assets/ferrepalCharacter.png';
 export const CheckAuth = ({children}) =>{
     const[loading, setLoading] = useState(false);
     const[isAuth, setIsAuth] =  useState(false);
-    const URL_PATH = 'http://localhost:8181'
+    const URL_PATH = 'https://apiferrepal.onrender.com'
     const navigate = useNavigate();
     
 
