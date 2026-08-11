@@ -1,4 +1,4 @@
-const URL_PATH = 'http://localhost:8181';
+const URL_PATH = 'https://apiferrepal.onrender.com';
 
 export const getAllInfoCustomer = async(id) =>{
     const response = await fetch(`${URL_PATH}/credit/info/customer/${id}`,{
