@@ -7,7 +7,7 @@ import character from '../assets/ferrepalCharacter.png'
 export const CheckAuthLogin = ({children}) =>{
     const[loading, setLoading] = useState(false);
     const[isAuth, setIsAuth] =  useState(false);
-    const URL_PATH = 'https://apiferrepal.onrender.com'
+    const URL_PATH = import.meta.env.VITE_API_URL
     const navigate = useNavigate();
     
 

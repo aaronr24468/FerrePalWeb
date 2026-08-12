@@ -1,4 +1,4 @@
-const URL_PATH = 'https://apiferrepal.onrender.com';
+const URL_PATH = import.meta.env.VITE_API_URL;
 
 export const getAllInfoCustomer = async(id) =>{
     const response = await fetch(`${URL_PATH}/credit/info/customer/${id}`,{

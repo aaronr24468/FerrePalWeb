@@ -23,6 +23,11 @@
             object-fit: contain;
             border-radius: 50%;
             background: white;
+
+            @media (width <= 1500px){
+                width: 120px;
+                height: 120px;
+            }
         }
 
         .user {
