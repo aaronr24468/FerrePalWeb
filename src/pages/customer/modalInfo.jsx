@@ -10,20 +10,20 @@ export const InfoCredit = ({ selectModal, credit, loading, editCredit, setAmount
         <dialog id="info_credit" >
 
 
-            {selectModal === "Info" && <div className="info_credit_Container">
-                <div className="info_credit_customer">
+            {selectModal === "Info" && !loading && <div className="info_credit_Container">
+                {!loading && <div className="info_credit_customer">
                     {credit.status === "Activo" && <p className="data_credit"><span className="description_info">Status </span>{credit.status}</p>}
-                </div>
+                </div>}
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Monto total </span>${Number(credit.amount).toLocaleString('en-US')}</p></div>
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Saldo pendiente </span>${Number((Number(credit.amount) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p></div>
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Total abonado </span>${Number(credit.Installment).toLocaleString('en-US')}</p></div>
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de inicio </span>{dayjs(credit.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de ultimo cambio</span>{dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
-                <div className="info_credit_customer_edit description_edit"><span className="amount_edit">Descripción</span> {!loading && <textarea readOnly type="text" defaultValue={credit.description} className="info_description_edit none_edit" ref={textareaRef} />}</div>
+                <div className="info_credit_customer_edit description_edit"><span className="amount_edit">Descripción</span> <textarea readOnly type="text" defaultValue={credit.description} className="info_description_edit none_edit" ref={textareaRef} /></div>
             </div>}
 
 
-            {selectModal === "Edit" && <div className="info_credit_Container">
+            {selectModal === "Edit" && !loading && <div className="info_credit_Container">
                 {loading ? (
                     <>
                     </>
@@ -47,7 +47,7 @@ export const InfoCredit = ({ selectModal, credit, loading, editCredit, setAmount
             </div>}
 
 
-            {selectModal === "Money" && <div className="money_credit_Container">
+            {selectModal === "Money" && !loading && <div className="money_credit_Container">
                 <section className="boxPayment installment">
                     <span className="installment_span">Abonar</span>
                     <div className="abono_container_input">
@@ -69,7 +69,7 @@ export const InfoCredit = ({ selectModal, credit, loading, editCredit, setAmount
             </div>}
 
 
-            {selectModal === "credit" && <div className="new_credit">
+            {selectModal === "credit" &&  <div className="new_credit">
                 <section className="new_credit_container">
                     <div className="credit_total_amount">
                         <span className="credit_amount_title">Total a pagar:</span>
@@ -82,7 +82,7 @@ export const InfoCredit = ({ selectModal, credit, loading, editCredit, setAmount
                 </section>
             </div>}
 
-            {selectModal === "InstallmentHistory" && <div className="installment_history_container">
+            {selectModal === "InstallmentHistory" &&  !loading && <div className="installment_history_container">
                 
                 <span className="title_installment_span">Historial de Abonos</span>
 
