@@ -19,7 +19,7 @@ export const InfoCredit = ({ selectModal, credit, loading, editCredit, setAmount
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Total abonado </span>${Number(credit.Installment).toLocaleString('en-US')}</p></div>
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de inicio </span>{dayjs(credit.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de ultimo cambio</span>{dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
-                <div className="info_credit_customer_edit description_edit"><span className="amount_edit">Descripción</span> <textarea readOnly type="text" defaultValue={credit.description} className="info_description_edit none_edit" ref={textareaRef} /></div>
+                <div className="info_credit_customer_edit description_edit"><span className="amount_edit">Descripción</span> {!loading && <textarea readOnly type="text" defaultValue={credit.description} className="info_description_edit none_edit" ref={textareaRef} />}</div>
             </div>}
 
 
