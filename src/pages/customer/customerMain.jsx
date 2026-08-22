@@ -26,7 +26,12 @@ export const CustomerMain = ({ }) => {
         createNewCredit,
         showTicketModal,
         historyInstallment,
-        installmentH
+        installmentH,
+        getProductNewCredit,
+        productsList,
+        add_Product_credit_box,
+        listSelected,
+        unit_of_measurement
     } = useCustomerHook();
 
     return (
@@ -63,6 +68,11 @@ export const CustomerMain = ({ }) => {
                 payoutCredit={payoutCredit}
                 createNewCredit={createNewCredit}
                 installmentH={installmentH}
+                getProductNewCredit={getProductNewCredit}
+                productsList={productsList}
+                add_Product_credit_box={add_Product_credit_box}
+                listSelected={listSelected}
+                unit_of_measurement={unit_of_measurement}
             />
 
             {/* Modal para imprimir ticket de credito */}

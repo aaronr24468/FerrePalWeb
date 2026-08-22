@@ -89,3 +89,15 @@ export const historyInstallmentCredit = async(id_credit, id_customer) =>{
 
     return(response.json())
 }
+
+export const getListProducts = async() =>{
+    const response = await fetch(`${URL_PATH}/products/list/products`,{
+        method: 'GET',
+        credentials: 'include',
+        headers:{
+            "Content-Type":"application/json"
+        },
+    })
+
+    return(response.json())
+}
