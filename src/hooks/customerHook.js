@@ -1,30 +1,34 @@
 import { useState, useEffect, useCallback } from "react"
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
-import { editCreditCustomer, getAllInfoCustomer, getInfoCredit, getListProducts, historyInstallmentCredit, installmentCreditCustomer, newCreditCustomer, payoutCreditCustomer } from "../services/customer";
+import { editCreditCustomer, get_total_credit_amount, getAllInfoCustomer, getInfoCredit, getListProducts, historyInstallmentCredit, installmentCreditCustomer, newCreditCustomer, payoutCreditCustomer } from "../services/customer";
 
 export const useCustomerHook = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
     const [customer, setCustomer] = useState([]);
     const [credits, setCredits] = useState([]);
+
     const [credit, setCredit] = useState({
         Installment: "0.00",
         amount: "0.00",
         create_at: "dd/mm/yyy",
         description: "",
         status: "",
-        updated_at: ""
+        updated_at: "",
+        list_products: ''
     });
-    const [selectModal, setSelectModal] = useState('Info')
-    const [installmentH, setInstallmentH] = useState([])
 
-    const [amount, setAmount] = useState('0.00');
-    const [description, setDescription] = useState('')
+    const [selectModal, setSelectModal] = useState('Info') // seleccionamos que modal se va a mostrar
+    const [installmentH, setInstallmentH] = useState([]) //guardar los historiales que obtengamos del back sobre el credito
 
-    const [productsList, setProductsList] = useState([]);
-    const [filterProducts, setFilterProducts] = useState([]);
-    const [listSelected, setListSelected] = useState([])
+    const [productsList, setProductsList] = useState([]); //para guardar la lista de productos del inventario y mostrarlos en el front para seleccionar
+    const [filterProducts, setFilterProducts] = useState([]); //filtrar la lista por el codigo de barras o en su defecto por nombre
+    const [listSelected, setListSelected] = useState([]) //guardamos los productos seleccionados para el credito
+    const [totalCredit, setTotalCredit] = useState('0.00'); //guardamos el total del credito, este dato lo obtenemos del backEnd
+    const [totalCreditEdit, setTotalCreditEdit] = useState('0.00'); //guardamos el total del credito al editar el mismo, este dato lo obtenemos del backEnd
+    const [productsCreditEdit, setProductsCreditEdit] = useState([]);
 
     const { id } = useParams();
 
@@ -50,6 +54,7 @@ export const useCustomerHook = () => {
             setSelectModal(modal)
             document.getElementById('info_credit').showModal()
             const data = await getInfoCredit(id_credit);
+            setProductsCreditEdit(data.listP)
             setCredit(data.info)
         } catch (error) {
             setError(error.message || "Error de servidor")
@@ -153,7 +158,30 @@ export const useCustomerHook = () => {
         }
     }
 
-    // corroboramos que este producto ya este para evitarnos duplicaciones inecesarias
+    const total_credit_amount = async () => {
+        try {
+            const list = listSelected;
+            
+            const data = await get_total_credit_amount(list)
+            setTotalCredit(String(data.amount))
+        } catch (error) {
+            setError(error.message || "Error de servidor")
+        }
+    }
+
+
+    const total_credit_amount_edit = async () => {
+        try {
+            const creditList = productsCreditEdit
+            const data = await get_total_credit_amount(creditList)
+            setTotalCreditEdit(String(data.amount))
+        } catch (error) {
+            setError(error.message || "Error de servidor")
+        }
+    }
+
+
+    // corroboramos que este producto ya este para evitarnos duplicaciones inecesarias-------------------------------------------------------------------------------
     const add_Product_credit_box = (list) => {
         if (listSelected.some(item => item.id_product === list.id_product)) {
             Swal.fire({
@@ -164,60 +192,119 @@ export const useCustomerHook = () => {
         } else {
             setListSelected(prevList => [...prevList, list])
         }
+
     }
 
 
 
-    // cambiamos el valor de unidad de medida del producto para saber si lo vamos a cobrar por pieza o a granel
+    // cambiamos el valor de unidad de medida del producto para saber si lo vamos a cobrar por pieza o a granel-----------------------------------------------------
     const unit_of_measurement = (event) => {
         const state = event.target.checked;
-        const id = event.target.id
+        const id = Number(event.target.id);
 
         setListSelected(prevProducts =>
             prevProducts.map(item =>
-                item.id_product === Number(id)
+                item.id_product === id
                     ? { ...item, unidad_medida: state ? "kg" : "pieza" }
                     : item
             )
         );
     }
 
+    // metodo para agregar cantidades de piezas que el cliente se va a llevar-------------------------------------------------------------------------------------
+    const more_less_unite = (event) => {
+        const button = event.target;
+        const id = Number(event.target.id);
+        const state = button.getAttribute('quantity');
 
-    // metodo para crear el registro del nuevo credito
+        setListSelected(prevList =>
+            prevList.map((item) =>
+                item.id_product === id
+                    ? { ...item, quantity: state === "true" ? (item.quantity + 1) : (item.quantity === 1 ? (item.quantity = 1) : (item.quantity - 1)) }
+                    : item
+            )
+        )
+    }
+
+    //metodo para cambiar el valor a granel del producto en su objeto correspondiente-----------------------------------------------------------------------------
+    const set_Kilograms_quantity = (event) => {
+        const id = Number(event.target.id);
+        const value = Number(event.target.value);
+
+        setListSelected((prevList) =>
+            prevList.map((item) =>
+                item.id_product === id
+                    ? { ...item, kg: value }
+                    : item
+            )
+        )
+    }
+
+    const more_less_unite_edit = (event) => {
+        const button = event.target;
+        const id = Number(event.target.id);
+        const state = button.getAttribute('quantity');
+        console.log(id, state)
+
+        setProductsCreditEdit(prevList =>
+            prevList.map((item) =>
+                item.id_product === id
+                    ? { ...item, quantity: state === "true" ? (item.quantity + 1) : (item.quantity === 1 ? (item.quantity = 1) : (item.quantity - 1)) }
+                    : item
+            )
+        )
+    }
+
+    const set_Kilograms_quantity_edit = (event) => {
+        const id = Number(event.target.id);
+        const value = Number(event.target.value);
+        console.log(id,value)
+
+        setProductsCreditEdit((prevList) =>
+            prevList.map((item) =>
+                item.id_product === id
+                    ? { ...item, kg: value }
+                    : item
+            )
+        )
+    }
+
+
+    // metodo para crear el registro del nuevo credito------------------------------------------------------------------------------------------------------------
     const createNewCredit = async () => {
         try {
-            const id_customer = customer.id;
+            const id_customer = customer.id; //obtenermos el id del cliente por medio del useState donde tenemos toda su informacion
 
-            // const asnwer = await newCreditCustomer(id_customer);
+            const asnwer = await newCreditCustomer(id_customer, listSelected, totalCredit);
 
-            // if(!asnwer.ok) return(setError( Swal.fire({
-            //     icon: 'error',
-            //     title: asnwer.message,
-            //     target: document.getElementById('info_credit')
-            // }) || "Error de servidor"))
+            if (!asnwer.ok) return (Swal.fire({
+                icon: 'error',
+                title: asnwer.message,
+                target: document.getElementById('info_credit')
+            }) || "Error de servidor");
 
-            // infoCustomer();
+            infoCustomer();
 
-            // Swal.fire({
-            //     icon: 'success',
-            //     title: 'Se creo credito con exito'
-            // })
+            Swal.fire({
+                icon: 'success',
+                title: 'Se creo credito con exito'
+            })
 
-            // document.getElementById('info_credit').close()
+            document.getElementById('info_credit').close()
 
         } catch (error) {
             setError(error.message || "Error de servidor")
         }
     }
 
-    // mostramos el modal para crear un nuevo credito
+    // mostramos el modal para crear un nuevo credito--------------------------------------------------------------------------------------------------------------
     const newCredit = (modal) => {
         setSelectModal(modal)
         document.getElementById('info_credit').showModal()
     }
 
 
-    // metodo para mostrar el modal y a su vez la informacion a imprimir en el ticket
+    // metodo para mostrar el modal y a su vez la informacion a imprimir en el ticket--------------------------------------------------------------------------------
     const showTicketModal = async (id_credit) => {
         try {
             setLoading(true);
@@ -229,7 +316,7 @@ export const useCustomerHook = () => {
         }
     }
 
-    // metodo el cual obtenemos el historial de los abonos
+    // metodo el cual obtenemos el historial de los abonos------------------------------------------------------------------------------------------------------------
     const historyInstallment = async (id_credit, id_customer, modal) => {
         try {
             setLoading(true)
@@ -253,14 +340,24 @@ export const useCustomerHook = () => {
         const id = event.target.id || null;
 
         if (target === "dialog") {
-            document.getElementById(`${id}`).close();
-            document.getElementById('list_products_select_credit').style.display = "none"
+            document.getElementById(`${id}`)?.close();
+            document.getElementById('list_products_select_credit')?.style.setProperty("display", "none");
         }
 
         if (event.target.className === "new_credit_container") {
-            document.getElementById('list_products_select_credit').style.display = "none"
+            document.getElementById('list_products_select_credit')?.style.setProperty("display", "none");
         }
     })
+
+    useEffect(() =>{
+        if(productsCreditEdit.length === 0) return
+        total_credit_amount_edit();
+    }, [productsCreditEdit])
+
+    useEffect(() => {
+        if(listSelected.length === 0) return
+        total_credit_amount();
+    }, [listSelected])
 
     useEffect(() => {
         infoCustomer();
@@ -274,8 +371,6 @@ export const useCustomerHook = () => {
         credit,
         loading,
         editCredit,
-        setAmount,
-        setDescription,
         installmentCredit,
         payoutCredit,
         newCredit,
@@ -287,6 +382,13 @@ export const useCustomerHook = () => {
         productsList,
         add_Product_credit_box,
         listSelected,
-        unit_of_measurement
+        unit_of_measurement,
+        more_less_unite,
+        set_Kilograms_quantity,
+        totalCredit,
+        productsCreditEdit,
+        more_less_unite_edit,
+        set_Kilograms_quantity_edit,
+        totalCreditEdit
     }
 }

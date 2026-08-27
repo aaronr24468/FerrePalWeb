@@ -310,6 +310,16 @@
                     overflow-y: auto;
                     scrollbar-width: none;
                     outline: none;
+                    padding: 10px 0 0 30px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .prod_list_credit {
+                        width: 100%;
+                        height: fit-content;
+                        list-style-type: decimal;
+                    }
 
                     &::-webkit-scrollbar {
                         display: none;
@@ -321,11 +331,167 @@
 
             .description_edit {
                 width: 100%;
-                height: 300px;
+                height: 350px;
+                display: flex;
+                flex-direction: column;
+                padding: 5px 0 0 0;
 
-                .none_edit {
-                    border: none;
-                    box-shadow: -2px 0 5px black;
+                .input_bar_code_name {
+                    width: 100%;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+
+                    .filter_product_by {
+                        width: 100%;
+                        height: 100%;
+                        font-family: 'local';
+                        font-size: 1.2rem;
+                        padding: 0 10px 0 10px;
+                        outline: none;
+                    }
+
+                    .products_inventory_edit {
+                        position: absolute;
+                        top: 100%;
+                        width: 100%;
+                        height: 350px;
+                        background: white;
+                        box-shadow: 0 0 5px black;
+                        border-radius: 0 0 5px 5px;
+                        display: none;
+
+                        .products_inventory_edit_container {
+                            width: 100%;
+                            height: 100%;
+                            overflow-x: hidden;
+                            overflow-y: auto;
+                            scrollbar-width: thin;
+                            padding: 5px;
+                            position: relative;
+
+                            .close_products_inventory {
+                                width: 25px;
+                                height: 25px;
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+                                border: none;
+                                background: rgba(255, 0, 0, 0.733);
+                                border-radius: 0 0 0 5px;
+
+                                &:hover {
+                                    transform: scale(1.1);
+                                }
+
+
+                                &:active {
+                                    transform: scale(1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .list_products_crerdit {
+                    width: 100%;
+                    height: 100%;
+                    box-shadow: inset 0 0 3px black;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 5px;
+                    gap: 5px;
+
+                    .list_credit_edit {
+                        width: 100%;
+                        height: 100px;
+                        list-style-type: none;
+                        border: 1px solid black;
+                        display: flex;
+                        align-items: center;
+                        padding: 0 5px 0 5px;
+                        justify-content: space-between;
+
+                        .desc_product_edit_container {
+                            width: 100%;
+                            height: fit-content;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+
+                            .img_credit_edit {
+                                width: 80px;
+                                height: 80px;
+                                object-fit: cover;
+                            }
+
+                            .description_products_edit {
+                                width: fit-content;
+                                height: 100%;
+                                display: flex;
+                                flex-direction: column;
+
+                                .desc_products_edit {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+
+                                    .img_edit_desc {
+                                        width: 20px;
+                                        height: 20px;
+                                    }
+                                }
+                            }
+                        }
+
+
+                        .container_selector_medida_edit {
+                            width: fit-content;
+                            height: 100%;
+
+                            .quantity_product_edit {
+                                width: fit-content;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+
+                                .quantity_product_edit_input {
+                                    width: 40px;
+                                    height: 40px;
+                                    font-family: 'local';
+                                    font-size: 1.3rem;
+                                    text-align: center;
+                                }
+
+
+                                .container_kilograms_metro {
+                                    width: fit-content;
+                                    height: fit-content;
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                }
+
+                                .btn_quantity_edit {
+                                    width: 40px;
+                                    height: 40px;
+                                }
+
+                                .quantity_kilograms_edit {
+                                    width: 120px;
+                                    height: 40px;
+                                    font-family: 'local';
+                                    text-align: center;
+                                    font-size: 1.2rem;
+
+                                }
+                            }
+
+                        }
+
+
+                    }
                 }
             }
 
@@ -602,115 +768,126 @@
                         display: none;
                         padding: 10px;
 
-                        .list_product_BD {
+
+                        .container_list_products {
                             width: 100%;
                             height: fit-content;
-                            box-shadow: 0 0 5px black;
-                            padding: 0 10px 0 10px;
-                            border-radius: 5px;
                             list-style-type: none;
-                            display: flex;
-                            align-items: center;
-                            justify-content: space-between;
-                            gap: 5px;
 
-                            .image_product_list {
-                                width: fit-content;
-                                height: 100%;
+
+                            .list_product_BD {
+                                width: 100%;
+                                height: fit-content;
+                                box-shadow: 0 0 5px black;
+                                padding: 0 10px 0 10px;
+                                border-radius: 5px;
+                                list-style-type: none;
                                 display: flex;
-                                align-content: center;
+                                align-items: center;
+                                justify-content: space-between;
+                                margin-bottom: 5px;
 
-                                .img_product_list_select {
-                                    width: 100px;
-                                    height: 100%;
-                                    object-fit: contain;
-                                }
 
-                                .info {
+                                .image_product_list {
                                     width: fit-content;
                                     height: 100%;
-                                    padding: 3px 5px 3px 15px;
+                                    display: flex;
+                                    align-content: center;
 
-                                    .desItem {
+                                    .img_product_list_select {
+                                        width: 100px;
+                                        height: 100%;
+                                        object-fit: contain;
+                                    }
+
+                                    .info {
+                                        width: fit-content;
+                                        height: 100%;
+                                        padding: 3px 5px 3px 15px;
+
+                                        .desItem {
+                                            width: fit-content;
+                                            height: fit-content;
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 5px;
+                                            user-select: none;
+
+                                            .name_product {
+                                                font-size: 1.2rem;
+                                            }
+
+                                            .img_Desc {
+                                                width: 20px;
+                                                height: 20px;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .add_list_item {
+
+                                    width: fit-content;
+                                    height: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 10px;
+                                    align-items: center;
+
+                                    .add_more_items {
                                         width: fit-content;
                                         height: fit-content;
                                         display: flex;
-                                        align-items: center;
-                                        gap: 5px;
-                                        user-select: none;
 
-                                        .name_product {
-                                            font-size: 1.2rem;
+                                        .btn_more_less {
+                                            width: 30px;
+                                            height: 30px;
                                         }
 
-                                        .img_Desc {
-                                            width: 20px;
-                                            height: 20px;
-                                        }
-                                    }
-                                }
-                            }
-
-                            .add_list_item {
-
-                                width: fit-content;
-                                height: 100%;
-                                display: flex;
-                                flex-direction: column;
-                                gap: 10px;
-                                align-items: center;
-
-                                .add_more_items {
-                                    width: fit-content;
-                                    height: fit-content;
-                                    display: flex;
-
-                                    .btn_more_less {
-                                        width: 30px;
-                                        height: 30px;
-                                    }
-
-                                    .amount_products {
-                                        width: 50px;
-                                        height: 30px;
-                                        text-align: center;
-                                    }
-                                }
-
-                                .addProductCredit {
-                                    width: fit-content;
-                                    height: fit-content;
-
-                                    .addItemCredit {
-                                        width: 110px;
-                                        height: 80px;
-                                        position: relative;
-                                        border: 1px solid rgb(201, 201, 201);
-                                        border-radius: 20px;
-                                        background: none;
-                                        transition: box-shadow 0.2s linear;
-
-                                        .gifAdd {
-                                            position: absolute;
-                                            left: 50%;
-                                            top: 50%;
-                                            transform: translate(-50%, -55%);
+                                        .amount_products {
                                             width: 50px;
-                                            display: none;
-                                        }
-
-                                        &:hover {
-                                            box-shadow: inset 0 0 5px rgb(175, 175, 175);
-                                        }
-
-                                        &:active {
-                                            transform: scale(1.05);
+                                            height: 30px;
+                                            text-align: center;
                                         }
                                     }
-                                }
 
+                                    .addProductCredit {
+                                        width: fit-content;
+                                        height: fit-content;
+
+                                        .addItemCredit {
+                                            width: 110px;
+                                            height: 80px;
+                                            position: relative;
+                                            border: 1px solid rgb(201, 201, 201);
+                                            border-radius: 20px;
+                                            background: none;
+                                            transition: box-shadow 0.2s linear;
+
+                                            .gifAdd {
+                                                position: absolute;
+                                                left: 50%;
+                                                top: 50%;
+                                                transform: translate(-50%, -55%);
+                                                width: 50px;
+                                                display: none;
+                                            }
+
+                                            &:hover {
+                                                box-shadow: inset 0 0 5px rgb(175, 175, 175);
+                                            }
+
+                                            &:active {
+                                                transform: scale(1.05);
+                                            }
+                                        }
+                                    }
+
+                                }
                             }
                         }
+
+
 
                         .list_product_BD_loading {
                             width: 100%;
@@ -798,7 +975,7 @@
                         align-items: center;
                         gap: 20px;
 
-                        .select_medida{
+                        .select_medida {
                             width: fit-content;
                             height: fit-content;
                             display: flex;
@@ -824,6 +1001,14 @@
                             .btn_quantity {
                                 width: 40px;
                                 height: 40px;
+                            }
+
+                            .quantity_kilograms {
+                                width: 120px;
+                                height: 40px;
+                                font-family: 'local';
+                                text-align: center;
+                                font-size: 1.2rem;
                             }
                         }
                     }

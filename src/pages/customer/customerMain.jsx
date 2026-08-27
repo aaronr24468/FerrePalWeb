@@ -18,8 +18,6 @@ export const CustomerMain = ({ }) => {
         credit,
         loading,
         editCredit,
-        setAmount,
-        setDescription,
         installmentCredit,
         payoutCredit,
         newCredit,
@@ -31,7 +29,14 @@ export const CustomerMain = ({ }) => {
         productsList,
         add_Product_credit_box,
         listSelected,
-        unit_of_measurement
+        unit_of_measurement,
+        more_less_unite,
+        set_Kilograms_quantity,
+        totalCredit,
+        productsCreditEdit,
+        more_less_unite_edit,
+        set_Kilograms_quantity_edit,
+        totalCreditEdit
     } = useCustomerHook();
 
     return (
@@ -62,8 +67,6 @@ export const CustomerMain = ({ }) => {
                 credit={credit}
                 loading={loading}
                 editCredit={editCredit}
-                setAmount={setAmount}
-                setDescription={setDescription}
                 installmentCredit={installmentCredit}
                 payoutCredit={payoutCredit}
                 createNewCredit={createNewCredit}
@@ -73,6 +76,13 @@ export const CustomerMain = ({ }) => {
                 add_Product_credit_box={add_Product_credit_box}
                 listSelected={listSelected}
                 unit_of_measurement={unit_of_measurement}
+                more_less_unite={more_less_unite}
+                set_Kilograms_quantity={set_Kilograms_quantity}
+                totalCredit={totalCredit}
+                productsCreditEdit={productsCreditEdit}
+                more_less_unite_edit={more_less_unite_edit}
+                set_Kilograms_quantity_edit={set_Kilograms_quantity_edit}
+                totalCreditEdit={totalCreditEdit}
             />
 
             {/* Modal para imprimir ticket de credito */}

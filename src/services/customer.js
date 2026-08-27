@@ -63,14 +63,14 @@ export const payoutCreditCustomer = async(id_credit, id_customer) =>{
     return(response.json())
 }
 
-export const newCreditCustomer = async(id_customer, amountCredit, descriptionData) =>{
+export const newCreditCustomer = async(id_customer, listSelected, totalCredit) =>{
     const response = await fetch(`${URL_PATH}/credit/new/credit`,{
         method: 'POST',
         credentials: 'include',
         headers:{
             "Content-Type":"application/json"
         },
-        body: JSON.stringify({id_customer, amountCredit, descriptionData})
+        body: JSON.stringify({id_customer, listSelected, totalCredit})
     })
 
     return(response.json())
@@ -97,6 +97,19 @@ export const getListProducts = async() =>{
         headers:{
             "Content-Type":"application/json"
         },
+    })
+
+    return(response.json())
+}
+
+export const get_total_credit_amount = async(list) =>{
+    const response = await fetch(`${URL_PATH}/products/get/price/credit`,{
+        method: 'POST',
+        credentials: 'include',
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({list})
     })
 
     return(response.json())

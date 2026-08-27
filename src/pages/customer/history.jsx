@@ -21,12 +21,17 @@ export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyIns
                 {credits.map((element, index) => {
                     return (
                         <li key={index} className='list_credit'>
+
+
                             <div className="buttons_credit_details">
                                 <button className="info_buttons" onClick={() => showTicketModal(element.id)}><img className='svg_buttons' src={receipt} alt="" /></button>
                                 <button className="info_buttons" onClick={() => infoCredit(element.id, 'Info')}><img className='svg_buttons' src={eyes} alt="" /></button>
                                 {element.status != "Pagado" && <button className="info_buttons" onClick={() => infoCredit(element.id, 'Edit')}><img className='svg_buttons' src={pencil} alt="" /></button>}
                                 {element.status != "Pagado" && <button className="info_buttons" onClick={() => infoCredit(element.id, 'Money')}><img className='svg_buttons' src={money} alt="" /></button>}
                             </div>
+
+
+                            
 
                             <div className="data_credit">
                                 <span className='credit_description'>{dayjs(element.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</span>

@@ -5,6 +5,8 @@ import dayjs from 'dayjs';
 export const TicketModal = ({ credit }) => {
     const componentRef = useRef(null)
 
+    const arrayProducts = credit.list_products.split(',')
+
     const handlePrint = useReactToPrint({
         contentRef: componentRef,
         documentTitle: 'Recivo',
@@ -54,6 +56,11 @@ export const TicketModal = ({ credit }) => {
                         <p>---------------Descripcion---------------</p>
                         <p>---------------------------------------------</p>
                         <p>{credit.description}</p>
+                        <ul>{arrayProducts.map((element, index) =>{
+                            return(      
+                                <li className="lista_ticket" key={index}>{element}</li>
+                            )
+                        })}</ul>
                         <p>---------------------------------------------</p>
                         
                     </section>
