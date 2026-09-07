@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { getListCustomersEndpoint, getUserName, logoutService, newCustomer } from "../services/ferrpal";
 import Swal from "sweetalert2";
 
@@ -16,6 +16,8 @@ export const useFerrepalHook = () =>{
     const[name, setName] = useState('');
     const[phone, setPhone] = useState('');
     const[address, setAddress] = useState('');
+
+    const location = useLocation();
 
     const infoUser = async() =>{
         try {
@@ -113,6 +115,7 @@ export const useFerrepalHook = () =>{
         name,
         phone,
         address,
-        filterByName
+        filterByName,
+    
     }
 }

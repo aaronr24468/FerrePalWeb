@@ -390,6 +390,86 @@
                                     transform: scale(1);
                                 }
                             }
+
+                            .list_container_edit {
+                                width: 100%;
+                                height: 100%;
+                                padding: 30px 0 0 0;
+                                overflow-x: hidden;
+                                overflow-y: auto;
+                                scrollbar-width: thin;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 10px;
+
+                                .item_container_edit {
+                                    width: 100%;
+                                    height: fit-content;
+                                    border: 1px solid rgb(197, 197, 197);
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: space-between;
+                                    padding: 5px;
+
+                                    .image_data_container {
+                                        width: 100%;
+                                        height: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        padding: 0 5px 0 5px;
+
+                                        .img_edit_credit {
+                                            width: 90px;
+                                            height: 90px;
+                                        }
+
+                                        .edit_description_edit_product {
+                                            width: fit-content;
+                                            height: 100%;
+                                            display: flex;
+                                            flex-direction: column;
+                                            justify-content: start;
+                                            padding: 0 0 0 20px;
+                                            border-left: 1px solid black;
+
+                                            .edit_description_data_product {
+                                                width: fit-content;
+                                                height: fit-content;
+                                                display: flex;
+                                                align-items: center;
+
+                                                .nombre_product_edit {
+                                                    font-size: 1rem;
+                                                }
+
+                                                .img_edit_credit {
+                                                    width: 20px;
+                                                    height: 20px;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .add_new_item_edit {
+                                        width: 150px;
+                                        height: 70px;
+                                        font-family: 'local';
+                                        font-size: 1.2rem;
+                                        background: none;
+                                        border: 1px solid rgba(0, 0, 0, 0.39);
+                                        border-radius: 5px;
+                                        transition: box-shadow 0.2s linear;
+
+                                        &:hover {
+                                            box-shadow: inset 0 0 5px rgb(175, 175, 175);
+                                        }
+
+                                        &:active {
+                                            transform: scale(1.05);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -814,7 +894,7 @@
                                             user-select: none;
 
                                             .name_product {
-                                                font-size: 1.2rem;
+                                                font-size: 1rem;
                                             }
 
                                             .img_Desc {
@@ -862,16 +942,9 @@
                                             border: 1px solid rgb(201, 201, 201);
                                             border-radius: 20px;
                                             background: none;
+                                            font-family: 'local';
+                                            font-size: 1.2rem;
                                             transition: box-shadow 0.2s linear;
-
-                                            .gifAdd {
-                                                position: absolute;
-                                                left: 50%;
-                                                top: 50%;
-                                                transform: translate(-50%, -55%);
-                                                width: 50px;
-                                                display: none;
-                                            }
 
                                             &:hover {
                                                 box-shadow: inset 0 0 5px rgb(175, 175, 175);

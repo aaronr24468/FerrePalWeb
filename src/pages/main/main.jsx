@@ -6,12 +6,12 @@ import { AsideMain } from './aside';
 import { MainScreenList } from './mainScreen';
 
 export const MainScreen = ({ }) => {
-    const { logOut, username, list, regiterCustomer, setName, setPhone, setAddress, name, phone, address, filterByName } = useFerrepalHook();
+    const { logOut, username, list, regiterCustomer, setName, setPhone, setAddress, name, phone, address, filterByName,  } = useFerrepalHook();
 
     return (
         <main className='ferrepal_main'>
             <div className="aside_account">
-                <AsideMain logOut={logOut} username={username}/>
+                <AsideMain logOut={logOut} username={username} />
             </div>
             <section className='main_screen'>
                 <MainScreenList  list={list} filterByName={filterByName}/>
@@ -35,7 +35,7 @@ export const MainScreen = ({ }) => {
                         </div>
                         <div className="inputClientContainer">
                             <span className='title_input'>Dirección</span>
-                            <textarea name="" id="" className='address_customer' placeholder='Calle, Número, Colonia, Ciudad...' id='data_customer_input_address' onChange={(event) => setAddress(event.target.value)}></textarea>
+                            <textarea name="" className='address_customer' placeholder='Calle, Número, Colonia, Ciudad...' id='data_customer_input_address' onChange={(event) => setAddress(event.target.value)}></textarea>
                         </div>
                         <div className="buttons_Press">
                             <button className='btn_modal_customer' onClick={() => document.getElementById('new_customer').close()}>Cancelar</button>

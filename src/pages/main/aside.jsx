@@ -1,11 +1,21 @@
 import logo from '../../assets/ferrepalLogo.png';
-import user from '../../assets/user.svg'
+import user from '../../assets/user.svg';
+import { useNavigate, useLocation } from 'react-router';
 
 export const AsideMain = ({ logOut, username }) => {
-
+    const navigate = useNavigate();
+    const location = useLocation();
+    const path = location.pathname;
     return (
         <>
-            <img className='logoFerre' src={logo} />
+            <div className="ferrepal_service">
+                <img className='logoFerre' src={logo} />
+
+                <div className="routes_Ferrepal">
+                    <a  className='route_direction' href="/Inventario" >Inventario</a>
+                </div>
+            </div>
+            
 
             <div className="user">
 

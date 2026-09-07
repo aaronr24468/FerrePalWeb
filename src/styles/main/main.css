@@ -17,18 +17,60 @@
         align-items: center;
         padding: 30px 0 0 0;
 
-        .logoFerre {
-            width: 200px;
-            height: 200px;
-            object-fit: contain;
-            border-radius: 50%;
-            background: white;
+        .ferrepal_service {
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            align-items: center;
 
-            @media (width <= 1500px){
-                width: 120px;
-                height: 120px;
+            .logoFerre {
+                width: 200px;
+                height: 200px;
+                object-fit: contain;
+                border-radius: 50%;
+                background: white;
+
+                @media (width <=1500px) {
+                    width: 120px;
+                    height: 120px;
+                }
+            }
+
+            .routes_Ferrepal {
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+
+
+                .route_direction {
+                    text-decoration: none;
+                    font-size: 1.4rem;
+                    color: white;
+                    text-shadow: 0 0 1px black;
+                    border-bottom: 3px solid black;
+                    padding: 3px 5px 3px 5px;
+                    transition: box-shadow 0.2s linear;
+                    border-radius: 5px 5px 0 0;
+
+
+                    &:hover {
+                        box-shadow: inset 0 0 5px black;
+                    }
+
+                    &:active{
+                        transform: scale(1.05)
+                    }
+                }
+
             }
         }
+
+
 
         .user {
             width: 100%;
@@ -234,12 +276,12 @@
                             justify-content: center;
                             gap: 5px;
 
-                            .logo_user{
+                            .logo_user {
                                 width: 20px;
                             }
                         }
 
-                        &:hover{
+                        &:hover {
                             background: rgb(240, 240, 240);
                         }
                     }
@@ -299,19 +341,19 @@
                 overflow: hidden;
                 gap: 10px;
 
-                .title_register_customer{
+                .title_register_customer {
                     font-size: 2rem;
                 }
 
-                .inputClientContainer{
+                .inputClientContainer {
                     width: 100%;
                     height: auto;
 
-                    .title_input{
+                    .title_input {
                         font-size: 1.2rem;
                     }
 
-                    .input_Data_customer{
+                    .input_Data_customer {
                         width: 100%;
                         height: 40px;
                         border-radius: 5px;
@@ -321,7 +363,7 @@
                         outline: none;
                     }
 
-                    .address_customer{
+                    .address_customer {
                         width: 100%;
                         height: 150px;
                         font-size: 1.1rem;
@@ -330,14 +372,14 @@
                     }
                 }
 
-                .buttons_Press{
+                .buttons_Press {
                     width: 100%;
                     height: 40px;
                     display: flex;
                     justify-content: end;
                     gap: 10px;
 
-                    .btn_modal_customer{
+                    .btn_modal_customer {
                         width: fit-content;
                         height: 100%;
                         padding: 0 10px 0 10px;
@@ -346,7 +388,7 @@
                         font-size: 1.1rem;
                     }
 
-                    .registar_cliente{
+                    .registar_cliente {
                         background: rgb(255, 202, 26);
                         color: white;
                         text-shadow: 0 0 2px black;

@@ -6,6 +6,7 @@ import { MainScreen } from './pages/main/main';
 import { CheckAuth } from './components/chechAuth';
 import { CheckAuthLogin } from './components/checkAuthLogin';
 import { CustomerMain } from './pages/customer/customerMain';
+import { InventoryComponent } from './pages/Inventory/InventoryMain';
 
 function App() {
 
@@ -29,6 +30,12 @@ function App() {
             <CustomerMain />
           </CheckAuth>}
         />
+
+        <Route path='/Inventario' element={
+          <CheckAuth>
+            <InventoryComponent />
+          </CheckAuth>
+        }/>
 
       </Routes>
 

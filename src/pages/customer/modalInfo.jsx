@@ -26,15 +26,15 @@ export const InfoCredit = ({ selectModal,
     productsCreditEdit,
     more_less_unite_edit,
     set_Kilograms_quantity_edit,
-    totalCreditEdit
+    totalCreditEdit,
+    getProductEditCredit,
+    productsListEdit,
+    add_Product_edit_box
 }) => {
 
     const textareaRef = useRef();
 
-
     const arrayProducts = credit.list_products.split(',')
-
-    console.log(productsCreditEdit)
 
     return (
         <dialog id="info_credit" >
@@ -86,7 +86,8 @@ export const InfoCredit = ({ selectModal,
                                     type="text"
                                     className="filter_product_by"
                                     placeholder="Codigo de barras o Nombre"
-                                    onClick={() => document.getElementById('products_inventory_edit')?.style.setProperty('display', 'block')}
+                                    onClick={() => {document.getElementById('products_inventory_edit')?.style.setProperty('display', 'block'), getProductEditCredit()}}
+                                    onChange={(event) => getProductEditCredit(event.target.value)}
                                 />
 
                                 <div className="products_inventory_edit" id="products_inventory_edit">
@@ -97,6 +98,57 @@ export const InfoCredit = ({ selectModal,
                                             onClick={() => document.getElementById('products_inventory_edit')?.style.setProperty('display', 'none')}
                                         >x</button>
 
+                                        <ul className="list_container_edit">
+                                            {productsListEdit.map((element, index) =>{
+                                                return(
+                                                    <li key={index} className="item_container_edit">
+                                                        <div className="image_data_container">
+                                                            <img src={element.images} alt="" className="img_edit_credit"/>
+                                                            <div className="edit_description_edit_product">
+
+                                                                <div className="edit_description_data_product">
+                                                                    <p className="nombre_product_edit">{element.nombre}</p>
+                                                                </div>
+                                                                <div className="edit_description_data_product">
+                                                                    <img src={barCode} alt=""  className="img_edit_credit"/>
+                                                                    <span>{element.codigo_barras}</span>
+                                                                </div>
+                                                                <div className="edit_description_data_product">
+                                                                    <img src={moneyP} alt=""  className="img_edit_credit"/>
+                                                                    <span>{element.precio}</span>
+                                                                </div>
+                                                                <div className="edit_description_data_product">
+                                                                    <img src={mark} alt=""  className="img_edit_credit"/>
+                                                                    <span>{element.marca}</span>
+                                                                </div>
+                                                                <div className="edit_description_data_product">
+                                                                    <img src={box} alt=""  className="img_edit_credit"/>
+                                                                    <span>{element.stock}</span>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+
+                                                        <button className="add_new_item_edit" onClick={() =>{
+                                                            add_Product_edit_box({
+                                                                id_product: element.id,
+                                                                id_credit: element.id_credit,
+                                                                nombre: `${element.nombre}`,
+                                                                images: `${element.images}`,
+                                                                codigo_barras: `${element.codigo_barras}`,
+                                                                precio: element.precio,
+                                                                marca: `${element.marca}`,
+                                                                stock: element.stock,
+                                                                unidad_medida: element.unidad_medida,
+                                                                kg: '0.00',
+                                                                quantity: 1
+                                                            })
+                                                        }}>Agregar</button>
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +158,7 @@ export const InfoCredit = ({ selectModal,
                                         <li key={index} className="list_credit_edit">
 
                                             <div className="desc_product_edit_container">
-                                                <img src={element.image} className="img_credit_edit" />
+                                                <img src={element.images} className="img_credit_edit" />
 
                                                 <div className="description_products_edit">
                                                     <div className="desc_products_edit">
@@ -134,7 +186,7 @@ export const InfoCredit = ({ selectModal,
 
                                                 {element.unidad_medida === "pieza" && <div className="quantity_product_edit">
 
-                                                    <button className="btn_quantity_edit" id={element.id_product} quantity="false" onClick={more_less_unite_edit}>-</button>
+                                                    <button className="btn_quantity_edit" id={element.id_product} quantity="false" defaultV={element.quantity} onClick={more_less_unite_edit}>-</button>
 
                                                     <input type="text" value={element.quantity} readOnly className="quantity_product_edit_input" id="quantity" />
 
@@ -221,7 +273,7 @@ export const InfoCredit = ({ selectModal,
                     <div className="select_Product" >
                         <button autoFocus className="close_focus">x</button>
 
-                        <input type="text" placeholder="Codigo de Barras" className="search_by_code" onClick={getProductNewCredit} />
+                        <input type="text" placeholder="Codigo de Barras o Nombre" className="search_by_code" onClick={getProductNewCredit} onChange={(event) => getProductNewCredit(event.target.value)}/>
 
                         <ul className="list_products_select_credit" id="list_products_select_credit">
                             {productsList.map((element, index) => {
@@ -236,7 +288,7 @@ export const InfoCredit = ({ selectModal,
                                             <div className="list_product_BD">
                                                 <div className="image_product_list">
 
-                                                    <img src={element.images[0]} className="img_product_list_select" />
+                                                    <img src={element.images} className="img_product_list_select" />
 
                                                     <div className="info">
                                                         <div className="desItem">
@@ -268,7 +320,7 @@ export const InfoCredit = ({ selectModal,
                                                             add_Product_credit_box({
                                                                 id_product: element.id,
                                                                 nombre: `${element.nombre}`,
-                                                                image: `${element.images[0]}`,
+                                                                image: `${element.images}`,
                                                                 codigo_barras: `${element.codigo_barras}`,
                                                                 precio: element.precio,
                                                                 marca: `${element.marca}`,
@@ -351,7 +403,7 @@ export const InfoCredit = ({ selectModal,
                                         {element.unidad_medida === "metro" && <div className="quantity_product">
 
                                             {/* aqui va a ir para los kilogramos, productos que se vendan a granel */}
-                                            <input type="text" id={element.id_product} className="quantity_kilograms" placeholder="0.0m" min="0.01" step="0.01" onChange={set_Kilograms_quantity} />
+                                            <input type="text" id={element.id_product} className="quantity_kilograms" placeholder="0.0m" min="0.01" step="0.01" onChange={set_Kilograms_quantity} defaultValue={element.quantity}/>
 
                                         </div>}
                                     </div>
