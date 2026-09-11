@@ -106,9 +106,47 @@
         flex-direction: column;
         padding: 20px;
 
-        .title_section_inventory {
-            font-size: 2rem;
+        .titleAndNewProduct {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            .title_section_inventory {
+                font-size: 2rem;
+            }
+
+            .btn_new_product {
+                width: 50px;
+                height: 50px;
+                padding: 0 10px 0 10px;
+                background: #d4d4d4;
+                border: none;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0.5;
+                transition: opacity 0.2s linear;
+
+                .image_plus {
+                    width: 35px;
+                    height: 35px;
+                }
+
+                &:hover {
+                    opacity: 1;
+                    cursor: pointer;
+                }
+
+                &:active {
+                    transform: scale(0.95);
+                }
+            }
         }
+
 
         .container_inventory_items {
             width: 100%;
@@ -230,7 +268,7 @@
 
     }
 
-    .modal_inventory {
+    #modal_inventory {
         align-self: center;
         justify-self: center;
         border: none;
@@ -368,6 +406,189 @@
                     border: none;
                     background: rgb(0, 245, 0);
                 }
+            }
+        }
+    }
+
+
+    #modal_new_product {
+        align-self: center;
+        justify-self: center;
+        border: none;
+        border-radius: 10px;
+
+        .mainContainerNewProduct {
+            width: 700px;
+            height: 600px;
+            position: relative;
+
+            .close_modal_new_product {
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 40px;
+                height: 40px;
+                border-radius: 0 10px 0 20px;
+                background: rgba(255, 0, 0, 0.5);
+                border: none;
+
+                &:hover {
+                    border: 3px solid black;
+                    background: rgba(255, 0, 0, 1);
+                }
+
+                &:active {
+                    transform: scale(0.95);
+                }
+            }
+
+            .container_input_data_register_product {
+                width: 100%;
+                height: 100%;
+                padding: 10px;
+                box-shadow: inset 0 0 5px black;
+                border-radius: 10px;
+
+                .form_input_product {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    scrollbar-width: thin;
+                    align-items: center;
+
+                    .inputs_options {
+                        width: 100%;
+                        height: fit-content;
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        gap: 10px;
+                        justify-content: center;
+
+                        .inputBox {
+                            width: 45%;
+                            height: fit-content;
+                            display: flex;
+                            flex-direction: column;
+
+                            .title_input_new_product {
+                                font-size: 1.3rem;
+                            }
+
+                            .input_new_product {
+                                width: 100%;
+                                height: 30px;
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+
+                    .description_container_input {
+                        width: 100%;
+                        height: fit-content;
+                        display: flex;
+                        justify-content: center;
+
+                        #description_item {
+                            width: 92%;
+                            height: 100px;
+                            resize: none;
+                            font-size: 1rem;
+                        }
+                    }
+
+                    .select_images {
+                        width: 100%;
+                        height: fit-content;
+                        display: flex;
+                        justify-content: center;
+                        gap: 10px;
+
+                        .label_file_input {
+                            width: fit-content;
+                            height: fit-content;
+
+                            .img_upload {
+                                width: 70px;
+                                aspect-ratio: 1;
+                            }
+
+                            &:hover {
+                                transform: scale(1.05);
+                                cursor: pointer;
+                                box-shadow: 0 0 5px black, 2px 2px 5px black;
+                                border-radius: 10px;
+                            }
+                        }
+
+                        .input_file_images {
+                            display: none;
+                        }
+
+                        .box_image {
+                            width: fit-content;
+                            height: fit-content;
+                            position: relative;
+
+                            .delete_image{
+                                position: absolute;
+                                right: -5px;
+                                top: -5px;
+                                background: none;
+                                border: none;
+
+                                .trash_image{
+                                    width: 17px;
+                                    aspect-ratio: 1;
+                                    opacity: 0.4;
+                                    transition: width 0.2s linear;
+
+                                    &:hover{
+                                        width: 25px;
+                                        cursor: pointer;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+
+                            .img_product_selected {
+                                width: 80px;
+                                aspect-ratio: 1;
+                                object-fit: contain;
+                                border: 3px solid rgb(175, 175, 175);
+                                border-radius: 10px;
+                            }
+                        }
+
+
+                    }
+
+                    .btn_submit_product{
+                        width: 20%;
+                        height: 30px;
+                        background: none;
+                        border: none;
+                        border: 3px solid black;
+                        border-radius: 5px;
+
+                        &:hover{
+                            border: 3px solid rgb(42, 250, 0);
+                            cursor: pointer;
+                            transform: scale(1.05);
+                        }
+
+                        &:active{
+                            transform: scale(1);
+                        }
+                    }
+
+                }
+
+
             }
         }
     }

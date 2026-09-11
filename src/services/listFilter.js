@@ -22,5 +22,13 @@ export const listInventoryFerrePal = [
     'Centros de carga y bases para medidor',
     'Cerrajeria accesorios',
     'Cespol para lavado fregadero coladeras y tapas',
-    'Chalupas botes y cajas y tapas de registro'
+    'Chalupas botes y cajas y tapas de registro',
+    'Iluminacion',
+    'Cables conductores de electricidad'
+]
+
+export const unidadMedida = [
+    'pieza',
+    'kg',
+    'metro'
 ]

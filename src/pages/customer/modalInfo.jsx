@@ -6,6 +6,7 @@ import moneyP from '../../assets/moneyProduct.svg'
 import mark from '../../assets/mark.svg'
 import box from '../../assets/box.svg'
 import add from '../../assets/package.gif'
+import { cuteText } from "../../functions/methods";
 
 export const InfoCredit = ({ selectModal,
     credit,
@@ -102,12 +103,12 @@ export const InfoCredit = ({ selectModal,
                                             {productsListEdit.map((element, index) =>{
                                                 return(
                                                     <li key={index} className="item_container_edit">
-                                                        <div className="image_data_container">
+                                                        <div className="image_data_container" title={element.nombre}>
                                                             <img src={element.images} alt="" className="img_edit_credit"/>
                                                             <div className="edit_description_edit_product">
 
                                                                 <div className="edit_description_data_product">
-                                                                    <p className="nombre_product_edit">{element.nombre}</p>
+                                                                    <p className="nombre_product_edit">{cuteText(element.nombre)}</p>
                                                                 </div>
                                                                 <div className="edit_description_data_product">
                                                                     <img src={barCode} alt=""  className="img_edit_credit"/>
@@ -157,12 +158,12 @@ export const InfoCredit = ({ selectModal,
                                     return (
                                         <li key={index} className="list_credit_edit">
 
-                                            <div className="desc_product_edit_container">
+                                            <div className="desc_product_edit_container" title={element.nombre}>
                                                 <img src={element.images} className="img_credit_edit" />
 
                                                 <div className="description_products_edit">
                                                     <div className="desc_products_edit">
-                                                        <span>{element.nombre}</span>
+                                                        <span>{cuteText(element.nombre)}</span>
                                                     </div>
                                                     <div className="desc_products_edit">
                                                         <img src={barCode} className="img_edit_desc" />
@@ -288,7 +289,11 @@ export const InfoCredit = ({ selectModal,
                                             <div className="list_product_BD">
                                                 <div className="image_product_list">
 
-                                                    <img src={element.images} className="img_product_list_select" />
+                                                    <div className="container_image_list_roduct">
+                                                        <img src={element.images} className="img_product_list_select" />
+                                                    </div>
+
+                                                    
 
                                                     <div className="info">
                                                         <div className="desItem">
