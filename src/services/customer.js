@@ -24,14 +24,14 @@ export const getInfoCredit = async(id) =>{
     return(response.json());
 }
 
-export const editCreditCustomer = async(id, productsCreditEdit) =>{
+export const editCreditCustomer = async(id, productsCreditEdit, newTotal) =>{
     const response = await fetch(`${URL_PATH}/credit/edit/credit`,{
         method: 'PUT',
         credentials: 'include',
         headers:{
             "Content-Type":"application/json"
         },
-        body: JSON.stringify({id, productsCreditEdit})
+        body: JSON.stringify({id, productsCreditEdit, newTotal})
     })
 
     return(response.json())

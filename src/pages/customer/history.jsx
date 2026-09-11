@@ -38,7 +38,7 @@ export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyIns
                             </div>
 
                             <div className="data_credit">
-                                <span className='credit_description'>${Number(element.amount).toLocaleString('en-US')}</span>
+                                <span className='credit_description'>${Number(element.total_credit).toLocaleString('en-US')}</span>
                             </div>
 
                             <div className="data_credit historyC">
@@ -46,7 +46,7 @@ export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyIns
                                 <button className='btnList' onClick={() => historyInstallment(element.id, element.id_customer, 'InstallmentHistory')}><img className='imgList' src={lisInstallment} /></button>
                             </div>
 
-                            <div className="data_credit"><span className='credit_description'>${Number((Number(element.amount) - Number(element.Installment)).toFixed(2)).toLocaleString('en-US')}</span></div>
+                            <div className="data_credit"><span className='credit_description'>${Number((Number(element.total_credit) - Number(element.Installment)).toFixed(2)).toLocaleString('en-US')}</span></div>
 
                             <div className="data_credit"><span className='credit_description'>{dayjs(element.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</span></div>
 

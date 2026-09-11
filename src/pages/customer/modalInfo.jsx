@@ -45,8 +45,8 @@ export const InfoCredit = ({ selectModal,
                 {!loading && <div className="info_credit_customer">
                     {credit.status === "Activo" && <p className="data_credit"><span className="description_info">Status </span>{credit.status}</p>}
                 </div>}
-                <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Monto total </span>${Number(credit.amount).toLocaleString('en-US')}</p></div>
-                <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Saldo pendiente </span>${Number((Number(credit.amount) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p></div>
+                <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Monto total </span>${Number(credit.total_credit).toLocaleString('en-US')}</p></div>
+                <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Saldo pendiente </span>${Number((Number(credit.total_credit) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p></div>
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Total abonado </span>${Number(credit.Installment).toLocaleString('en-US')}</p></div>
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de inicio </span>{dayjs(credit.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
                 <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de ultimo cambio</span>{dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
@@ -74,8 +74,8 @@ export const InfoCredit = ({ selectModal,
                         <div className="info_credit_customer">
                             {credit.status === "Activo" && <p className="data_credit"><span className="description_info">Status </span>{credit.status}</p>}
                         </div>
-                        <div className="info_credit_customer_edit"><span className="amount_edit">Monto total</span> <span className="current_amount">${Number(totalCreditEdit).toLocaleString('en-US')}</span></div>
-                        <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Saldo pendiente </span>${Number((Number(credit.amount) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p></div>
+                        <div className="info_credit_customer_edit"><span className="amount_edit">Monto total</span> <span className="current_amount">${Number(credit.total_credit).toLocaleString('en-US')}</span></div>
+                        <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Saldo pendiente </span>${Number((Number(credit.total_credit) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p></div>
                         <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Total abonado </span>${Number(credit.Installment).toLocaleString('en-US')}</p></div>
                         <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de inicio </span>{dayjs(credit.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
                         <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de ultimo cambio</span>{dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
@@ -226,7 +226,8 @@ export const InfoCredit = ({ selectModal,
                         </div>
 
                         <div className="button_container_save">
-                            <button className="edit_data_btn" onClick={() => editCredit(credit.id, textareaRef, credit.description)}>Guardar Cambios</button>
+                            <span className="new_total">Total nuevo: {Number(totalCreditEdit).toLocaleString('en-US')}</span>
+                            <button className="edit_data_btn" onClick={() => editCredit(credit.id, totalCreditEdit, credit.total_credit)}>Guardar Cambios</button>
                         </div>
                     </>
                 )}
@@ -248,7 +249,7 @@ export const InfoCredit = ({ selectModal,
                     <span className="payout_span">Liquidar</span>
                     <div className="payout_container">
                         <span className="payout_total">total a liquidar: </span>
-                        <p className="total_amount">${Number((Number(credit.amount) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p>
+                        <p className="total_amount">${Number((Number(credit.total_credit) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p>
                     </div>
                     <button className="payout_button" onClick={() => payoutCredit(credit.id, credit.id_customer)}>Liquidar</button>
                 </section>

@@ -55,7 +55,7 @@ export const useCustomerHook = () => {
             setSelectModal(modal)
             document.getElementById('info_credit').showModal()
             const data = await getInfoCredit(id_credit);
-            setProductsCreditEdit(data.listP)
+            //setProductsCreditEdit(data.listP)
             setCredit(data.info)
         } catch (error) {
             setError(error.message || "Error de servidor")
@@ -66,11 +66,15 @@ export const useCustomerHook = () => {
 
 
     // metodo que nos permite editar el credito, agregar mas productos y crear un historial de los nuevos movimientos
-    const editCredit = async (id_credit, textareaRef, refDescription) => {
+    const editCredit = async (id_credit, totalCreditEdit, total_credit) => {
         try {
             const id = id_credit; //id del credito del cliente
 
-            const asnwer = await editCreditCustomer(id, productsCreditEdit)
+            const newTotal = Number(totalCreditEdit) + Number(total_credit)
+
+            console.log(newTotal)
+
+            const asnwer = await editCreditCustomer(id, productsCreditEdit, newTotal)
 
             if (!asnwer.ok) return setError(asnwer.message || 'Error de servidor');
 

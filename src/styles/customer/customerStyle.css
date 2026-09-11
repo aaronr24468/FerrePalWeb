@@ -583,7 +583,11 @@
                 height: 50px;
                 display: flex;
                 align-items: center;
-                justify-content: end;
+                justify-content: space-between;
+
+                .new_total{
+                    font-size: 1.3rem;
+                }
 
                 .edit_data_btn {
                     width: 150px;

@@ -42,6 +42,8 @@ export const CustomerMain = ({ }) => {
         add_Product_edit_box
     } = useCustomerHook();
 
+    console.log(credits)
+
     return (
         <main className="Customer_Main_container">
             <h1 className='title_Customer_component'>Perfil del Cliente</h1>
