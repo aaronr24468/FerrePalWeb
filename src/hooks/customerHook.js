@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react"
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
 import { editCreditCustomer, get_total_credit_amount, getAllInfoCustomer, getInfoCredit, getListProducts, historyInstallmentCredit, installmentCreditCustomer, newCreditCustomer, payoutCreditCustomer } from "../services/customer";
+import { deleteProducts } from "../functions/methods";
 
 export const useCustomerHook = () => {
     const [loading, setLoading] = useState(false);
@@ -30,6 +31,7 @@ export const useCustomerHook = () => {
     const [totalCredit, setTotalCredit] = useState('0.00'); //guardamos el total del credito, este dato lo obtenemos del backEnd
     const [totalCreditEdit, setTotalCreditEdit] = useState('0.00'); //guardamos el total del credito al editar el mismo, este dato lo obtenemos del backEnd
     const [productsCreditEdit, setProductsCreditEdit] = useState([]);
+    const [showProducts, setShowProducts] = useState([])
 
     const { id } = useParams();
 
@@ -56,6 +58,7 @@ export const useCustomerHook = () => {
             document.getElementById('info_credit').showModal()
             const data = await getInfoCredit(id_credit);
             //setProductsCreditEdit(data.listP)
+            setShowProducts(data.listP)
             setCredit(data.info)
         } catch (error) {
             setError(error.message || "Error de servidor")
@@ -84,6 +87,8 @@ export const useCustomerHook = () => {
                 icon: 'success',
                 title: 'Se actualizo el credito con exito',
             })
+
+            setProductsCreditEdit([]);
 
             infoCustomer();
         } catch (error) {
@@ -146,7 +151,6 @@ export const useCustomerHook = () => {
                 document.getElementById('list_products_select_credit').style.display = "block"
                 setLoading(true);
                 const products = await getListProducts();
-                console.log(products.products)
                 setProductsList(products.products)
             }
 
@@ -385,6 +389,21 @@ export const useCustomerHook = () => {
         }
     }
 
+
+    // metodo que nos permite filtrar y eliminar productos de la lista de edit credit
+    const deleteProductEditCredit = (id) =>{
+        const response = deleteProducts(id, productsCreditEdit)
+        setProductsCreditEdit(response)
+    }
+
+    //metodo que nos permite eliminar productos no deseados antes de crear el credito
+    const deleteProductNewCredit = (id) =>{
+        console.log(id)
+        const response = deleteProducts(id, listSelected);
+        console.log(response)
+        setListSelected(response)
+    }
+
     window.addEventListener('click', (event) => {
         const target = event.target.localName;
         const id = event.target.id || null;
@@ -442,6 +461,9 @@ export const useCustomerHook = () => {
         totalCreditEdit,
         getProductEditCredit,
         productsListEdit,
-        add_Product_edit_box
+        add_Product_edit_box,
+        deleteProductEditCredit,
+        deleteProductNewCredit,
+        showProducts
     }
 }

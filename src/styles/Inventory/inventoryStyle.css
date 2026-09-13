@@ -83,8 +83,11 @@
                 border-left: 3px solid rgb(50, 231, 255);
 
                 .filter_name {
-                    font-size: 1.2rem;
+                    border: none;
+                    font-size: 1rem;
                     user-select: none;
+                    background: none;
+                    font-family: 'local';
                 }
 
                 &:hover {
@@ -181,6 +184,26 @@
                 .list_inventory_ul {
                     width: 100%;
                     height: 100%;
+
+                    .no_products{
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+
+                        .sad_character{
+                            width: 15%;
+                            user-select: none;
+                        }
+
+                        .no_products_span{
+                            position: absolute;
+                            top: 20%;
+                            font-size: 2rem;
+                        }
+                    }
 
                     .products_list_inventory {
                         width: 100%;

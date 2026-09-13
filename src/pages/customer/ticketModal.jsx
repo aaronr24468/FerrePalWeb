@@ -50,7 +50,7 @@ export const TicketModal = ({ credit }) => {
                         <p>---------------------------------------------</p>
                         <p>Fecha del credito: {dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p>
                         <p>---------------------------------------------</p>
-                        <p>Total a pagar: ${credit.amount}</p>
+                        <p>Total a pagar: ${credit.total_credit}</p>
                         <p>Total Abonado: ${credit.Installment}</p>
                         <p>---------------------------------------------</p>
                         <p>---------------Descripcion---------------</p>

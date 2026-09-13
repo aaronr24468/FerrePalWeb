@@ -1,12 +1,13 @@
 import { useEffect, useState, useCallback } from "react";
 import { getListProducts } from "../services/customer";
-import { editProductData, uploadImages, uploadNewP } from "../services/inventory";
+import { editProductData, getProductsByCategory, uploadImages, uploadNewP } from "../services/inventory";
 import Swal from "sweetalert2";
 
 export const useInventoryHook = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [list, setList] = useState([]);
+    const [categorySelected, setCategorySelected] = useState('Todos')
 
     const [dataProduct, setDataProduct] = useState({
         id: '',
@@ -22,9 +23,9 @@ export const useInventoryHook = () => {
     })
 
 
-    const[images, setImages] = useState([]);
-    const[tempImages, setTempImages] = useState([]);
-    const[reloadData, setReloadData] = useState(false)
+    const [images, setImages] = useState([]);
+    const [tempImages, setTempImages] = useState([]);
+    const [reloadData, setReloadData] = useState(false)
 
 
     const getProducts = useCallback(async () => {
@@ -61,7 +62,7 @@ export const useInventoryHook = () => {
                 showCancelButton: true,
                 confirmButtonText: 'Gurdar',
                 target: document.getElementById('modal_inventory')
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     const res = await editProductData(id, dataProduct);
                     if (!res.ok) return Swal.fire({
@@ -86,10 +87,10 @@ export const useInventoryHook = () => {
         }
     }
 
-    const ImagesFile = (event) =>{
+    const ImagesFile = (event) => {
         const files = event.target.files
-        
-        for(const file of files){
+
+        for (const file of files) {
             const tempUrl = URL.createObjectURL(file)
             setTempImages((prev) => [...prev, tempUrl])
         }
@@ -97,24 +98,24 @@ export const useInventoryHook = () => {
         setImages(files);
     }
 
-    const deleteImage = (index2) =>{
+    const deleteImage = (index2) => {
         let counter = 0
         let dataFilter = []
 
-        const filterFile = tempImages.filter((element, index) =>{
-            return(index2 != index)
+        const filterFile = tempImages.filter((element, index) => {
+            return (index2 != index)
         })
-        
-        for(const fileD of images){
-            if(counter != index2) dataFilter.push(fileD)
+
+        for (const fileD of images) {
+            if (counter != index2) dataFilter.push(fileD)
             counter += 1;
         }
-       
+
         setTempImages(filterFile)
         setImages(dataFilter)
     }
 
-    const uploadNewProduct = async(event) =>{
+    const uploadNewProduct = async (event) => {
         try {
             event.preventDefault();
             const form = event.target;
@@ -134,22 +135,22 @@ export const useInventoryHook = () => {
 
             const response = await uploadNewP(data);
 
-            if(!response.ok) return Swal.fire({
+            if (!response.ok) return Swal.fire({
                 icon: 'error',
                 title: response.message
             })
 
             const formData = new FormData();
 
-            for(const file of images){
+            for (const file of images) {
                 formData.append('images', file)
             }
 
             console.log(formData)
-            
+
             const responseImage = await uploadImages(formData, response.id)
 
-            if(!responseImage.ok) return Swal.fire({
+            if (!responseImage.ok) return Swal.fire({
                 icon: 'error',
                 title: response.message
             })
@@ -163,17 +164,61 @@ export const useInventoryHook = () => {
                 title: 'Se subio producto con exito'
             })
         } catch (error) {
-            setError(error.message || "Error de servidor")   
-        }finally{
+            setError(error.message || "Error de servidor")
+        } finally {
             setReloadData(false)
         }
     }
 
-    const cuteText = (stringData) => {
-        if (stringData.length > 26) {
-            return (stringData.slice(0, 27) + "...")
+    const searchByCategory = async (category) => {
+        try {
+            setCategorySelected(category)
+            if (category == 'Todos') setReloadData(true);
+
+            setLoading(true)
+            console.log(category)
+            const data = await getProductsByCategory(category)
+
+            if (!data.ok) return Swal.fire({
+                icon: 'error',
+                title: 'Error al obtener productos'
+            })
+
+            setList(data.products)
+        } catch (error) {
+            setError(error.message || "Error de servidor")
+        } finally {
+            setLoading(false)
+            setReloadData(false)
         }
-        return (stringData)
+    }
+
+    const searchProductByNameOrCode = async (event) => {
+        try {
+            setLoading(true)
+            const category = categorySelected;
+            const search = event.target.value;
+            if (category == 'Todos') {
+                const data = await getListProducts();
+                const filterData = data.products.filter((element) => {
+                    return (element.nombre.toLowerCase().includes(search.toLowerCase()) || element.codigo_barras.toLowerCase().includes(search.toLowerCase()))
+                })
+                setList(filterData)
+            } else {
+                const data = await getProductsByCategory(category)
+                const filterData = data.products.filter((element) => {
+                    return (element.nombre.toLowerCase().includes(search.toLowerCase()) || element.codigo_barras.toLowerCase().includes(search.toLowerCase()))
+                })
+                setList(filterData)
+            }
+
+        } catch (error) {
+            setError(error.message || "Error de servidor")
+        } finally {
+            setLoading(false)
+        }
+
+
     }
 
     useEffect(() => {
@@ -184,7 +229,6 @@ export const useInventoryHook = () => {
         list,
         dataProduct,
         getionProduct,
-        cuteText,
         dataProduct,
         loading,
         setDataProduct,
@@ -192,6 +236,8 @@ export const useInventoryHook = () => {
         ImagesFile,
         tempImages,
         deleteImage,
-        uploadNewProduct
+        uploadNewProduct,
+        searchByCategory,
+        searchProductByNameOrCode
     }
 }

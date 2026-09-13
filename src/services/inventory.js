@@ -38,3 +38,15 @@ export const uploadImages = async(formData, id) =>{
 
     return(response.json())
 }
+
+export const getProductsByCategory = async(category) =>{
+    const response = await fetch(`${URL_PATH}/products/get/by/${category}`,{
+        method: 'GET',
+        credentials: 'include',
+        headers:{
+            "Content-Type":"application/json"
+        }
+    })
+
+    return(response.json())
+}

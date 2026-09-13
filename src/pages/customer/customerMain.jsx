@@ -39,7 +39,10 @@ export const CustomerMain = ({ }) => {
         totalCreditEdit,
         getProductEditCredit,
         productsListEdit,
-        add_Product_edit_box
+        add_Product_edit_box,
+        deleteProductEditCredit,
+        deleteProductNewCredit,
+        showProducts
     } = useCustomerHook();
 
     console.log(credits)
@@ -91,6 +94,9 @@ export const CustomerMain = ({ }) => {
                 getProductEditCredit={getProductEditCredit}
                 productsListEdit={productsListEdit}
                 add_Product_edit_box={add_Product_edit_box}
+                deleteProductEditCredit={deleteProductEditCredit}
+                deleteProductNewCredit={deleteProductNewCredit}
+                showProducts={showProducts}
             />
 
             {/* Modal para imprimir ticket de credito */}

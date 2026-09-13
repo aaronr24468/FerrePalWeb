@@ -17,7 +17,9 @@ export const InventoryComponent = ({ }) => {
         ImagesFile,
         tempImages,
         deleteImage,
-        uploadNewProduct
+        uploadNewProduct,
+        searchByCategory,
+        searchProductByNameOrCode
     } = useInventoryHook();
 
 
@@ -28,13 +30,13 @@ export const InventoryComponent = ({ }) => {
             
                 <div className="inputSearch">
                     <a href="/FerrePal" className='route_direction_gestion'>Gestion de clientes</a>
-                    <input type="text" className='search_inventory_item' placeholder='Busca por codigo de barras o nombre' />
+                    <input type="text" className='search_inventory_item' placeholder='Busca por codigo de barras o nombre' onChange={searchProductByNameOrCode}/>
                 </div>
                 <ul className='list_filter'>
                     {listInventoryFerrePal.map((element, index) => {
                         return (
-                            <li className='filter_checkboxs' title={element} key={index}>
-                                <span className='filter_name'>{cuteText(element)}</span>
+                            <li className='filter_checkboxs' title={element} key={index} onClick={() => searchByCategory(element)}>
+                                <button className='filter_name' >{cuteText(element)}</button>
                             </li>
                         )
                     })}

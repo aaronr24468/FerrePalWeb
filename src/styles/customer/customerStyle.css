@@ -314,11 +314,22 @@
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+                    gap: 10px;
 
                     .prod_list_credit {
                         width: 100%;
                         height: fit-content;
                         list-style-type: decimal;
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        border-bottom: 3px solid black;
+
+                        .image_show_product {
+                            width: 60px;
+                            height: 60px;
+                            object-fit: contain;
+                        }
                     }
 
                     &::-webkit-scrollbar {
@@ -334,7 +345,7 @@
                 height: 350px;
                 display: flex;
                 flex-direction: column;
-                padding: 5px 0 0 0;
+                padding: 5px 0 10px 0;
 
                 .input_bar_code_name {
                     width: 100%;
@@ -495,6 +506,23 @@
                         align-items: center;
                         padding: 0 5px 0 5px;
                         justify-content: space-between;
+                        gap: 10px;
+
+                        .delete_product_list {
+                            width: fit-content;
+                            height: 100%;
+                            border: none;
+                            background: rgba(255, 0, 0, 0.295);
+                            font-family: 'local';
+                            padding: 0 5px 0 5px;
+                            font-size: 1.1rem;
+                            transition: background 0.2s linear;
+
+                            &:hover {
+                                background: rgba(255, 0, 0, 0.9);
+                                cursor: pointer;
+                            }
+                        }
 
                         .desc_product_edit_container {
                             width: 100%;
@@ -502,6 +530,7 @@
                             display: flex;
                             flex-direction: row;
                             align-items: center;
+                            gap: 5px;
 
                             .img_credit_edit {
                                 width: 80px;
@@ -585,7 +614,7 @@
                 align-items: center;
                 justify-content: space-between;
 
-                .new_total{
+                .new_total {
                     font-size: 1.3rem;
                 }
 
@@ -1005,6 +1034,9 @@
                 overflow-y: auto;
                 overflow-x: hidden;
                 scrollbar-width: thin;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
 
                 .container_selected_product {
                     width: 100%;
@@ -1021,6 +1053,22 @@
                         align-items: center;
                         padding: 5px;
                         gap: 5px;
+
+                        .Delete_product_selected {
+                            width: fit-content;
+                            height: 100%;
+                            padding: 0 5px 0 5px;
+                            background: rgba(255, 0, 0, 0.3);
+                            border: none;
+                            transition: background 0.2s linear;
+                            font-family: local;
+                            font-size: 1.1rem;
+
+                            &:hover {
+                                cursor: pointer;
+                                background: rgba(255, 0, 0, 0.9);
+                            }
+                        }
 
 
                         .product_image_selected {
@@ -1075,7 +1123,7 @@
                             display: flex;
                             align-items: center;
 
-                            .quantity_product {
+                            .quantity_product_pieza {
                                 width: 40px;
                                 height: 40px;
                                 font-family: 'local';
@@ -1095,6 +1143,13 @@
                                 text-align: center;
                                 font-size: 1.2rem;
                             }
+
+                        }
+
+                        .meters_kilo{
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
                         }
                     }
 
