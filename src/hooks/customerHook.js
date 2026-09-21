@@ -77,11 +77,11 @@ export const useCustomerHook = () => {
 
             const newTotal = Number(totalCreditEdit) + Number(total_credit)
 
-            console.log(newTotal)
+            //console.log(newTotal)
 
             const asnwer = await editCreditCustomer(id, productsCreditEdit, newTotal)
 
-            console.log(asnwer)
+            //console.log(asnwer)
 
             if (!asnwer.ok) return setError(asnwer.message || 'Error de servidor');
 
@@ -163,7 +163,7 @@ export const useCustomerHook = () => {
             if (search.length > 0) {
                 const products = await getListProducts();
                 const filterData = products.products.filter((element) => {
-                    console.log(element.nombre.toLowerCase().includes(search.toLowerCase()))
+                    //console.log(element.nombre.toLowerCase().includes(search.toLowerCase()))
 
                     return (element.nombre.toLowerCase().includes(search.toLowerCase()) || element.codigo_barras.toLowerCase().includes(search.toLowerCase()))
                 })
@@ -403,16 +403,16 @@ export const useCustomerHook = () => {
     const deleteProductEditCredit = (id) => {
         const response = deleteProducts(id, productsCreditEdit)
         setProductsCreditEdit(response)
-        console.log(productsCreditEdit.length)
+        //console.log(productsCreditEdit.length)
 
         if (productsCreditEdit.length === 1) setTotalCreditEdit('0.00')
     }
 
     //metodo que nos permite eliminar productos no deseados antes de crear el credito
     const deleteProductNewCredit = (id) => {
-        console.log(id)
+        //console.log(id)
         const response = deleteProducts(id, listSelected);
-        console.log(response)
+        //console.log(response)
         setListSelected(response)
     }
 
@@ -441,7 +441,7 @@ export const useCustomerHook = () => {
 
     const deleteProductCreditCustomer = (id, quantity, price, total, id_credit, id_customer) => {
         try {
-            console.log(id, quantity, price, total)
+            //console.log(id, quantity, price, total)
             const discountAmount = Number(price) * Number(quantity);
             Swal.fire({
                 icon: 'warning',

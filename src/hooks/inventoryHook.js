@@ -147,7 +147,7 @@ export const useInventoryHook = () => {
                 formData.append('images', file)
             }
 
-            console.log(formData)
+            //console.log(formData)
 
             const responseImage = await uploadImages(formData, response.id)
 
@@ -177,7 +177,7 @@ export const useInventoryHook = () => {
             if (category == 'Todos') setReloadData(true);
 
             setLoading(true)
-            console.log(category)
+            //console.log(category)
             const data = await getProductsByCategory(category)
 
             if (!data.ok) return Swal.fire({
