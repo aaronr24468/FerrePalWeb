@@ -25,7 +25,7 @@ export const ModalEditCredit = ({
     deleteCredit
 }) => {
 
-    console.log(customer)
+   // console.log(customer)
 
     return (
         <>

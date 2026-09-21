@@ -7,7 +7,7 @@ import { cuteText } from "../../functions/methods";
 export const TicketModal = ({ credit, showProducts }) => {
     const componentRef = useRef(null)
 
-    console.log(showProducts)
+    //console.log(showProducts)
 
     const arrayProducts = credit.list_products.split(',')
 

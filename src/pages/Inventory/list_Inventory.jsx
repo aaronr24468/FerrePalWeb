@@ -3,7 +3,7 @@ import { cuteText } from '../../functions/methods';
 import sadCharacter from '../../assets/sadFerrePal.png'
 
 export const ListInventory = ({ list, getionProduct }) => {
-    console.log(list)
+    //console.log(list)
     return (
         <>
             <div className="titleAndNewProduct">

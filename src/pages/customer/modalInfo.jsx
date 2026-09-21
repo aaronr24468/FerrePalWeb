@@ -63,9 +63,9 @@ export const InfoCredit = ({ selectModal,
                 <div className="info_credit_customer_edit description_edit">
                     <span className="amount_edit">Descripción</span>
                     <ul className="info_description_edit none_edit">
-                        {showProducts.map((element) => {
+                        {showProducts.map((element, index) => {
                             return (
-                                <li className="prod_list_credit">
+                                <li className="prod_list_credit" key={index}>
                                     <img src={element.images} className="image_show_product"/>
                                     <span>{cuteText(element.nombre)}</span>
                                     <span>{`(${element.quantity} ${element.unidad_medida})`}</span>

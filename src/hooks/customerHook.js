@@ -32,6 +32,7 @@ export const useCustomerHook = () => {
     const [productsCreditEdit, setProductsCreditEdit] = useState([]);
     const [showProducts, setShowProducts] = useState([])
     const [showListCredit, setShowListCredit] = useState(false);
+    const [statusCredit, setStatusCredit] = useState('Activo')
 
     const { id } = useParams();
 
@@ -58,7 +59,7 @@ export const useCustomerHook = () => {
             document.getElementById('info_credit').showModal()
             const data = await getInfoCredit(id_credit);
             //setProductsCreditEdit(data.listP)
-            console.log(data)
+            //console.log(data)
             setShowProducts(data.listP)
             setCredit(data.info)
         } catch (error) {
@@ -522,10 +523,10 @@ export const useCustomerHook = () => {
         if (target === "dialog") {
             document.getElementById(`${id}`)?.close();
             document.getElementById('list_products_select_credit')?.style.setProperty("display", "none");
-            document.getElementById('filter_product_by').removeAttribute('disabled', 'true')
-            document.getElementById('edit_credit_Customer').style.background = 'rgb(3, 150, 52)';
-            document.getElementById('button_container_save').style.display = 'flex'
-            document.getElementById('container_delete_credit').style.display = 'none'
+            document.getElementById('filter_product_by')?.removeAttribute('disabled', 'true')
+            document.getElementById('edit_credit_Customer')?.style.setProperty('background','rgb(3, 150, 52)');
+            document.getElementById('button_container_save')?.style.setProperty('display','flex')
+            document.getElementById('container_delete_credit')?.style.setProperty('display','none')
             setShowListCredit(false)
         }
 
@@ -585,6 +586,8 @@ export const useCustomerHook = () => {
         editListCredit,
         showListCredit,
         deleteProductCreditCustomer,
-        deleteCredit
+        deleteCredit,
+        setStatusCredit,
+        statusCredit
     }
 }

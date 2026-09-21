@@ -4,6 +4,7 @@ import phone from '../../assets/phone.svg'
 import address from '../../assets/address.svg'
 import creditImg from '../../assets/plusWhite.svg'
 import back from '../../assets/back.svg'
+import downArrow from '../../assets/downArrow.svg'
 
 
 import { CreditHistory } from './history';
@@ -47,7 +48,9 @@ export const CustomerMain = ({ }) => {
         editListCredit,
         showListCredit,
         deleteProductCreditCustomer,
-        deleteCredit
+        deleteCredit,
+        setStatusCredit,
+        statusCredit
     } = useCustomerHook();
 
     return (
@@ -65,12 +68,21 @@ export const CustomerMain = ({ }) => {
             <section className='credit_history'>
                 <div className="headTitle">
                     <span className='credit_history_title'>Historial Completo de Creditos</span>
+                    <button className='select_status_credit'>
+                        {statusCredit === 'Desabilitado' ? 'Cancelado':statusCredit} 
+                        <img className='downArrow' src={downArrow} alt="" />
+                        <section className='select'>
+                            <span className='select_status' onClick={() => setStatusCredit('Activo')}>Activo</span>
+                            <span className='select_status' onClick={() => setStatusCredit('Pagado')}>Pagado</span>
+                            <span className='select_status' onClick={() => setStatusCredit('Desabilitado')}>Cancelado</span>
+                        </section>
+                    </button>
 
                     <button className='new_credit_customer' onClick={() => newCredit('credit')}><img className='img_new_credit' src={creditImg} />Nuevo credito</button>
                 </div>
 
                 <div className="credit_list_Container">
-                    <CreditHistory credits={credits} infoCredit={infoCredit} showTicketModal={showTicketModal} historyInstallment={historyInstallment}/>
+                    <CreditHistory credits={credits} infoCredit={infoCredit} showTicketModal={showTicketModal} historyInstallment={historyInstallment} statusCredit={statusCredit}/>
                 </div>
             </section>
 

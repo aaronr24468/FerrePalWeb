@@ -94,6 +94,51 @@
                 color: rgba(3, 150, 52, 0.603);
             }
 
+            .select_status_credit{
+                width: fit-content;
+                height: 90%;
+                padding: 0 5px 0 5px;
+                font-family: 'local';
+                font-size: 1.2rem;
+                background: green;
+                color: white;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                position: relative;
+
+                .downArrow{
+                    width: 15px;
+                }
+
+                .select{
+                    position: absolute;
+                    width: 100%;
+                    left: 0;
+                    top: 100%;
+                    display: none;
+                    flex-direction: column;
+                    background: white;
+                    box-shadow: 0 0 5px black;
+                    z-index: 1000000;
+                    border-radius: 0 0 5px 5px;
+
+                    .select_status{
+                        width: 100%;
+                        color: black;
+                        font-size: 1rem;
+
+                        &:hover{
+                            background: rgba(128, 128, 128, 0.342);
+                        }
+                    }
+                }
+
+                &:hover > .select{
+                    display: flex;
+                }
+            }
+
             .new_credit_customer {
                 width: fit-content;
                 height: 30px;

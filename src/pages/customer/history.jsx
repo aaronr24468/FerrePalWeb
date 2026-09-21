@@ -5,7 +5,9 @@ import receipt from '../../assets/receipt.svg'
 import lisInstallment from '../../assets/listInstallment.svg'
 import dayjs from 'dayjs';
 
-export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyInstallment }) => {
+export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyInstallment, statusCredit }) => {
+
+    //console.log(credits)
 
     return (
         <>
@@ -21,14 +23,15 @@ export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyIns
                 {credits.map((element, index) => {
                     return (
 
-                        element.status === 'Activo' && <li key={index} className='list_credit'>
+                        element.status === statusCredit && <li key={index} className='list_credit'>
 
 
                             <div className="buttons_credit_details">
                                 <button className="info_buttons" onClick={() => showTicketModal(element.id)}><img className='svg_buttons' src={receipt} alt="" /></button>
                                 <button className="info_buttons" onClick={() => infoCredit(element.id, 'Info')}><img className='svg_buttons' src={eyes} alt="" /></button>
-                                {element.status != "Pagado" && <button className="info_buttons" onClick={() => infoCredit(element.id, 'Edit')}><img className='svg_buttons' src={pencil} alt="" /></button>}
-                                {element.status != "Pagado" && <button className="info_buttons" onClick={() => infoCredit(element.id, 'Money')}><img className='svg_buttons' src={money} alt="" /></button>}
+                                {element.status != "Pagado" && element.status != "Desabilitado" && <button className="info_buttons" onClick={() => infoCredit(element.id, 'Edit')}><img className='svg_buttons' src={pencil} alt="" /></button>}
+                                {element.status != "Pagado" && element.status != "Desabilitado" && <button className="info_buttons" onClick={() => infoCredit(element.id, 'Money')}><img className='svg_buttons' src={money} alt="" /></button>}
+                                
                             </div>
 
 
@@ -54,6 +57,8 @@ export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyIns
                             {element.status === "Activo" && <div className="data_credit"><span className='credit_description credit_status'>{element.status}</span></div>}
 
                             {element.status === "Pagado" && <div className="data_credit"><span className='credit_description credit_status_payout'>{element.status}</span></div>}
+
+                            {element.status === "Desabilitado" && <div className="data_credit"><span className='credit_description credit_status_payout'>Cancelado</span></div>}
                         </li>
 
                     )
