@@ -1,9 +1,13 @@
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import dayjs from 'dayjs';
+import { cuteText } from "../../functions/methods";
 
-export const TicketModal = ({ credit }) => {
+
+export const TicketModal = ({ credit, showProducts }) => {
     const componentRef = useRef(null)
+
+    console.log(showProducts)
 
     const arrayProducts = credit.list_products.split(',')
 
@@ -56,9 +60,11 @@ export const TicketModal = ({ credit }) => {
                         <p>---------------Descripcion---------------</p>
                         <p>---------------------------------------------</p>
                         <p>{credit.description}</p>
-                        <ul>{arrayProducts.map((element, index) =>{
+                        <ul>{showProducts.map((element, index) =>{
                             return(      
-                                <li className="lista_ticket" key={index}>{element}</li>
+                                <li className="lista_ticket" key={index}>
+                                    {element.nombre}----{`(${element.quantity} ${element.unidad_medida})`}-----{`>$${Number(element.buy_price)* Number(element.quantity)} `}
+                                </li>
                             )
                         })}</ul>
                         <p>---------------------------------------------</p>

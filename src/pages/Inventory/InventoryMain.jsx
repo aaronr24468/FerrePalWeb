@@ -32,6 +32,7 @@ export const InventoryComponent = ({ }) => {
                     <a href="/FerrePal" className='route_direction_gestion'>Gestion de clientes</a>
                     <input type="text" className='search_inventory_item' placeholder='Busca por codigo de barras o nombre' onChange={searchProductByNameOrCode}/>
                 </div>
+                
                 <ul className='list_filter'>
                     {listInventoryFerrePal.map((element, index) => {
                         return (

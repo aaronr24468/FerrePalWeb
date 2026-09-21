@@ -3,6 +3,7 @@ import '../../styles/customer/customerStyle.css';
 import phone from '../../assets/phone.svg'
 import address from '../../assets/address.svg'
 import creditImg from '../../assets/plusWhite.svg'
+import back from '../../assets/back.svg'
 
 
 import { CreditHistory } from './history';
@@ -42,13 +43,17 @@ export const CustomerMain = ({ }) => {
         add_Product_edit_box,
         deleteProductEditCredit,
         deleteProductNewCredit,
-        showProducts
+        showProducts,
+        editListCredit,
+        showListCredit,
+        deleteProductCreditCustomer,
+        deleteCredit
     } = useCustomerHook();
-
-    console.log(credits)
 
     return (
         <main className="Customer_Main_container">
+            <a className='btn_back_credit' href='/FerrePal'><img className='back_btn_svg' src={back} alt="" /></a>
+
             <h1 className='title_Customer_component'>Perfil del Cliente</h1>
 
             <section className='info_customer'>
@@ -97,10 +102,15 @@ export const CustomerMain = ({ }) => {
                 deleteProductEditCredit={deleteProductEditCredit}
                 deleteProductNewCredit={deleteProductNewCredit}
                 showProducts={showProducts}
+                editListCredit={editListCredit}
+                showListCredit={showListCredit}
+                deleteProductCreditCustomer={deleteProductCreditCustomer}
+                customer={customer}
+                deleteCredit={deleteCredit}
             />
 
             {/* Modal para imprimir ticket de credito */}
-            <TicketModal  credit={credit}/>
+            <TicketModal  credit={credit} showProducts={showProducts}/>
         </main>
     )
 }

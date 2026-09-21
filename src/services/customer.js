@@ -114,3 +114,29 @@ export const get_total_credit_amount = async(list) =>{
 
     return(response.json())
 }
+
+export const deleteProductCredit = async(id, discountAmount, totalCredit, id_credit, id_customer) =>{
+    const response = await fetch(`${URL_PATH}/credit/delete/product/credit`,{
+        method: 'POST',
+        credentials: 'include',
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({id, discountAmount, totalCredit, id_credit, id_customer})
+    })
+
+    return(response.json());
+}
+
+export const disableCredit = async(id_credit) =>{
+    const response = await fetch(`${URL_PATH}/credit/disable/credit`,{
+        method: 'POST',
+        credentials: 'include',
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({id_credit})
+    })
+
+    return(response.json());
+}

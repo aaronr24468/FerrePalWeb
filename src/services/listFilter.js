@@ -32,3 +32,24 @@ export const unidadMedida = [
     'kg',
     'metro'
 ]
+
+export const categoria = [
+    'Herramientas',
+    'Electricidad',
+    'Plomeria',
+    'Iluminacion',
+    'Herramientas electricas',
+    'Brocas y discos',
+    'Tornillería y fijación',
+    'Cadenas, cables y alambres',
+    'Mangueras y riego',
+    'Pintura',
+    'Adhesivos y selladores',
+    'Lubricantes',
+    'Seguridad',
+    'Cerraduras y herrajes',
+    'Construcción',
+    'Jardinería',
+    'Automotriz',
+    'Organización y almacenamiento'
+]

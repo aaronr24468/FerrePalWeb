@@ -1,4 +1,4 @@
-import { listInventoryFerrePal, unidadMedida } from "../../services/listFilter";
+import { listInventoryFerrePal, unidadMedida, categoria } from "../../services/listFilter";
 import upload from '../../assets/upload.svg'
 import trash from '../../assets/trash.svg'
 
@@ -24,7 +24,12 @@ export const NewProduct = ({ ImagesFile, tempImages, deleteImage, uploadNewProdu
 
                             <div className="inputBox">
                                 <span className="title_input_new_product">Categoria</span>
-                                <input type="text" placeholder="Categoria" className="input_new_product" onMouseEnter={(event) => event.target.focus()} name="categoria"/>
+                                <input type="text" placeholder="Categoria" list="categoria" className="input_new_product" onMouseEnter={(event) => event.target.focus()} name="categoria"/>
+                                <datalist id="categoria">
+                                    {categoria.map((element, index) =>{
+                                        return(<option value={element} key={index}/>)
+                                    })}
+                                </datalist>
                             </div>
 
                             <div className="inputBox">

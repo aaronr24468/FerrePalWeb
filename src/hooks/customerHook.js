@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
-import { editCreditCustomer, get_total_credit_amount, getAllInfoCustomer, getInfoCredit, getListProducts, historyInstallmentCredit, installmentCreditCustomer, newCreditCustomer, payoutCreditCustomer } from "../services/customer";
+import { deleteProductCredit, disableCredit, editCreditCustomer, get_total_credit_amount, getAllInfoCustomer, getInfoCredit, getListProducts, historyInstallmentCredit, installmentCreditCustomer, newCreditCustomer, payoutCreditCustomer } from "../services/customer";
 import { deleteProducts } from "../functions/methods";
 
 export const useCustomerHook = () => {
@@ -26,12 +26,12 @@ export const useCustomerHook = () => {
 
     const [productsList, setProductsList] = useState([]); //para guardar la lista de productos del inventario y mostrarlos en el front para seleccionar
     const [productsListEdit, setProductListEdit] = useState([]) //lista para guardar el credito editado
-    const [filterProducts, setFilterProducts] = useState([]); //filtrar la lista por el codigo de barras o en su defecto por nombre
     const [listSelected, setListSelected] = useState([]) //guardamos los productos seleccionados para el credito
     const [totalCredit, setTotalCredit] = useState('0.00'); //guardamos el total del credito, este dato lo obtenemos del backEnd
     const [totalCreditEdit, setTotalCreditEdit] = useState('0.00'); //guardamos el total del credito al editar el mismo, este dato lo obtenemos del backEnd
     const [productsCreditEdit, setProductsCreditEdit] = useState([]);
     const [showProducts, setShowProducts] = useState([])
+    const [showListCredit, setShowListCredit] = useState(false);
 
     const { id } = useParams();
 
@@ -58,6 +58,7 @@ export const useCustomerHook = () => {
             document.getElementById('info_credit').showModal()
             const data = await getInfoCredit(id_credit);
             //setProductsCreditEdit(data.listP)
+            console.log(data)
             setShowProducts(data.listP)
             setCredit(data.info)
         } catch (error) {
@@ -79,6 +80,8 @@ export const useCustomerHook = () => {
 
             const asnwer = await editCreditCustomer(id, productsCreditEdit, newTotal)
 
+            console.log(asnwer)
+
             if (!asnwer.ok) return setError(asnwer.message || 'Error de servidor');
 
             document.getElementById('info_credit').close()
@@ -89,6 +92,8 @@ export const useCustomerHook = () => {
             })
 
             setProductsCreditEdit([]);
+
+            setTotalCreditEdit('0.00')
 
             infoCustomer();
         } catch (error) {
@@ -162,11 +167,11 @@ export const useCustomerHook = () => {
                     return (element.nombre.toLowerCase().includes(search.toLowerCase()) || element.codigo_barras.toLowerCase().includes(search.toLowerCase()))
                 })
                 setProductsList(filterData)
-            }else{
+            } else {
                 const products = await getListProducts();
                 setProductsList(products.products)
             }
-            
+
         } catch (error) {
             setError(error.message || "Error de servidor")
         } finally {
@@ -182,17 +187,17 @@ export const useCustomerHook = () => {
 
         try {
 
-            if(dato.length > 0){
+            if (dato.length > 0) {
                 const products = await getListProducts();
-                const filterData = products.products.filter((element) =>{
-                    return(element.nombre.toLowerCase().includes(search.toLowerCase()) || element.codigo_barras.toLowerCase().includes(search.toLowerCase()));
+                const filterData = products.products.filter((element) => {
+                    return (element.nombre.toLowerCase().includes(search.toLowerCase()) || element.codigo_barras.toLowerCase().includes(search.toLowerCase()));
                 })
                 setProductListEdit(filterData)
-            }else{
+            } else {
                 const products = await getListProducts();
                 setProductListEdit(products.products)
             }
-            
+
         } catch (error) {
             setError(error.message || "Error de servidor")
         }
@@ -344,6 +349,8 @@ export const useCustomerHook = () => {
                 title: 'Se creo credito con exito'
             })
 
+            setListSelected([])
+
             document.getElementById('info_credit').close()
 
         } catch (error) {
@@ -365,6 +372,7 @@ export const useCustomerHook = () => {
             document.getElementById('ticket_credit').showModal();
             const data = await getInfoCredit(id_credit);
             setCredit(data.info)
+            setShowProducts(data.listP)
         } catch (error) {
             setError(error.message || "Error de servidor")
         }
@@ -391,17 +399,120 @@ export const useCustomerHook = () => {
 
 
     // metodo que nos permite filtrar y eliminar productos de la lista de edit credit
-    const deleteProductEditCredit = (id) =>{
+    const deleteProductEditCredit = (id) => {
         const response = deleteProducts(id, productsCreditEdit)
         setProductsCreditEdit(response)
+        console.log(productsCreditEdit.length)
+
+        if (productsCreditEdit.length === 1) setTotalCreditEdit('0.00')
     }
 
     //metodo que nos permite eliminar productos no deseados antes de crear el credito
-    const deleteProductNewCredit = (id) =>{
+    const deleteProductNewCredit = (id) => {
         console.log(id)
         const response = deleteProducts(id, listSelected);
         console.log(response)
         setListSelected(response)
+    }
+
+    //mostrar productos en edit credit y anular el input de momento
+
+    const editListCredit = () => {
+
+        if (!showListCredit) {
+            document.getElementById('filter_product_by').setAttribute('disabled', 'true')
+            document.getElementById('edit_credit_Customer').style.background = 'red';
+            document.getElementById('button_container_save').style.display = 'none'
+            document.getElementById('container_delete_credit').style.display = 'flex'
+
+            //document.getElementById('new_total').style.display = 'none'
+            setShowListCredit(true)
+        } else {
+            document.getElementById('filter_product_by').removeAttribute('disabled', 'true')
+            document.getElementById('edit_credit_Customer').style.background = 'rgb(3, 150, 52)';
+            document.getElementById('button_container_save').style.display = 'flex'
+            document.getElementById('container_delete_credit').style.display = 'none'
+            //document.getElementById('new_total').style.display = 'block'
+            setShowListCredit(false)
+        }
+
+    }
+
+    const deleteProductCreditCustomer = (id, quantity, price, total, id_credit, id_customer) => {
+        try {
+            console.log(id, quantity, price, total)
+            const discountAmount = Number(price) * Number(quantity);
+            Swal.fire({
+                icon: 'warning',
+                text: `¿Estas segura de eliminar este producto? quedaria un total de $${(Number(total) - Number(quantity * price)).toLocaleString('en-US')}`,
+                target: document.getElementById('info_credit'),
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, Eliminar!",
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const res = await deleteProductCredit(id, discountAmount, total, id_credit, id_customer);
+
+                    if (!res.ok) return Swal.fire({ icon: 'error', text: res.message, target: document.getElementById('info_credit') })
+
+                    const id_c = res.id
+
+                    const data = await getInfoCredit(id_c);
+
+                    setShowProducts(data.listP)
+                    setCredit(data.info)
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Se realizo cambio con exito',
+                        target: document.getElementById('info_credit')
+                    })
+
+                    infoCustomer();
+                }
+            })
+        } catch (error) {
+            setError(error.message || "Error de servidor")
+        }
+    }
+
+    const deleteCredit = async (id_credit) => {
+        try {
+
+            Swal.fire({
+                icon: 'warning',
+                title: '¿Estas segura en eliminar el credito?',
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, Eliminar!",
+                cancelButtonText: 'Cancelar',
+                target: document.getElementById('info_credit')
+            }).then(async(result) => {
+                if (result.isConfirmed) {
+                    const asnwer = await disableCredit(id_credit);
+
+                    if (!asnwer.ok) return Swal.fire({
+                        icon: 'error',
+                        text: asnwer.message,
+                        target: document.getElementById('info_credit')
+                    })
+
+                    document.getElementById('info_credit').close();
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Se Elimino credito con exito'
+                    })
+
+                    infoCustomer();
+                }
+            })
+
+        } catch (error) {
+            setError(error.message || "Error de servidor")
+        }
     }
 
     window.addEventListener('click', (event) => {
@@ -411,11 +522,17 @@ export const useCustomerHook = () => {
         if (target === "dialog") {
             document.getElementById(`${id}`)?.close();
             document.getElementById('list_products_select_credit')?.style.setProperty("display", "none");
+            document.getElementById('filter_product_by').removeAttribute('disabled', 'true')
+            document.getElementById('edit_credit_Customer').style.background = 'rgb(3, 150, 52)';
+            document.getElementById('button_container_save').style.display = 'flex'
+            document.getElementById('container_delete_credit').style.display = 'none'
+            setShowListCredit(false)
         }
 
         if (event.target.className === "new_credit_container") {
             document.getElementById('list_products_select_credit')?.style.setProperty("display", "none");
         }
+
     })
 
     useEffect(() => {
@@ -464,6 +581,10 @@ export const useCustomerHook = () => {
         add_Product_edit_box,
         deleteProductEditCredit,
         deleteProductNewCredit,
-        showProducts
+        showProducts,
+        editListCredit,
+        showListCredit,
+        deleteProductCreditCustomer,
+        deleteCredit
     }
 }

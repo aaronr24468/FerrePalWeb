@@ -16,8 +16,16 @@ export const ModalEditCredit = ({
     set_Kilograms_quantity_edit,
     editCredit,
     totalCreditEdit,
-    deleteProductEditCredit
+    deleteProductEditCredit,
+    editListCredit,
+    showProducts,
+    showListCredit,
+    deleteProductCreditCustomer,
+    customer,
+    deleteCredit
 }) => {
+
+    console.log(customer)
 
     return (
         <>
@@ -33,13 +41,21 @@ export const ModalEditCredit = ({
             {/* Agregar productos */}
             <div className="info_credit_customer_edit description_edit">
                 <div className="input_bar_code_name">
-                    <input
-                        type="text"
-                        className="filter_product_by"
-                        placeholder="Codigo de barras o Nombre"
-                        onClick={() => { document.getElementById('products_inventory_edit')?.style.setProperty('display', 'block'), getProductEditCredit() }}
-                        onChange={(event) => getProductEditCredit(event.target.value)}
-                    />
+
+                    <div className="inputContainerSearch">
+                        <input
+                            type="text"
+                            className="filter_product_by"
+                            id="filter_product_by"
+                            placeholder="Codigo de barras o Nombre"
+                            onClick={() => { document.getElementById('products_inventory_edit')?.style.setProperty('display', 'block'), getProductEditCredit() }}
+                            onChange={(event) => getProductEditCredit(event.target.value)}
+                        />
+
+                        <button className="edit_credit_Customer" id="edit_credit_Customer" onClick={editListCredit}>Edit credit</button>
+                    </div>
+
+
 
                     <div className="products_inventory_edit" id="products_inventory_edit">
                         <div className="products_inventory_edit_container">
@@ -107,83 +123,164 @@ export const ModalEditCredit = ({
 
 
                 <ul className="list_products_crerdit">
-                    {productsCreditEdit.map((element, index) => {
-                        return (
-                            <li key={index} className="list_credit_edit">
 
-                                <button className="delete_product_list" onClick={() =>deleteProductEditCredit(element.id_product)}>Eliminar</button>
+                    {showListCredit === false ?
 
-                                <div className="desc_product_edit_container" title={element.nombre}>
-                                    <img src={element.images} className="img_credit_edit" />
+                        productsCreditEdit.map((element, index) => {
+                            return (
+                                <li key={index} className="list_credit_edit">
 
-                                    <div className="description_products_edit">
-                                        <div className="desc_products_edit">
-                                            <span>{cuteText(element.nombre)}</span>
+                                    <button className="delete_product_list" onClick={() => deleteProductEditCredit(element.id_product)}>Eliminar</button>
+
+                                    <div className="desc_product_edit_container" title={element.nombre}>
+                                        <img src={element.images} className="img_credit_edit" />
+
+                                        <div className="description_products_edit">
+                                            <div className="desc_products_edit">
+                                                <span>{cuteText(element.nombre)}</span>
+                                            </div>
+                                            <div className="desc_products_edit">
+                                                <img src={barCode} className="img_edit_desc" />
+                                                <span>{element.codigo_barras}</span>
+                                            </div>
+                                            <div className="desc_products_edit">
+                                                <img src={mark} className="img_edit_desc" />
+                                                <span>{element.marca}</span>
+                                            </div>
+                                            <div className="desc_products_edit">
+                                                <img src={moneyP} className="img_edit_desc" />
+                                                <span>{element.precio}</span>
+                                            </div>
                                         </div>
-                                        <div className="desc_products_edit">
-                                            <img src={barCode} className="img_edit_desc" />
-                                            <span>{element.codigo_barras}</span>
-                                        </div>
-                                        <div className="desc_products_edit">
-                                            <img src={mark} className="img_edit_desc" />
-                                            <span>{element.marca}</span>
-                                        </div>
-                                        <div className="desc_products_edit">
-                                            <img src={moneyP} className="img_edit_desc" />
-                                            <span>{element.precio}</span>
-                                        </div>
+
                                     </div>
 
-                                </div>
 
 
+                                    <div className="container_selector_medida_edit">
 
-                                <div className="container_selector_medida_edit">
+                                        {element.unidad_medida === "pieza" && <div className="quantity_product_edit">
 
-                                    {element.unidad_medida === "pieza" && <div className="quantity_product_edit">
+                                            <button className="btn_quantity_edit" id={element.id_product} quantity="false" defaultV={element.quantity} onClick={more_less_unite_edit}>-</button>
 
-                                        <button className="btn_quantity_edit" id={element.id_product} quantity="false" defaultV={element.quantity} onClick={more_less_unite_edit}>-</button>
+                                            <input type="text" value={element.quantity} readOnly className="quantity_product_edit_input" id="quantity" />
 
-                                        <input type="text" value={element.quantity} readOnly className="quantity_product_edit_input" id="quantity" />
+                                            <button className="btn_quantity_edit" id={element.id_product} quantity="true" onClick={more_less_unite_edit}>+</button>
 
-                                        <button className="btn_quantity_edit" id={element.id_product} quantity="true" onClick={more_less_unite_edit}>+</button>
-
-                                    </div>}
+                                        </div>}
 
 
-                                    {element.unidad_medida === "kg" && <div className="quantity_product_edit">
+                                        {element.unidad_medida === "kg" && <div className="quantity_product_edit">
 
-                                        {/* aqui va a ir para los kilogramos, productos que se vendan a granel */}
-                                        <div className="container_kilograms_metro">
-                                            <span className="sale_unite">unidad en kilos</span>
-                                            <input type="text" id={element.id_product} className="quantity_kilograms_edit" placeholder="0.00kg" min="0.01" step="0.01" onChange={set_Kilograms_quantity_edit} defaultValue={element.quantity} />
+                                            {/* aqui va a ir para los kilogramos, productos que se vendan a granel */}
+                                            <div className="container_kilograms_metro">
+                                                <span className="sale_unite">unidad en kilos</span>
+                                                <input type="text" id={element.id_product} className="quantity_kilograms_edit" placeholder="0.00kg" min="0.01" step="0.01" onChange={set_Kilograms_quantity_edit} defaultValue={element.quantity} />
+                                            </div>
+
+
+                                        </div>}
+
+                                        {element.unidad_medida === "metro" && <div className="quantity_product_edit">
+
+                                            {/* aqui va a ir para los kilogramos, productos que se vendan a granel */}
+                                            <div className="container_kilograms_metro">
+                                                <span className="sale_unite">unidad en metros</span>
+                                                <input type="text" id={element.id_product} className="quantity_kilograms_edit" placeholder="0.0m" min="0.01" step="0.01" onChange={set_Kilograms_quantity_edit} defaultValue={element.quantity} />
+                                            </div>
+
+                                        </div>}
+
+                                    </div>
+
+                                </li>
+                            )
+                        })
+
+                        :
+
+                        showProducts.map((element, index) => {
+                            return (
+                                <li key={index} className="list_credit_edit">
+
+                                    <button className="delete_product_list" onClick={() => deleteProductCreditCustomer(element.id, element.quantity, element.buy_price, credit.total_credit, credit.id, customer.id)}>Eliminar</button>
+
+                                    <div className="desc_product_edit_container" title={element.nombre}>
+                                        <img src={element.images} className="img_credit_edit" />
+
+                                        <div className="description_products_edit">
+                                            <div className="desc_products_edit">
+                                                <span>{cuteText(element.nombre)}</span>
+                                            </div>
+                                            <div className="desc_products_edit">
+                                                <img src={barCode} className="img_edit_desc" />
+                                                <span>{element.codigo_barras}</span>
+                                            </div>
+                                            <div className="desc_products_edit">
+                                                <img src={mark} className="img_edit_desc" />
+                                                <span>{element.marca}</span>
+                                            </div>
+                                            <div className="desc_products_edit">
+                                                <img src={moneyP} className="img_edit_desc" />
+                                                <span>{element.buy_price}</span>
+                                            </div>
                                         </div>
 
+                                    </div>
 
-                                    </div>}
 
-                                    {element.unidad_medida === "metro" && <div className="quantity_product_edit">
 
-                                        {/* aqui va a ir para los kilogramos, productos que se vendan a granel */}
-                                        <div className="container_kilograms_metro">
-                                            <span className="sale_unite">unidad en metros</span>
-                                            <input type="text" id={element.id_product} className="quantity_kilograms_edit" placeholder="0.0m" min="0.01" step="0.01" onChange={set_Kilograms_quantity_edit} defaultValue={element.quantity} />
-                                        </div>
+                                    <div className="container_selector_medida_edit">
 
-                                    </div>}
+                                        {element.unidad_medida === "pieza" && <div className="quantity_product_edit">
+                                            <span>Total de piezas</span>
+                                            <input type="text" value={element.quantity} readOnly className="quantity_product_edit_input" id="quantity" />
 
-                                </div>
+                                        </div>}
 
-                            </li>
-                        )
-                    })}
+
+                                        {element.unidad_medida === "kg" && <div className="quantity_product_edit">
+
+                                            {/* aqui va a ir para los kilogramos, productos que se vendan a granel */}
+                                            <div className="container_kilograms_metro">
+                                                <span className="sale_unite">unidad en kilos</span>
+                                                <input type="text" id={element.id_product} readOnly className="quantity_kilograms_edit" placeholder="0.00kg" min="0.01" step="0.01" onChange={set_Kilograms_quantity_edit} defaultValue={element.quantity} />
+                                            </div>
+
+
+                                        </div>}
+
+                                        {element.unidad_medida === "metro" && <div className="quantity_product_edit">
+
+                                            {/* aqui va a ir para los kilogramos, productos que se vendan a granel */}
+                                            <div className="container_kilograms_metro">
+                                                <span className="sale_unite">unidad en metros</span>
+                                                <input type="text" id={element.id_product} readOnly className="quantity_kilograms_edit" placeholder="0.0m" min="0.01" step="0.01" onChange={set_Kilograms_quantity_edit} defaultValue={element.quantity} />
+                                            </div>
+
+                                        </div>}
+
+                                    </div>
+
+                                </li>
+                            )
+                        })
+                    }
+
                 </ul>
             </div>
 
-            <div className="button_container_save">
-                <span className="new_total">Total nuevo: ${Number(totalCreditEdit).toLocaleString('en-US')} </span>
-                <button className="edit_data_btn" onClick={() => editCredit(credit.id, totalCreditEdit, credit.total_credit)}>Guardar Cambios</button>
+            <div className="button_container_save" id="button_container_save">
+                <span className="new_total" id="new_total">Total nuevo: ${(Number(totalCreditEdit) + Number(credit.total_credit)).toLocaleString('en-US')} </span>
+                <button className="edit_data_btn" id="edit_data_btn" onClick={() => editCredit(credit.id, totalCreditEdit, credit.total_credit)}>Guardar Cambios</button>
             </div>
+
+            <div className="container_delete_credit" id="container_delete_credit">
+                <button className="delete_credit" onClick={() => deleteCredit(credit.id)}>Eliminar credito</button>
+            </div>
+
+
+
         </>
     )
 }

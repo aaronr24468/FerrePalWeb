@@ -35,13 +35,17 @@ export const InfoCredit = ({ selectModal,
     add_Product_edit_box,
     deleteProductEditCredit,
     deleteProductNewCredit,
-    showProducts
+    showProducts,
+    editListCredit,
+    showListCredit,
+    deleteProductCreditCustomer,
+    customer,
+    deleteCredit
 }) => {
 
     const textareaRef = useRef();
 
     const arrayProducts = credit.list_products.split(',')
-    console.log(showProducts)
 
     return (
         <dialog id="info_credit" >
@@ -65,6 +69,7 @@ export const InfoCredit = ({ selectModal,
                                     <img src={element.images} className="image_show_product"/>
                                     <span>{cuteText(element.nombre)}</span>
                                     <span>{`(${element.quantity} ${element.unidad_medida})`}</span>
+                                    <span>---------------${Number(element.buy_price)*Number(element.quantity)}</span>
                                 </li>
                             )
                         })}
@@ -91,6 +96,12 @@ export const InfoCredit = ({ selectModal,
                             editCredit={editCredit}
                             totalCreditEdit={totalCreditEdit}
                             deleteProductEditCredit={deleteProductEditCredit}
+                            editListCredit={editListCredit}
+                            showProducts={showProducts}
+                            showListCredit={showListCredit}
+                            deleteProductCreditCustomer={deleteProductCreditCustomer}
+                            customer={customer}
+                            deleteCredit={deleteCredit}
                         />
 
                         

@@ -20,7 +20,8 @@ export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyIns
             <ul className='list_credit_customer'>
                 {credits.map((element, index) => {
                     return (
-                        <li key={index} className='list_credit'>
+
+                        element.status === 'Activo' && <li key={index} className='list_credit'>
 
 
                             <div className="buttons_credit_details">
@@ -31,7 +32,7 @@ export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyIns
                             </div>
 
 
-                            
+
 
                             <div className="data_credit">
                                 <span className='credit_description'>{dayjs(element.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</span>
@@ -54,6 +55,7 @@ export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyIns
 
                             {element.status === "Pagado" && <div className="data_credit"><span className='credit_description credit_status_payout'>{element.status}</span></div>}
                         </li>
+
                     )
                 })}
             </ul>

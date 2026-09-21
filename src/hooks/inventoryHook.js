@@ -39,7 +39,7 @@ export const useInventoryHook = () => {
         } finally {
             setLoading(false);
         }
-    }, [])
+    }, [reloadData])
 
     const getionProduct = (data) => {
         try {
@@ -135,6 +135,7 @@ export const useInventoryHook = () => {
 
             const response = await uploadNewP(data);
 
+
             if (!response.ok) return Swal.fire({
                 icon: 'error',
                 title: response.message
@@ -223,7 +224,7 @@ export const useInventoryHook = () => {
 
     useEffect(() => {
         getProducts();
-    }, [getProducts, reloadData])
+    }, [getProducts])
 
     return {
         list,
