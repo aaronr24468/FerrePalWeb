@@ -17,13 +17,13 @@ export const ListInventory = ({ list, getionProduct }) => {
                     <div className="item_box_name_inventory">
                         <span className='name_section_product'>Articulo</span>
                     </div>
-                    <div className="item_box_name_inventory">
+                    <div className="item_box_name_inventory ">
                         <span className='name_section_product'>Codigo de barras</span>
                     </div>
-                    <div className="item_box_name_inventory">
+                    <div className="item_box_name_inventory code">
                         <span className='name_section_product'>stock</span>
                     </div>
-                    <div className="item_box_name_inventory">
+                    <div className="item_box_name_inventory code">
                         <span className='name_section_product'>categoria</span>
                     </div>
                     <div className="item_box_name_inventory">
@@ -47,15 +47,15 @@ export const ListInventory = ({ list, getionProduct }) => {
                                             <img src={element.images} alt="" className='image_inventory' />
                                             <span>{cuteText(element.nombre)}</span>
                                         </div>
-                                        <div className="img_inventory item_inv">
+                                        <div className="img_inventory item_inv ">
 
                                             <span>{element.codigo_barras}</span>
                                         </div>
-                                        <div className="img_inventory item_inv">
+                                        <div className="img_inventory item_inv item_inv_cb">
 
                                             <span>{element.stock}</span>
                                         </div>
-                                        <div className="img_inventory item_inv">
+                                        <div className="img_inventory item_inv item_inv_cb">
 
                                             <span>{element.categoria_ferreteria}</span>
                                         </div>
