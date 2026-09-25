@@ -16,7 +16,8 @@ export const ModalCreateCredit = ({
     totalCredit,
     createNewCredit,
     loading,
-    deleteProductNewCredit
+    deleteProductNewCredit,
+    loadingModal
 }) => {
 
     return (
@@ -29,74 +30,85 @@ export const ModalCreateCredit = ({
                 <input type="text" placeholder="Codigo de Barras o Nombre" className="search_by_code" onClick={getProductNewCredit} onChange={(event) => getProductNewCredit(event.target.value)} />
 
                 <ul className="list_products_select_credit" id="list_products_select_credit">
-                    {productsList.map((element, index) => {
+                    {loadingModal ?
+                        <>
+                            <div className="loading_logo">
+                                <img src={ferrepalCharacter} alt="" className="loading_img_character" />
+                            </div>
+                        </>
+                        :
+                        <>
+                            {productsList.map((element, index) => {
 
-                        return (
-                            <li key={index} className="container_list_products">
-                                {loading ?
-                                    <div className="list_product_BD_loading" >
-                                        <img src={ferrepalCharacter} className="loading_product_logo" />
-                                    </div>
-                                    :
-                                    <div className="list_product_BD">
-                                        <div className="image_product_list">
-
-                                            <div className="container_image_list_roduct">
-                                                <img src={element.images} className="img_product_list_select" />
+                                return (
+                                    <li key={index} className="container_list_products">
+                                        {loading ?
+                                            <div className="list_product_BD_loading" >
+                                                <img src={ferrepalCharacter} className="loading_product_logo" />
                                             </div>
+                                            :
+                                            <div className="list_product_BD">
+                                                <div className="image_product_list">
+
+                                                    <div className="container_image_list_roduct">
+                                                        <img src={element.images} className="img_product_list_select" />
+                                                    </div>
 
 
 
-                                            <div className="info">
-                                                <div className="desItem">
-                                                    <span className="name_product">{element.nombre}</span>
+                                                    <div className="info">
+                                                        <div className="desItem">
+                                                            <span className="name_product">{element.nombre}</span>
+                                                        </div>
+                                                        <div className="desItem" title="Codigo de barras">
+                                                            <img src={barCode} className="img_Desc" />
+                                                            <span>{element.codigo_barras}</span>
+                                                        </div>
+                                                        <div className="desItem" title="Precio del producto">
+                                                            <img src={moneyP} className="img_Desc" />
+                                                            <span>{element.precio}</span>
+                                                        </div>
+                                                        <div className="desItem" title="Marca del producto">
+                                                            <img src={mark} className="img_Desc" />
+                                                            <span>{element.marca}</span>
+                                                        </div>
+                                                        <div className="desItem" title="stock">
+                                                            <img src={box} className="img_Desc" />
+                                                            <span>{element.stock}</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div className="desItem" title="Codigo de barras">
-                                                    <img src={barCode} className="img_Desc" />
-                                                    <span>{element.codigo_barras}</span>
-                                                </div>
-                                                <div className="desItem" title="Precio del producto">
-                                                    <img src={moneyP} className="img_Desc" />
-                                                    <span>{element.precio}</span>
-                                                </div>
-                                                <div className="desItem" title="Marca del producto">
-                                                    <img src={mark} className="img_Desc" />
-                                                    <span>{element.marca}</span>
-                                                </div>
-                                                <div className="desItem" title="stock">
-                                                    <img src={box} className="img_Desc" />
-                                                    <span>{element.stock}</span>
+
+                                                <div className="add_list_item">
+                                                    <div className="addProductCredit">
+                                                        <button className="addItemCredit" onClick={() => {
+                                                            // Al dar click mandamos a llamar este metodo el los customeHooks para agregar el producto
+                                                            add_Product_credit_box({
+                                                                id_product: element.id,
+                                                                nombre: `${element.nombre}`,
+                                                                image: `${element.images}`,
+                                                                codigo_barras: `${element.codigo_barras}`,
+                                                                precio: element.precio,
+                                                                marca: `${element.marca}`,
+                                                                stock: element.stock,
+                                                                unidad_medida: element.unidad_medida,
+                                                                kg: '0.00',
+                                                                quantity: 1
+                                                            })
+                                                        }}>
+                                                            <span className="title_btn">Agregar</span>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
+                                    </li>
+                                )
 
-                                        <div className="add_list_item">
-                                            <div className="addProductCredit">
-                                                <button className="addItemCredit" onClick={() => {
-                                                    // Al dar click mandamos a llamar este metodo el los customeHooks para agregar el producto
-                                                    add_Product_credit_box({
-                                                        id_product: element.id,
-                                                        nombre: `${element.nombre}`,
-                                                        image: `${element.images}`,
-                                                        codigo_barras: `${element.codigo_barras}`,
-                                                        precio: element.precio,
-                                                        marca: `${element.marca}`,
-                                                        stock: element.stock,
-                                                        unidad_medida: element.unidad_medida,
-                                                        kg: '0.00',
-                                                        quantity: 1
-                                                    })
-                                                }}>
-                                                    <span className="title_btn">Agregar</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            </li>
-                        )
+                            })}
+                        </>
+                    }
 
-                    })}
                 </ul>
             </div>
 

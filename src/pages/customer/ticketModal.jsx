@@ -2,9 +2,10 @@ import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import dayjs from 'dayjs';
 import { cuteText } from "../../functions/methods";
+import ferrepalCharacter from '../../assets/ferrepalCharacter.png';
 
 
-export const TicketModal = ({ credit, showProducts }) => {
+export const TicketModal = ({ credit, showProducts, loadingModal }) => {
     const componentRef = useRef(null)
 
     //console.log(showProducts)
@@ -48,32 +49,43 @@ export const TicketModal = ({ credit, showProducts }) => {
     return (
         <>
             <dialog id="ticket_credit" open={false}>
-                <div className="container_Ticket">
-                    <section className="ticket_Container" ref={componentRef}>
-                        <p>FerrePal</p>
-                        <p>---------------------------------------------</p>
-                        <p>Fecha del credito: {dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p>
-                        <p>---------------------------------------------</p>
-                        <p>Total a pagar: ${credit.total_credit}</p>
-                        <p>Total Abonado: ${credit.Installment}</p>
-                        <p>---------------------------------------------</p>
-                        <p>---------------Descripcion---------------</p>
-                        <p>---------------------------------------------</p>
-                        <p>{credit.description}</p>
-                        <ul>{showProducts.map((element, index) =>{
-                            return(      
-                                <li className="lista_ticket" key={index}>
-                                    {element.nombre}----{`(${element.quantity} ${element.unidad_medida})`}-----{`>$${Number(element.buy_price)* Number(element.quantity)} `}
-                                </li>
-                            )
-                        })}</ul>
-                        <p>---------------------------------------------</p>
-                        
-                    </section>
-                    <button className="btn_ticket" onClick={handlePrint}>Imprimir</button>
-                </div>
+                {loadingModal ?
+                    <>
+                        <div className="loading_logo">
+                            <img src={ferrepalCharacter} alt="" className="loading_img_character" />
+                        </div>
+                    </>
+                    :
+                    <>
+                        <div className="container_Ticket">
+                            <section className="ticket_Container" ref={componentRef}>
+                                <p>FerrePal</p>
+                                <p>---------------------------------------------</p>
+                                <p>Fecha del credito: {dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p>
+                                <p>---------------------------------------------</p>
+                                <p>Total a pagar: ${credit.total_credit}</p>
+                                <p>Total Abonado: ${credit.Installment}</p>
+                                <p>---------------------------------------------</p>
+                                <p>---------------Descripcion---------------</p>
+                                <p>---------------------------------------------</p>
+                                <p>{credit.description}</p>
+                                <ul>{showProducts.map((element, index) => {
+                                    return (
+                                        <li className="lista_ticket" key={index}>
+                                            {element.nombre}----{`(${element.quantity} ${element.unidad_medida})`}-----{`>$${Number(element.buy_price) * Number(element.quantity)} `}
+                                        </li>
+                                    )
+                                })}</ul>
+                                <p>---------------------------------------------</p>
+
+                            </section>
+                            <button className="btn_ticket" onClick={handlePrint}>Imprimir</button>
+                        </div>
+                    </>
+                }
+
             </dialog>
-            
+
         </>
 
     )

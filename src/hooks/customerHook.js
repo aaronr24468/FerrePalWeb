@@ -6,8 +6,9 @@ import { deleteProducts } from "../functions/methods";
 
 export const useCustomerHook = () => {
     const [loading, setLoading] = useState(false);
+    const [loadingMain, setLoadingMain] = useState(false);
     const [error, setError] = useState(null);
-    const [loadingModal, setLoadingModal] = useState(true)
+    const [loadingModal, setLoadingModal] = useState(false)
 
     const [customer, setCustomer] = useState([]);
     const [credits, setCredits] = useState([]);
@@ -41,6 +42,7 @@ export const useCustomerHook = () => {
     const infoCustomer = async () => {
         try {
             setLoading(true)
+            setLoadingMain(true)
             const data = await getAllInfoCustomer(id);
             if (!data.ok) return (setError(data.message || "Error de servidor"));
             setCustomer(data.customer), setCredits(data.credits);
@@ -48,6 +50,7 @@ export const useCustomerHook = () => {
             setError(error.message || "Error de servidor")
         } finally {
             setLoading(false)
+            setLoadingMain(false)
         }
     }
 
@@ -155,7 +158,7 @@ export const useCustomerHook = () => {
     // obtenemos la lista de productos cuando le demos focus al input 
     const getProductNewCredit = async (search) => {
         try {
-
+            setLoadingModal(true)
             if (document.getElementById('list_products_select_credit').style.display !== "block") {
                 document.getElementById('list_products_select_credit').style.display = "block"
                 setLoading(true);
@@ -180,6 +183,7 @@ export const useCustomerHook = () => {
             setError(error.message || "Error de servidor")
         } finally {
             setLoading(false)
+            setLoadingModal(false)
         }
     }
 
@@ -373,12 +377,16 @@ export const useCustomerHook = () => {
     const showTicketModal = async (id_credit) => {
         try {
             setLoading(true);
+            setLoadingModal(true)
             document.getElementById('ticket_credit').showModal();
             const data = await getInfoCredit(id_credit);
             setCredit(data.info)
             setShowProducts(data.listP)
         } catch (error) {
             setError(error.message || "Error de servidor")
+        }finally{
+            setLoading(false);
+            setLoadingModal(false)
         }
     }
 
@@ -386,6 +394,7 @@ export const useCustomerHook = () => {
     const historyInstallment = async (id_credit, id_customer, modal) => {
         try {
             setLoading(true)
+            setLoadingModal(true)
             setSelectModal(modal)
             setInstallmentH([])
             document.getElementById('info_credit').showModal()
@@ -398,6 +407,7 @@ export const useCustomerHook = () => {
             setError(error.message || 'Error de servidor')
         } finally {
             setLoading(false)
+            setLoadingModal(false)
         }
     }
 
@@ -592,6 +602,7 @@ export const useCustomerHook = () => {
         deleteCredit,
         setStatusCredit,
         statusCredit,
-        loadingModal
+        loadingModal,
+        loadingMain
     }
 }

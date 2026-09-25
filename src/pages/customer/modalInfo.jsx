@@ -93,7 +93,7 @@ export const InfoCredit = ({ selectModal,
             </div>}
 
 
-            {selectModal === "Edit" && !loading && <div className="info_credit_Container">
+            {selectModal === "Edit" && <div className="info_credit_Container">
                 {loadingModal ? (
                     <>
                         <div className="loading_logo">
@@ -129,7 +129,7 @@ export const InfoCredit = ({ selectModal,
             </div>}
 
 
-            {selectModal === "Money" && !loading && <div className="money_credit_Container">
+            {selectModal === "Money" && <div className="money_credit_Container">
                 {loadingModal ?
                     <>
                         <div className="loading_logo">
@@ -179,6 +179,7 @@ export const InfoCredit = ({ selectModal,
                         createNewCredit={createNewCredit}
                         loading={loading}
                         deleteProductNewCredit={deleteProductNewCredit}
+                        loadingModal={loadingModal}
                     />
 
 
@@ -191,34 +192,46 @@ export const InfoCredit = ({ selectModal,
 
             {selectModal === "InstallmentHistory" && !loading && <div className="installment_history_container">
 
-                <span className="title_installment_span">Historial de Abonos</span>
+                {loadingModal ?
+                    <>
+                        <div className="loading_logo">
+                            <img src={ferrepalCharacter} alt="" className="loading_img_character" />
+                        </div>
+                    </>
+                    :
+                    <>
+                        <span className="title_installment_span">Historial de Abonos</span>
 
-                <section className="title_installment">
-                    <span className="info_installment_title">fecha de Abono</span>
-                    <span className="info_installment_title">Cantidad</span>
-                    <span className="info_installment_title">Status</span>
-                </section>
-                <ul className="data_history_installment">
-                    {installmentH.length === 0 && !loading ?
-                        (<div className="no_list">No existe historial</div>)
-                        :
-                        installmentH.map((element, index) => {
-                            return (
+                        <section className="title_installment">
+                            <span className="info_installment_title">fecha de Abono</span>
+                            <span className="info_installment_title">Cantidad</span>
+                            <span className="info_installment_title">Status</span>
+                        </section>
+                        <ul className="data_history_installment">
+                            {installmentH.length === 0 && !loading ?
+                                (<div className="no_list">No existe historial</div>)
+                                :
+                                installmentH.map((element, index) => {
+                                    return (
 
-                                <li key={index} className="container_data_installment">
-                                    <span className="data_credit_installment">{dayjs(element.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</span>
-                                    <span className="data_credit_installment amount_installment">${element.installment_amount}</span>
-                                    <span className="data_credit_installment ">
-                                        {element.pay_status === "Abono" && <p className="intallment_status_tag">{element.pay_status}</p>}
-                                        {element.pay_status === "Liquidado" && <p className="payout_status_tag">{element.pay_status}</p>}
-                                    </span>
-                                </li>
-                            )
+                                        <li key={index} className="container_data_installment">
+                                            <span className="data_credit_installment">{dayjs(element.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</span>
+                                            <span className="data_credit_installment amount_installment">${element.installment_amount}</span>
+                                            <span className="data_credit_installment ">
+                                                {element.pay_status === "Abono" && <p className="intallment_status_tag">{element.pay_status}</p>}
+                                                {element.pay_status === "Liquidado" && <p className="payout_status_tag">{element.pay_status}</p>}
+                                            </span>
+                                        </li>
+                                    )
 
-                        })
-                    }
+                                })
+                            }
 
-                </ul>
+                        </ul>
+                    </>
+                }
+
+
             </div>}
         </dialog>
     )
