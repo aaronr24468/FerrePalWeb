@@ -7,6 +7,7 @@ import { deleteProducts } from "../functions/methods";
 export const useCustomerHook = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [loadingModal, setLoadingModal] = useState(true)
 
     const [customer, setCustomer] = useState([]);
     const [credits, setCredits] = useState([]);
@@ -55,6 +56,7 @@ export const useCustomerHook = () => {
     const infoCredit = async (id_credit, modal) => {
         try {
             setLoading(true)
+            setLoadingModal(true)
             setSelectModal(modal)
             document.getElementById('info_credit').showModal()
             const data = await getInfoCredit(id_credit);
@@ -66,6 +68,7 @@ export const useCustomerHook = () => {
             setError(error.message || "Error de servidor")
         } finally {
             setLoading(false)
+            setLoadingModal(false)
         }
     }
 
@@ -588,6 +591,7 @@ export const useCustomerHook = () => {
         deleteProductCreditCustomer,
         deleteCredit,
         setStatusCredit,
-        statusCredit
+        statusCredit,
+        loadingModal
     }
 }

@@ -40,47 +40,65 @@ export const InfoCredit = ({ selectModal,
     showListCredit,
     deleteProductCreditCustomer,
     customer,
-    deleteCredit
+    deleteCredit,
+    loadingModal
 }) => {
 
     const textareaRef = useRef();
 
     const arrayProducts = credit.list_products.split(',')
 
+    console.log(loadingModal)
+
     return (
         <dialog id="info_credit" >
 
 
-            {selectModal === "Info" && !loading && <div className="info_credit_Container">
-                {!loading && <div className="info_credit_customer">
-                    {<p className="data_credit"><span className="description_info">Status </span>{credit.status}</p>}
-                </div>}
-                <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Monto total </span>${Number(credit.total_credit).toLocaleString('en-US')}</p></div>
-                <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Saldo pendiente </span>${Number((Number(credit.total_credit) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p></div>
-                <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Total abonado </span>${Number(credit.Installment).toLocaleString('en-US')}</p></div>
-                <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de inicio </span>{dayjs(credit.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
-                <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de ultimo cambio</span>{dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
-                <div className="info_credit_customer_edit description_edit">
-                    <span className="amount_edit">Descripción</span>
-                    <ul className="info_description_edit none_edit">
-                        {showProducts.map((element, index) => {
-                            return (
-                                <li className="prod_list_credit" key={index}>
-                                    <img src={element.images} className="image_show_product"/>
-                                    <span>{cuteText(element.nombre)}</span>
-                                    <span>{`(${element.quantity} ${element.unidad_medida})`}</span>
-                                    <span>---------------${Number(element.buy_price)*Number(element.quantity)}</span>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
+            {selectModal === "Info" && <div className="info_credit_Container">
+                {loadingModal ?
+                    <>
+                        <div className="loading_logo">
+                            <img src={ferrepalCharacter} alt="" className="loading_img_character" />
+                        </div>
+                    </>
+
+                    :
+                    <>
+                        <div className="info_credit_customer">
+                            <p className="data_credit"><span className="description_info">Status </span>{credit.status}</p>
+                        </div>
+                        <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Monto total </span>${Number(credit.total_credit).toLocaleString('en-US')}</p></div>
+                        <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Saldo pendiente </span>${Number((Number(credit.total_credit) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p></div>
+                        <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Total abonado </span>${Number(credit.Installment).toLocaleString('en-US')}</p></div>
+                        <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de inicio </span>{dayjs(credit.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
+                        <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de ultimo cambio</span>{dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
+                        <div className="info_credit_customer_edit description_edit">
+                            <span className="amount_edit">Descripción</span>
+                            <ul className="info_description_edit none_edit">
+                                {showProducts.map((element, index) => {
+                                    return (
+                                        <li className="prod_list_credit" key={index}>
+                                            <img src={element.images} className="image_show_product" />
+                                            <span>{cuteText(element.nombre)}</span>
+                                            <span>{`(${element.quantity} ${element.unidad_medida})`}</span>
+                                            <span>---------------${Number(element.buy_price) * Number(element.quantity)}</span>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    </>
+
+                }
             </div>}
 
 
             {selectModal === "Edit" && !loading && <div className="info_credit_Container">
-                {loading ? (
+                {loadingModal ? (
                     <>
+                        <div className="loading_logo">
+                            <img src={ferrepalCharacter} alt="" className="loading_img_character" />
+                        </div>
                     </>
                 ) : (
                     <>
@@ -102,33 +120,45 @@ export const InfoCredit = ({ selectModal,
                             deleteProductCreditCustomer={deleteProductCreditCustomer}
                             customer={customer}
                             deleteCredit={deleteCredit}
+                            loadingModal={loadingModal}
                         />
 
-                        
+
                     </>
                 )}
             </div>}
 
 
             {selectModal === "Money" && !loading && <div className="money_credit_Container">
-                <section className="boxPayment installment">
-                    <span className="installment_span">Abonar</span>
-                    <div className="abono_container_input">
-                        <span>ingresa monto a abonar:</span>
-                        <input type="text" placeholder="$0.00" className="installment_input" id="installment_input" />
-                    </div>
-                    <button className="installment_button" onClick={() => installmentCredit(credit.id, credit.id_customer)}>Confirmar Abono</button>
+                {loadingModal ?
+                    <>
+                        <div className="loading_logo">
+                            <img src={ferrepalCharacter} alt="" className="loading_img_character" />
+                        </div>
+                    </>
+                    :
+                    <>
+                        <section className="boxPayment installment">
+                            <span className="installment_span">Abonar</span>
+                            <div className="abono_container_input">
+                                <span>ingresa monto a abonar:</span>
+                                <input type="text" placeholder="$0.00" className="installment_input" id="installment_input" />
+                            </div>
+                            <button className="installment_button" onClick={() => installmentCredit(credit.id, credit.id_customer)}>Confirmar Abono</button>
 
-                    <p className="info_installment">El abono se sumara al saldo acumulado</p>
-                </section>
-                <section className="boxPayment payout">
-                    <span className="payout_span">Liquidar</span>
-                    <div className="payout_container">
-                        <span className="payout_total">total a liquidar: </span>
-                        <p className="total_amount">${Number((Number(credit.total_credit) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p>
-                    </div>
-                    <button className="payout_button" onClick={() => payoutCredit(credit.id, credit.id_customer)}>Liquidar</button>
-                </section>
+                            <p className="info_installment">El abono se sumara al saldo acumulado</p>
+                        </section>
+                        <section className="boxPayment payout">
+                            <span className="payout_span">Liquidar</span>
+                            <div className="payout_container">
+                                <span className="payout_total">total a liquidar: </span>
+                                <p className="total_amount">${Number((Number(credit.total_credit) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p>
+                            </div>
+                            <button className="payout_button" onClick={() => payoutCredit(credit.id, credit.id_customer)}>Liquidar</button>
+                        </section>
+                    </>
+                }
+
             </div>}
 
 
@@ -138,20 +168,20 @@ export const InfoCredit = ({ selectModal,
             {selectModal === "credit" && <div className="new_credit">
                 <section className="new_credit_container">
 
-                    <ModalCreateCredit 
-                    getProductNewCredit={getProductNewCredit}
-                    productsList={productsList}
-                    add_Product_credit_box={add_Product_credit_box}
-                    listSelected={listSelected}
-                    more_less_unite={more_less_unite}
-                    set_Kilograms_quantity={set_Kilograms_quantity}
-                    totalCredit={totalCredit}
-                    createNewCredit={createNewCredit}
-                    loading={loading}
-                    deleteProductNewCredit={deleteProductNewCredit}
+                    <ModalCreateCredit
+                        getProductNewCredit={getProductNewCredit}
+                        productsList={productsList}
+                        add_Product_credit_box={add_Product_credit_box}
+                        listSelected={listSelected}
+                        more_less_unite={more_less_unite}
+                        set_Kilograms_quantity={set_Kilograms_quantity}
+                        totalCredit={totalCredit}
+                        createNewCredit={createNewCredit}
+                        loading={loading}
+                        deleteProductNewCredit={deleteProductNewCredit}
                     />
 
-                    
+
                 </section>
             </div>}
 

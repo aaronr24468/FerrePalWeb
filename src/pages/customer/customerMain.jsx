@@ -50,8 +50,10 @@ export const CustomerMain = ({ }) => {
         deleteProductCreditCustomer,
         deleteCredit,
         setStatusCredit,
-        statusCredit
+        statusCredit,
+        loadingModal
     } = useCustomerHook();
+
 
     return (
         <main className="Customer_Main_container">
@@ -119,6 +121,7 @@ export const CustomerMain = ({ }) => {
                 deleteProductCreditCustomer={deleteProductCreditCustomer}
                 customer={customer}
                 deleteCredit={deleteCredit}
+                loadingModal={loadingModal}
             />
 
             {/* Modal para imprimir ticket de credito */}
