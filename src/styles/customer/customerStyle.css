@@ -10,14 +10,14 @@
     background: rgb(204, 204, 204);
     position: relative;
 
-    .loading_main_customer_info{
+    .loading_main_customer_info {
         width: 100%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
 
-        .loading_logo_main{
+        .loading_logo_main {
             width: 15%;
             opacity: 0.4;
             animation: character 3s infinite;
@@ -209,6 +209,7 @@
                         font-size: 1.1rem;
                     }
                 }
+
             }
 
             .list_credit_customer {
@@ -308,20 +309,27 @@
                 }
             }
         }
+
+        @media (width <= 1000px){
+            width: 920px;
+        }
     }
 
 
 
 
     #info_credit {
-        width: auto;
-        height: auto;
+        width: fit-content;
+        height: fit-content;
         overflow: hidden;
         background: white;
-        align-self: center;
-        justify-self: center;
         border: none;
         border-radius: 10px;
+        margin: auto;
+        padding: 0;
+
+
+
 
         .info_credit_Container {
             width: 650px;
@@ -359,11 +367,25 @@
                         font-size: 1.7rem;
                         padding: 0 10px 0 0;
                         color: rgb(5, 194, 169);
+
+                        @media (height <=720px) {
+                            font-size: 1.2rem;
+                        }
                     }
 
                     .description_credit {
                         padding: 0 30% 0 0;
                     }
+
+                    @media (height <=720px) {
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+
+            .info_edit {
+                @media (height <=720px) {
+                    display: none;
                 }
             }
 
@@ -378,6 +400,10 @@
                     font-size: 1.7rem;
                     width: 40%;
                     color: rgb(5, 194, 169);
+
+                    @media (height <= 720px){
+                        font-size: 1.1rem;
+                    }
                 }
 
                 .current_amount {
@@ -421,11 +447,21 @@
                         align-items: center;
                         gap: 5px;
                         border-bottom: 3px solid black;
+                        
 
                         .image_show_product {
                             width: 60px;
                             height: 60px;
                             object-fit: contain;
+
+                            @media (height <= 720px){
+                                width: 55px;
+                                height: 55px;
+                            }
+                        }
+
+                        @media (height <= 720px){
+                            font-size: 1rem;
                         }
                     }
 
@@ -619,6 +655,10 @@
                                 }
                             }
                         }
+
+                        @media (height <= 700px){
+                            height: 300px;
+                        }
                     }
                 }
 
@@ -741,6 +781,10 @@
 
 
                     }
+                }
+
+                @media (height <= 720px){
+                    height: 290px;
                 }
             }
 
@@ -1491,18 +1535,17 @@
     #ticket_credit {
         width: fit-content;
         height: fit-content;
-        align-self: center;
-        justify-self: center;
+        margin: auto;
         border: 3px dashed black;
 
-        .loading_logo{
+        .loading_logo {
             width: 80mm;
             height: 80mm;
             display: flex;
             align-items: center;
             justify-content: center;
 
-            .loading_img_character{
+            .loading_img_character {
                 width: 35%;
                 opacity: 0.4;
                 animation: character 3s infinite;

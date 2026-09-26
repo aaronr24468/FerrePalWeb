@@ -343,8 +343,7 @@
     }
 
     #modal_inventory {
-        align-self: center;
-        justify-self: center;
+        margin: auto;
         border: none;
         border-radius: 10px;
         box-shadow: inset 0 0 4px black;
@@ -486,8 +485,7 @@
 
 
     #modal_new_product {
-        align-self: center;
-        justify-self: center;
+        margin: auto;
         border: none;
         border-radius: 10px;
 

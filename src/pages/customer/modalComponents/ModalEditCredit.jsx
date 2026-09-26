@@ -29,14 +29,14 @@ export const ModalEditCredit = ({
 
     return (
         <>
-            <div className="info_credit_customer">
+            {/* <div className="info_credit_customer">
                 {credit.status === "Activo" && <p className="data_credit"><span className="description_info">Status </span>{credit.status}</p>}
-            </div>
+            </div> */}
             <div className="info_credit_customer_edit"><span className="amount_edit">Monto total</span> <span className="current_amount">${Number(credit.total_credit).toLocaleString('en-US')}</span></div>
-            <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Saldo pendiente </span>${Number((Number(credit.total_credit) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p></div>
-            <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Total abonado </span>${Number(credit.Installment).toLocaleString('en-US')}</p></div>
-            <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de inicio </span>{dayjs(credit.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
-            <div className="info_credit_customer"><p className="data_credit"><span className="description_info">Fecha de ultimo cambio</span>{dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
+            <div className="info_credit_customer info_edit"><p className="data_credit"><span className="description_info">Saldo pendiente </span>${Number((Number(credit.total_credit) - Number(credit.Installment)).toFixed(2)).toLocaleString('en-US')}</p></div>
+            <div className="info_credit_customer info_edit"><p className="data_credit"><span className="description_info">Total abonado </span>${Number(credit.Installment).toLocaleString('en-US')}</p></div>
+            <div className="info_credit_customer info_edit"><p className="data_credit"><span className="description_info">Fecha de inicio </span>{dayjs(credit.create_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
+            <div className="info_credit_customer info_edit"><p className="data_credit"><span className="description_info">Fecha de ultimo cambio</span>{dayjs(credit.updated_at, 'YYYY/MM/DD').format('DD [de] MMMM [de] YYYY')}</p></div>
 
             {/* Agregar productos */}
             <div className="info_credit_customer_edit description_edit">
