@@ -115,10 +115,9 @@ export const useInventoryHook = () => {
         setImages(dataFilter)
     }
 
-    const uploadNewProduct = async (event) => {
+    const uploadNewProduct = async () => {
         try {
-            event.preventDefault();
-            const form = event.target;
+            const form = document.getElementById('form_input_product');
             const data = {
                 name: form.nombre.value,
                 codigo_barras: form.codigo.value,
@@ -138,31 +137,34 @@ export const useInventoryHook = () => {
 
             if (!response.ok) return Swal.fire({
                 icon: 'error',
-                title: response.message
+                title: response.message,
+                target: document.getElementById('modal_new_product')
             })
 
-            const formData = new FormData();
+            // const formData = new FormData();
 
-            for (const file of images) {
-                formData.append('images', file)
-            }
+            // for (const file of images) {
+            //     formData.append('images', file)
+            // }
 
-            //console.log(formData)
+            // //console.log(formData)
 
-            const responseImage = await uploadImages(formData, response.id)
+            // const responseImage = await uploadImages(formData, response.id)
 
-            if (!responseImage.ok) return Swal.fire({
-                icon: 'error',
-                title: response.message
-            })
+            // if (!responseImage.ok) return Swal.fire({
+            //     icon: 'error',
+            //     title: response.message,
+            //     target: document.getElementById('modal_new_product')
+            // })
 
-            document.getElementById('modal_new_product').close();
+            // document.getElementById('modal_new_product').close();
 
-            setReloadData(true)
+            // setReloadData(true)
 
             Swal.fire({
                 icon: 'success',
-                title: 'Se subio producto con exito'
+                title: 'Se subio producto con exito',
+                target: document.getElementById('modal_new_product')
             })
         } catch (error) {
             setError(error.message || "Error de servidor")

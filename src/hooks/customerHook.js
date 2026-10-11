@@ -35,6 +35,8 @@ export const useCustomerHook = () => {
     const [showProducts, setShowProducts] = useState([])
     const [showListCredit, setShowListCredit] = useState(false);
     const [statusCredit, setStatusCredit] = useState('Activo')
+    const [discount, setDiscount] = useState(0)
+    const [discountEdit, setDiscountEdit] = useState(0)
 
     const { id } = useParams();
 
@@ -83,13 +85,13 @@ export const useCustomerHook = () => {
 
             const newTotal = Number(totalCreditEdit) + Number(total_credit)
 
-            //console.log(newTotal)
+            const asnwer = await editCreditCustomer(id, productsCreditEdit, newTotal, discountEdit)
 
-            const asnwer = await editCreditCustomer(id, productsCreditEdit, newTotal)
-
-            //console.log(asnwer)
-
-            if (!asnwer.ok) return setError(asnwer.message || 'Error de servidor');
+            if (!asnwer.ok) return Swal.fire({
+                icon: 'warning',
+                title: asnwer.message,
+                target: document.getElementById('info_credit')
+            });
 
             document.getElementById('info_credit').close()
 
@@ -216,8 +218,8 @@ export const useCustomerHook = () => {
     const total_credit_amount = async () => {
         try {
             const list = listSelected;
-
-            const data = await get_total_credit_amount(list)
+            const discountAmount = discount || 0;
+            const data = await get_total_credit_amount(list, discountAmount)
             setTotalCredit(String(data.amount))
         } catch (error) {
             setError(error.message || "Error de servidor")
@@ -228,7 +230,9 @@ export const useCustomerHook = () => {
     const total_credit_amount_edit = async () => {
         try {
             const creditList = productsCreditEdit
-            const data = await get_total_credit_amount(creditList)
+            const discountAmount = discountEdit || 0;
+            console.log(creditList)
+            const data = await get_total_credit_amount(creditList, discountAmount)
             setTotalCreditEdit(String(data.amount))
         } catch (error) {
             setError(error.message || "Error de servidor")
@@ -342,7 +346,7 @@ export const useCustomerHook = () => {
         try {
             const id_customer = customer.id; //obtenermos el id del cliente por medio del useState donde tenemos toda su informacion
 
-            const asnwer = await newCreditCustomer(id_customer, listSelected, totalCredit);
+            const asnwer = await newCreditCustomer(id_customer, listSelected, totalCredit, discount);
 
             if (!asnwer.ok) return (Swal.fire({
                 icon: 'error',
@@ -452,20 +456,35 @@ export const useCustomerHook = () => {
 
     }
 
-    const deleteProductCreditCustomer = (id, quantity, price, total, id_credit, id_customer) => {
+    const deleteProductCreditCustomer = (id, quantity, buy_price, total, id_credit, id_customer, discount_product) => {
         try {
             //console.log(id, quantity, price, total)
-            const discountAmount = Number(price) * Number(quantity);
+
+            const total_discount = discount_product;
+
+            if(discount_product.includes('.')){
+                discount_product = discount_product.replace('.', '')
+            }
+            
+            const discountAmount =  total_discount > 9 ? 
+            ((Number(buy_price) * Number(quantity))-((Number(buy_price) * Number(quantity)) * (Number(String(`0.${discount_product}`)))))
+            :
+            ((Number(buy_price) * Number(quantity))-((Number(buy_price) * Number(quantity)) * (Number(String(`0.0${discount_product}`)))))
+
+
             Swal.fire({
+
                 icon: 'warning',
-                text: `¿Estas segura de eliminar este producto? quedaria un total de $${(Number(total) - Number(quantity * price)).toLocaleString('en-US')}`,
+                text: `¿Estas segura de eliminar este producto? quedaria un total de $${(Number(total) - discountAmount).toLocaleString('en-US')}`,
                 target: document.getElementById('info_credit'),
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Si, Eliminar!",
                 cancelButtonText: 'Cancelar'
+
             }).then(async (result) => {
+
                 if (result.isConfirmed) {
                     const res = await deleteProductCredit(id, discountAmount, total, id_credit, id_customer);
 
@@ -552,12 +571,12 @@ export const useCustomerHook = () => {
     useEffect(() => {
         if (productsCreditEdit.length === 0) return
         total_credit_amount_edit();
-    }, [productsCreditEdit])
+    }, [productsCreditEdit, discountEdit])
 
     useEffect(() => {
         if (listSelected.length === 0) return
         total_credit_amount();
-    }, [listSelected])
+    }, [listSelected, discount])
 
     useEffect(() => {
         infoCustomer();
@@ -603,6 +622,8 @@ export const useCustomerHook = () => {
         setStatusCredit,
         statusCredit,
         loadingModal,
-        loadingMain
+        loadingMain,
+        setDiscount,
+        setDiscountEdit
     }
 }

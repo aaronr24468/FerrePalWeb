@@ -2,6 +2,7 @@ import { listInventoryFerrePal, unidadMedida, categoria } from "../../services/l
 import upload from '../../assets/upload.svg'
 import trash from '../../assets/trash.svg'
 
+
 export const NewProduct = ({ ImagesFile, tempImages, deleteImage, uploadNewProduct }) => {
 
     return (
@@ -10,7 +11,7 @@ export const NewProduct = ({ ImagesFile, tempImages, deleteImage, uploadNewProdu
                 <button className="close_modal_new_product" onClick={() => document.getElementById('modal_new_product').close()}>x</button>
 
                 <div className="container_input_data_register_product">
-                    <form onSubmit={uploadNewProduct} className="form_input_product">
+                    <form  className="form_input_product" id="form_input_product">
                         <div className="inputs_options">
                             <div className="inputBox">
                                 <span className="title_input_new_product">Nombre</span>
@@ -107,7 +108,7 @@ export const NewProduct = ({ ImagesFile, tempImages, deleteImage, uploadNewProdu
 
                         </div>
 
-                        <button type="submit" className="btn_submit_product">Agregar producto</button>
+                        <button type="button" className="btn_submit_product" onClick={uploadNewProduct}>Agregar producto</button>
 
                     </form>
                 </div>

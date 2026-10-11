@@ -41,7 +41,9 @@ export const InfoCredit = ({ selectModal,
     deleteProductCreditCustomer,
     customer,
     deleteCredit,
-    loadingModal
+    loadingModal,
+    setDiscount,
+    setDiscountEdit
 }) => {
 
     const textareaRef = useRef();
@@ -120,6 +122,7 @@ export const InfoCredit = ({ selectModal,
                                 customer={customer}
                                 deleteCredit={deleteCredit}
                                 loadingModal={loadingModal}
+                                setDiscountEdit={setDiscountEdit}
                             />
 
 
@@ -179,6 +182,7 @@ export const InfoCredit = ({ selectModal,
                             loading={loading}
                             deleteProductNewCredit={deleteProductNewCredit}
                             loadingModal={loadingModal}
+                            setDiscount={setDiscount}
                         />
 
 

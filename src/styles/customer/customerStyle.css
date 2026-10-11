@@ -799,6 +799,25 @@
                     font-size: 1.3rem;
                 }
 
+                .discountSection{
+                    width: 150px;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+
+                    .discount_edit{
+                        font-size: 1.2rem;
+                    }
+
+                    .discount_edit_input{
+                        width: 50px;
+                        text-align: center;
+                        font-family: 'local';
+                        font-size: 1.2rem;
+                    }
+                }
+
                 .edit_data_btn {
                     width: 150px;
                     height: 100%;
@@ -1406,6 +1425,26 @@
 
                 .amount_credit {
                     font-size: 1.8rem;
+                }
+
+                .discount{
+                    width: 150px;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+
+                    .discount_span{
+                        font-size: 1.4rem;
+                    }
+
+                    .discount_input{
+                        width: 50px;
+                        height: 90%;
+                        font-family: 'local';
+                        text-align: center;
+                        font-size: 1.2rem;
+                    }
                 }
 
                 .create_credit {

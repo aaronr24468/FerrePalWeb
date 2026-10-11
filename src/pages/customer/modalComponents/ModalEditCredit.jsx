@@ -22,7 +22,8 @@ export const ModalEditCredit = ({
     showListCredit,
     deleteProductCreditCustomer,
     customer,
-    deleteCredit
+    deleteCredit,
+    setDiscountEdit
 }) => {
 
    // console.log(customer)
@@ -203,7 +204,7 @@ export const ModalEditCredit = ({
                             return (
                                 <li key={index} className="list_credit_edit">
 
-                                    <button className="delete_product_list" onClick={() => deleteProductCreditCustomer(element.id, element.quantity, element.buy_price, credit.total_credit, credit.id, customer.id)}>Eliminar</button>
+                                    <button className="delete_product_list" onClick={() => deleteProductCreditCustomer(element.id, element.quantity, element.buy_price, credit.total_credit, credit.id, customer.id, element.discount_product)}>Eliminar</button>
 
                                     <div className="desc_product_edit_container" title={element.nombre}>
                                         <img src={element.images} className="img_credit_edit" />
@@ -272,6 +273,12 @@ export const ModalEditCredit = ({
 
             <div className="button_container_save" id="button_container_save">
                 <span className="new_total" id="new_total">Total nuevo: ${(Number(totalCreditEdit) + Number(credit.total_credit)).toLocaleString('en-US')} </span>
+
+                    <div className="discountSection">
+                        <span className="discount_edit">Descuento:</span>
+                        <input type="text" placeholder="0%" className="discount_edit_input" onChange={(event) => setDiscountEdit(event.target.value)}/>
+                    </div>
+
                 <button className="edit_data_btn" id="edit_data_btn" onClick={() => editCredit(credit.id, totalCreditEdit, credit.total_credit)}>Guardar Cambios</button>
             </div>
 

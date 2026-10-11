@@ -24,14 +24,14 @@ export const getInfoCredit = async(id) =>{
     return(response.json());
 }
 
-export const editCreditCustomer = async(id, productsCreditEdit, newTotal) =>{
+export const editCreditCustomer = async(id, productsCreditEdit, newTotal, discountEdit) =>{
     const response = await fetch(`${URL_PATH}/credit/edit/credit`,{
         method: 'PUT',
         credentials: 'include',
         headers:{
             "Content-Type":"application/json"
         },
-        body: JSON.stringify({id, productsCreditEdit, newTotal})
+        body: JSON.stringify({id, productsCreditEdit, newTotal, discountEdit})
     })
 
     return(response.json())
@@ -63,14 +63,14 @@ export const payoutCreditCustomer = async(id_credit, id_customer) =>{
     return(response.json())
 }
 
-export const newCreditCustomer = async(id_customer, listSelected, totalCredit) =>{
+export const newCreditCustomer = async(id_customer, listSelected, totalCredit, discount) =>{
     const response = await fetch(`${URL_PATH}/credit/new/credit`,{
         method: 'POST',
         credentials: 'include',
         headers:{
             "Content-Type":"application/json"
         },
-        body: JSON.stringify({id_customer, listSelected, totalCredit})
+        body: JSON.stringify({id_customer, listSelected, totalCredit, discount})
     })
 
     return(response.json())
@@ -102,14 +102,14 @@ export const getListProducts = async() =>{
     return(response.json())
 }
 
-export const get_total_credit_amount = async(list) =>{
+export const get_total_credit_amount = async(list, discountAmount) =>{
     const response = await fetch(`${URL_PATH}/products/get/price/credit`,{
         method: 'POST',
         credentials: 'include',
         headers:{
             "Content-Type":"application/json"
         },
-        body: JSON.stringify({list})
+        body: JSON.stringify({list, discountAmount})
     })
 
     return(response.json())

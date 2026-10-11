@@ -4,6 +4,7 @@ import barCode from '../../../assets/barcode.svg'
 import moneyP from '../../../assets/moneyProduct.svg'
 import mark from '../../../assets/mark.svg'
 import box from '../../../assets/box.svg'
+import noImage from '../../../assets/noImage.jpg'
 import { cuteText } from "../../../functions/methods";
 
 export const ModalCreateCredit = ({
@@ -17,7 +18,8 @@ export const ModalCreateCredit = ({
     createNewCredit,
     loading,
     deleteProductNewCredit,
-    loadingModal
+    loadingModal,
+    setDiscount
 }) => {
 
     return (
@@ -51,7 +53,7 @@ export const ModalCreateCredit = ({
                                                 <div className="image_product_list">
 
                                                     <div className="container_image_list_roduct">
-                                                        <img src={element.images} className="img_product_list_select" />
+                                                        <img src={element.images || noImage} className="img_product_list_select" />
                                                     </div>
 
 
@@ -197,6 +199,10 @@ export const ModalCreateCredit = ({
 
             <div className="total_credit">
                 <span className="amount_credit"><strong>Total:</strong> ${Number(totalCredit).toLocaleString('en-US')}</span>
+                <div className="discount">
+                    <span className="discount_span">Descuento</span>
+                    <input className="discount_input" type="text" placeholder="0%" onChange={(event) => setDiscount(event.target.value)}/>
+                </div>
                 <button className="create_credit" onClick={createNewCredit}>Crear credito</button>
             </div>
         </>

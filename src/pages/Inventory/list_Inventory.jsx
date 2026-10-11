@@ -1,6 +1,7 @@
 import plus from '../../assets/plus.svg'
 import { cuteText } from '../../functions/methods';
 import sadCharacter from '../../assets/sadFerrePal.png'
+import noImage from '../../assets/noImage.jpg'
 
 export const ListInventory = ({ list, getionProduct }) => {
     //console.log(list)
@@ -44,7 +45,7 @@ export const ListInventory = ({ list, getionProduct }) => {
                                 return (
                                     <li className='products_list_inventory' key={index}>
                                         <div className="img_inventory item_inv img_item_inv" title={element.nombre}>
-                                            <img src={element.images} alt="" className='image_inventory' />
+                                            <img src={element.images || noImage} alt="" className='image_inventory' />
                                             <span>{cuteText(element.nombre)}</span>
                                         </div>
                                         <div className="img_inventory item_inv ">
@@ -62,7 +63,7 @@ export const ListInventory = ({ list, getionProduct }) => {
                                         <div className="img_inventory item_inv">
                                             <button className='gestion_product_btn' onClick={() => getionProduct({
                                                 id: element.id,
-                                                images: element.images,
+                                                images: element.images || noImage,
                                                 nombre: element.nombre,
                                                 codigo_barras: element.codigo_barras,
                                                 categoria_ferreteria: element.categoria_ferreteria,

@@ -53,7 +53,9 @@ export const CustomerMain = ({ }) => {
         setStatusCredit,
         statusCredit,
         loadingModal,
-        loadingMain
+        loadingMain,
+        setDiscount,
+        setDiscountEdit
     } = useCustomerHook();
 
 
@@ -132,6 +134,8 @@ export const CustomerMain = ({ }) => {
                         customer={customer}
                         deleteCredit={deleteCredit}
                         loadingModal={loadingModal}
+                        setDiscount={setDiscount}
+                        setDiscountEdit={setDiscountEdit}
                     />
 
                     {/* Modal para imprimir ticket de credito */}
