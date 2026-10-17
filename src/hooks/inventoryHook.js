@@ -70,6 +70,20 @@ export const useInventoryHook = () => {
                         title: `${res.message || "Error de servidor"}`
                     })
 
+                    if (tempImages.length > 0) {
+                        const formData = new FormData();
+                        for (const file of images) {
+                            formData.append('images', file)
+                        }
+
+                        const responseImage = await uploadImages(formData, id)
+
+                        if (!responseImage.ok) return Swal.fire({
+                            icon: 'error',
+                            message: responseImage.message
+                        })
+                    }
+
 
                     getProducts();
                     document.getElementById('modal_inventory').close();
@@ -134,6 +148,8 @@ export const useInventoryHook = () => {
 
             const response = await uploadNewP(data);
 
+            console.log('data', response)
+
 
             if (!response.ok) return Swal.fire({
                 icon: 'error',
@@ -141,31 +157,36 @@ export const useInventoryHook = () => {
                 target: document.getElementById('modal_new_product')
             })
 
-            // const formData = new FormData();
+            if (tempImages.length > 0) {
 
-            // for (const file of images) {
-            //     formData.append('images', file)
-            // }
+                const formData = new FormData();
 
-            // //console.log(formData)
+                for (const file of images) {
+                    formData.append('images', file)
+                }
 
-            // const responseImage = await uploadImages(formData, response.id)
+                const responseImage = await uploadImages(formData, response.id)
 
-            // if (!responseImage.ok) return Swal.fire({
-            //     icon: 'error',
-            //     title: response.message,
-            //     target: document.getElementById('modal_new_product')
-            // })
+                if (!responseImage.ok) return Swal.fire({
+                    icon: 'error',
+                    title: response.message,
+                    target: document.getElementById('modal_new_product')
+                })
 
-            // document.getElementById('modal_new_product').close();
+            }
 
-            // setReloadData(true)
+
+
+            document.getElementById('modal_new_product').close();
 
             Swal.fire({
                 icon: 'success',
                 title: 'Se subio producto con exito',
-                target: document.getElementById('modal_new_product')
             })
+
+            setReloadData(true)
+
+
         } catch (error) {
             setError(error.message || "Error de servidor")
         } finally {

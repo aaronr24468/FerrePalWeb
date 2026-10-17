@@ -59,6 +59,10 @@ export const useCustomerHook = () => {
 
     // metodo para obtener la informacion del cliente y todos sus credito
     const infoCredit = async (id_credit, modal) => {
+        document.getElementById('edit_credit_Customer')?.style.setProperty('background', 'rgb(3, 150, 52)');
+        document.getElementById('button_container_save')?.style.setProperty('display', 'flex')
+        document.getElementById('container_delete_credit')?.style.setProperty('display', 'none')
+        setShowListCredit(false)
         try {
             setLoading(true)
             setLoadingModal(true)
@@ -93,6 +97,7 @@ export const useCustomerHook = () => {
                 target: document.getElementById('info_credit')
             });
 
+
             document.getElementById('info_credit').close()
 
             Swal.fire({
@@ -101,7 +106,7 @@ export const useCustomerHook = () => {
             })
 
             setProductsCreditEdit([]);
-
+            setDiscountEdit(0)
             setTotalCreditEdit('0.00')
 
             infoCustomer();
@@ -231,7 +236,7 @@ export const useCustomerHook = () => {
         try {
             const creditList = productsCreditEdit
             const discountAmount = discountEdit || 0;
-            console.log(creditList)
+            console.log(discountAmount)
             const data = await get_total_credit_amount(creditList, discountAmount)
             setTotalCreditEdit(String(data.amount))
         } catch (error) {
@@ -388,7 +393,7 @@ export const useCustomerHook = () => {
             setShowProducts(data.listP)
         } catch (error) {
             setError(error.message || "Error de servidor")
-        }finally{
+        } finally {
             setLoading(false);
             setLoadingModal(false)
         }
@@ -441,16 +446,13 @@ export const useCustomerHook = () => {
             document.getElementById('filter_product_by').setAttribute('disabled', 'true')
             document.getElementById('edit_credit_Customer').style.background = 'red';
             document.getElementById('button_container_save').style.display = 'none'
-            document.getElementById('container_delete_credit').style.display = 'flex'
-
-            //document.getElementById('new_total').style.display = 'none'
+            document.getElementById('container_delete_credit').style.display = 'flex';
             setShowListCredit(true)
         } else {
             document.getElementById('filter_product_by').removeAttribute('disabled', 'true')
             document.getElementById('edit_credit_Customer').style.background = 'rgb(3, 150, 52)';
             document.getElementById('button_container_save').style.display = 'flex'
             document.getElementById('container_delete_credit').style.display = 'none'
-            //document.getElementById('new_total').style.display = 'block'
             setShowListCredit(false)
         }
 
@@ -462,14 +464,14 @@ export const useCustomerHook = () => {
 
             const total_discount = discount_product;
 
-            if(discount_product.includes('.')){
+            if (discount_product.includes('.')) {
                 discount_product = discount_product.replace('.', '')
             }
-            
-            const discountAmount =  total_discount > 9 ? 
-            ((Number(buy_price) * Number(quantity))-((Number(buy_price) * Number(quantity)) * (Number(String(`0.${discount_product}`)))))
-            :
-            ((Number(buy_price) * Number(quantity))-((Number(buy_price) * Number(quantity)) * (Number(String(`0.0${discount_product}`)))))
+
+            const discountAmount = total_discount > 9 ?
+                ((Number(buy_price) * Number(quantity)) - ((Number(buy_price) * Number(quantity)) * (Number(String(`0.${discount_product}`)))))
+                :
+                ((Number(buy_price) * Number(quantity)) - ((Number(buy_price) * Number(quantity)) * (Number(String(`0.0${discount_product}`)))))
 
 
             Swal.fire({
@@ -523,7 +525,7 @@ export const useCustomerHook = () => {
                 confirmButtonText: "Si, Eliminar!",
                 cancelButtonText: 'Cancelar',
                 target: document.getElementById('info_credit')
-            }).then(async(result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
                     const asnwer = await disableCredit(id_credit);
 
@@ -556,9 +558,9 @@ export const useCustomerHook = () => {
             document.getElementById(`${id}`)?.close();
             document.getElementById('list_products_select_credit')?.style.setProperty("display", "none");
             document.getElementById('filter_product_by')?.removeAttribute('disabled', 'true')
-            document.getElementById('edit_credit_Customer')?.style.setProperty('background','rgb(3, 150, 52)');
-            document.getElementById('button_container_save')?.style.setProperty('display','flex')
-            document.getElementById('container_delete_credit')?.style.setProperty('display','none')
+            document.getElementById('edit_credit_Customer')?.style.setProperty('background', 'rgb(3, 150, 52)');
+            document.getElementById('button_container_save')?.style.setProperty('display', 'flex')
+            document.getElementById('container_delete_credit')?.style.setProperty('display', 'none')
             setShowListCredit(false)
         }
 
@@ -624,6 +626,7 @@ export const useCustomerHook = () => {
         loadingModal,
         loadingMain,
         setDiscount,
-        setDiscountEdit
+        setDiscountEdit,
+        discountEdit
     }
 }

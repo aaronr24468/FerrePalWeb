@@ -1,0 +1,19 @@
+.container_Ticket{
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.lista_ticket_container{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+.lista_ticket{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    list-style-type: decimal;
+}

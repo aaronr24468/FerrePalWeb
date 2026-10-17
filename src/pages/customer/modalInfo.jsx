@@ -6,6 +6,7 @@ import moneyP from '../../assets/moneyProduct.svg'
 import mark from '../../assets/mark.svg'
 import box from '../../assets/box.svg'
 import add from '../../assets/package.gif'
+import discount from '../../assets/discount.svg'
 import { cuteText } from "../../functions/methods";
 import { ModalEditCredit } from "./modalComponents/ModalEditCredit";
 import { ModalCreateCredit } from "./modalComponents/ModalCredit";
@@ -43,14 +44,15 @@ export const InfoCredit = ({ selectModal,
     deleteCredit,
     loadingModal,
     setDiscount,
-    setDiscountEdit
+    setDiscountEdit,
+    discountEdit
 }) => {
 
     const textareaRef = useRef();
 
     const arrayProducts = credit.list_products.split(',')
 
-    console.log(loadingModal)
+    console.log(showProducts)
 
     return (
         <dialog id="info_credit" >
@@ -79,10 +81,14 @@ export const InfoCredit = ({ selectModal,
                                     {showProducts.map((element, index) => {
                                         return (
                                             <li className="prod_list_credit" key={index}>
-                                                <img src={element.images} className="image_show_product" />
-                                                <span>{cuteText(element.nombre)}</span>
-                                                <span>{`(${element.quantity} ${element.unidad_medida})`}</span>
-                                                <span>---------------${Number(element.buy_price) * Number(element.quantity)}</span>
+                                                <div className="info_credit_products" title={element.nombre}>
+                                                    <img src={element.images} className="image_show_product" />
+                                                    <span>{cuteText(element.nombre)}</span>
+                                                    <span>{`(${element.quantity} ${element.unidad_medida})`}</span>
+                                                    <span>---------------${Number(element.buy_price) * Number(element.quantity)}</span>
+                                                </div>
+                                                {element.discount_product > 0 && <span className="discount_data" title="Descuento"><img className="discount_img" src={discount} alt="" />{element.discount_product} </span>}
+                                                
                                             </li>
                                         )
                                     })}
@@ -123,6 +129,7 @@ export const InfoCredit = ({ selectModal,
                                 deleteCredit={deleteCredit}
                                 loadingModal={loadingModal}
                                 setDiscountEdit={setDiscountEdit}
+                                discountEdit={discountEdit}
                             />
 
 

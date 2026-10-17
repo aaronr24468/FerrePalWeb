@@ -5,7 +5,7 @@ import barCode from '../../../assets/barcode.svg'
 import moneyP from '../../../assets/moneyProduct.svg'
 import mark from '../../../assets/mark.svg'
 import box from '../../../assets/box.svg'
-
+import discount from '../../../assets/discount.svg'
 export const ModalEditCredit = ({
     credit,
     getProductEditCredit,
@@ -23,10 +23,11 @@ export const ModalEditCredit = ({
     deleteProductCreditCustomer,
     customer,
     deleteCredit,
-    setDiscountEdit
+    setDiscountEdit,
+    discountEdit
 }) => {
 
-   // console.log(customer)
+    console.log(productsCreditEdit)
 
     return (
         <>
@@ -149,8 +150,10 @@ export const ModalEditCredit = ({
                                                 <span>{element.marca}</span>
                                             </div>
                                             <div className="desc_products_edit">
-                                                <img src={moneyP} className="img_edit_desc" />
-                                                <span>{element.precio}</span>
+                                                <div className="price_product">
+                                                    <img src={moneyP} className="img_edit_desc" />
+                                                    <span>{element.precio}</span>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -222,8 +225,11 @@ export const ModalEditCredit = ({
                                                 <span>{element.marca}</span>
                                             </div>
                                             <div className="desc_products_edit">
-                                                <img src={moneyP} className="img_edit_desc" />
-                                                <span>{element.buy_price}</span>
+                                                <div className="price_product_edit">
+                                                    <img src={moneyP} className="img_edit_desc" />
+                                                    <span>{element.buy_price}</span>
+                                                </div>
+                                                {element.discount_product > 0 && <span className="discount_edit"><img className="discount_img_edit" src={discount} alt="" />{element.discount_product}</span>}
                                             </div>
                                         </div>
 
@@ -274,10 +280,10 @@ export const ModalEditCredit = ({
             <div className="button_container_save" id="button_container_save">
                 <span className="new_total" id="new_total">Total nuevo: ${(Number(totalCreditEdit) + Number(credit.total_credit)).toLocaleString('en-US')} </span>
 
-                    <div className="discountSection">
-                        <span className="discount_edit">Descuento:</span>
-                        <input type="text" placeholder="0%" className="discount_edit_input" onChange={(event) => setDiscountEdit(event.target.value)}/>
-                    </div>
+                <div className="discountSection">
+                    <span className="discount_edit">Descuento:</span>
+                    <input type="text" placeholder="0%" className="discount_edit_input" defaultValue={discountEdit} onChange={(event) => setDiscountEdit(event.target.value)} />
+                </div>
 
                 <button className="edit_data_btn" id="edit_data_btn" onClick={() => editCredit(credit.id, totalCreditEdit, credit.total_credit)}>Guardar Cambios</button>
             </div>

@@ -50,7 +50,7 @@ export const InventoryComponent = ({ }) => {
             </div>
 
             <dialog className='modal_inventory' id='modal_inventory'>
-                <ModalEditProduct setDataProduct={setDataProduct} dataProduct={dataProduct} saveChanges={saveChanges}/>
+                <ModalEditProduct setDataProduct={setDataProduct} dataProduct={dataProduct} saveChanges={saveChanges} ImagesFile={ImagesFile} tempImages={tempImages} deleteImage={deleteImage}/>
             </dialog>
 
             <dialog className='modal_new_product' id='modal_new_product'>

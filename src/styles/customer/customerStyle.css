@@ -310,7 +310,7 @@
             }
         }
 
-        @media (width <= 1000px){
+        @media (width <=1000px) {
             width: 920px;
         }
     }
@@ -401,7 +401,7 @@
                     width: 40%;
                     color: rgb(5, 194, 169);
 
-                    @media (height <= 720px){
+                    @media (height <=720px) {
                         font-size: 1.1rem;
                     }
                 }
@@ -445,22 +445,42 @@
                         list-style-type: decimal;
                         display: flex;
                         align-items: center;
+                        justify-content: space-between;
                         gap: 5px;
                         border-bottom: 3px solid black;
-                        
+                        padding: 0 10px 0 0;
+                        user-select: none;
 
-                        .image_show_product {
-                            width: 60px;
-                            height: 60px;
-                            object-fit: contain;
+                        .info_credit_products {
+                            display: flex;
+                            align-items: center;
 
-                            @media (height <= 720px){
-                                width: 55px;
-                                height: 55px;
+                            .image_show_product {
+                                width: 60px;
+                                height: 60px;
+                                object-fit: contain;
+
+                                @media (height <=720px) {
+                                    width: 55px;
+                                    height: 55px;
+                                }
                             }
                         }
 
-                        @media (height <= 720px){
+                        .discount_data {
+                            width: auto;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+
+                            .discount_img {
+                                width: 20px;
+                                height: 20px;
+                            }
+                        }
+
+
+                        @media (height <=720px) {
                             font-size: 1rem;
                         }
                     }
@@ -656,7 +676,7 @@
                             }
                         }
 
-                        @media (height <= 700px){
+                        @media (height <=700px) {
                             height: 300px;
                         }
                     }
@@ -730,6 +750,25 @@
                                         width: 20px;
                                         height: 20px;
                                     }
+
+                                    .price_product_edit {
+                                        width: auto;
+                                        height: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                    }
+
+                                    .discount_edit {
+                                        width: auto;
+                                        height: 100%;
+                                        display: flex;
+                                        align-items: center;
+
+                                        .discount_img_edit {
+                                            width: 15px;
+                                            height: 15px;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -783,7 +822,7 @@
                     }
                 }
 
-                @media (height <= 720px){
+                @media (height <=720px) {
                     height: 290px;
                 }
             }
@@ -799,18 +838,18 @@
                     font-size: 1.3rem;
                 }
 
-                .discountSection{
+                .discountSection {
                     width: 150px;
                     height: 100%;
                     display: flex;
                     align-items: center;
                     gap: 5px;
 
-                    .discount_edit{
+                    .discount_edit {
                         font-size: 1.2rem;
                     }
 
-                    .discount_edit_input{
+                    .discount_edit_input {
                         width: 50px;
                         text-align: center;
                         font-family: 'local';
@@ -1427,18 +1466,18 @@
                     font-size: 1.8rem;
                 }
 
-                .discount{
+                .discount {
                     width: 150px;
                     height: 100%;
                     display: flex;
                     align-items: center;
                     gap: 5px;
 
-                    .discount_span{
+                    .discount_span {
                         font-size: 1.4rem;
                     }
 
-                    .discount_input{
+                    .discount_input {
                         width: 50px;
                         height: 90%;
                         font-family: 'local';

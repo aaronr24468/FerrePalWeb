@@ -1,14 +1,31 @@
+import upload from '../../assets/upload.svg';
+import trash from '../../assets/trash.svg'
 
-export const ModalEditProduct = ({ setDataProduct, dataProduct, saveChanges }) => {
-
+export const ModalEditProduct = ({ setDataProduct, dataProduct, saveChanges, ImagesFile, tempImages, deleteImage }) => {
+  
     return (
         <>
             <div className="gestion_product">
                 <button className="close_modal_inventory" onClick={() => document.getElementById('modal_inventory').close()}>x</button>
                 <div className="topDecription">
+
                     <div className="img_gestion_item">
+
                         <img className='img_product_gestion_view' src={dataProduct.images || null} alt="" />
+
+                        {dataProduct.images === "/src/assets/noImage.jpg"?
+                            <>
+                                <label htmlFor="upload_photo_gestion" className="label_upload_image_gestion"><img src={upload} alt="" /></label>
+                                <input type="file" id="upload_photo_gestion" multiple style={{ display: "none" }} onChange={ImagesFile} />
+                            </>
+                            :
+                            ''
+
+                        }
+
+
                     </div>
+
                     <div className="first_data_product">
                         <div className="input_data_product">
                             <span className='data_name'>Nombre</span>
@@ -19,6 +36,7 @@ export const ModalEditProduct = ({ setDataProduct, dataProduct, saveChanges }) =
                                 }))
                             }} />
                         </div>
+
                         <div className="input_data_product">
                             <span className='data_name'>Codigo de barras</span>
                             <input className='data_product_input' type="text" value={dataProduct.codigo_barras} onChange={(event) => {
@@ -28,6 +46,7 @@ export const ModalEditProduct = ({ setDataProduct, dataProduct, saveChanges }) =
                                 }))
                             }} />
                         </div>
+
                         <div className="input_data_product">
                             <span className='data_name'>Categoria ferreteria</span>
                             <input className='data_product_input' type="text" value={dataProduct.categoria_ferreteria} onChange={(event) => {
@@ -86,6 +105,17 @@ export const ModalEditProduct = ({ setDataProduct, dataProduct, saveChanges }) =
                                 descripcion: event.target.value
                             }))
                         }}></textarea>
+                    </div>
+
+                    <div className="show_Images_Selected">
+                        {tempImages.map((element, index) => {
+                            return (
+                                <div className='box_image_selected'>
+                                    <button className='delete_image_selected' onClick={() => deleteImage(index)}><img className='trash_btn' src={trash} alt="" /></button>
+                                    <img className='img_show_selected' src={element} alt="" />
+                                </div>
+                            )
+                        })}
                     </div>
 
                     <button className='btn_save_changes' onClick={() => saveChanges(dataProduct.id)}>Guardar cambios</button>

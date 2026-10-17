@@ -108,7 +108,7 @@
         display: flex;
         flex-direction: column;
         padding: 20px;
-        
+
 
         .titleAndNewProduct {
             width: 100%;
@@ -149,13 +149,13 @@
                     transform: scale(0.95);
                 }
 
-                @media (width <= 1204px){
+                @media (width <=1204px) {
                     width: 40px;
                     height: 40px;
                 }
             }
 
-            @media (width <= 1204px){
+            @media (width <=1204px) {
                 padding: 0 0 5px 0;
             }
         }
@@ -184,13 +184,13 @@
                         font-size: 1.5rem;
                     }
 
-                    @media (width <= 1024px){
+                    @media (width <=1024px) {
                         width: 33.33%;
                     }
                 }
 
-                .code{
-                    @media (width <= 1024px){
+                .code {
+                    @media (width <=1024px) {
                         display: none;
                     }
                 }
@@ -211,7 +211,7 @@
                     flex-direction: column;
                     padding: 0 0 10px 0;
 
-                    .no_products{
+                    .no_products {
                         width: 100%;
                         height: 100%;
                         display: flex;
@@ -219,12 +219,12 @@
                         justify-content: center;
                         position: relative;
 
-                        .sad_character{
+                        .sad_character {
                             width: 15%;
                             user-select: none;
                         }
 
-                        .no_products_span{
+                        .no_products_span {
                             position: absolute;
                             top: 20%;
                             font-size: 2rem;
@@ -254,10 +254,10 @@
                                 height: 100%;
                                 object-fit: contain;
 
-                                @media (width <= 1024px){
+                                @media (width <=1024px) {
                                     width: 80px;
                                     aspect-ratio: 1;
-                                    
+
                                 }
                             }
                         }
@@ -307,18 +307,18 @@
                                     width: 250%;
                                 }
 
-                                @media (width <= 1024px){
+                                @media (width <=1024px) {
                                     font-size: 1rem;
                                 }
                             }
 
-                            @media (width <= 1024px){
+                            @media (width <=1024px) {
                                 width: 33.33%;
                             }
                         }
 
-                        .item_inv_cb{
-                            @media (width <= 1024px){
+                        .item_inv_cb {
+                            @media (width <=1024px) {
                                 display: none;
                             }
                         }
@@ -333,7 +333,7 @@
                     }
                 }
 
-                @media (width <= 1025px){
+                @media (width <=1025px) {
                     height: 84%;
                 }
             }
@@ -354,6 +354,12 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            align-items: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scrollbar-width: none;
+
+
 
             .close_modal_inventory {
                 position: absolute;
@@ -380,7 +386,7 @@
 
             .topDecription {
                 width: 100%;
-                height: 50%;
+                height: 250px;
                 display: flex;
 
                 .img_gestion_item {
@@ -391,10 +397,30 @@
                     justify-content: center;
                     box-shadow: inset -1px -1px 5px black;
                     background: rgb(212, 212, 212);
+                    position: relative;
 
                     .img_product_gestion_view {
                         width: 170px;
                         height: 170px;
+                    }
+
+                    .label_upload_image_gestion {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: rgba(128, 128, 128, 0.363);
+                        cursor: pointer;
+                        opacity: 0;
+                        transition: opacity 0.2s linear;
+
+                        &:hover {
+                            opacity: 1;
+                        }
                     }
                 }
 
@@ -428,7 +454,7 @@
 
             .data_product_bottom {
                 width: 100%;
-                height: 50%;
+                height: auto;
                 display: flex;
                 flex-direction: column;
                 gap: 5px;
@@ -460,7 +486,7 @@
 
                 .text_description_container {
                     width: 100%;
-                    height: 100%;
+                    height: 150px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -472,14 +498,59 @@
                     }
                 }
 
+                .show_Images_Selected {
+                    width: 100%;
+                    height: auto;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 5px;
+                    padding: 5px 20px 0 20px;
+
+                    .box_image_selected{
+                        width: 80px;
+                        aspect-ratio: 1;
+                        position: relative;
+                        border: 3px solid rgba(0, 0, 0, 0.479);
+                        border-radius: 10px;
+
+                        .delete_image_selected{
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            width: 25px;
+                            height: 25px;
+                            background: none;
+                            border: none;
+                            cursor: pointer;
+
+                            .trash_btn{
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+
+                        .img_show_selected{
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 10px;
+                        }
+                    }
+                }
+
                 .btn_save_changes {
                     width: 100%;
-                    height: 50px;
+                    height: 30px;
                     border-radius: 0 0 5px 5px;
                     border: none;
                     background: rgb(0, 245, 0);
+                    cursor: pointer;
                 }
             }
+
+            &::-webkit-scrollbar{
+                display: none;
+            }
+
         }
     }
 
@@ -606,20 +677,20 @@
                             height: fit-content;
                             position: relative;
 
-                            .delete_image{
+                            .delete_image {
                                 position: absolute;
                                 right: -5px;
                                 top: -5px;
                                 background: none;
                                 border: none;
 
-                                .trash_image{
+                                .trash_image {
                                     width: 17px;
                                     aspect-ratio: 1;
                                     opacity: 0.4;
                                     transition: width 0.2s linear;
 
-                                    &:hover{
+                                    &:hover {
                                         width: 25px;
                                         cursor: pointer;
                                         opacity: 1;
@@ -639,7 +710,7 @@
 
                     }
 
-                    .btn_submit_product{
+                    .btn_submit_product {
                         width: 20%;
                         height: 30px;
                         background: none;
@@ -647,13 +718,13 @@
                         border: 3px solid black;
                         border-radius: 5px;
 
-                        &:hover{
+                        &:hover {
                             border: 3px solid rgb(42, 250, 0);
                             cursor: pointer;
                             transform: scale(1.05);
                         }
 
-                        &:active{
+                        &:active {
                             transform: scale(1);
                         }
                     }

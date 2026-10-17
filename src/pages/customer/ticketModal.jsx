@@ -1,3 +1,4 @@
+import '../../styles/ticket/ticket_style.css'
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import dayjs from 'dayjs';
@@ -8,7 +9,7 @@ import ferrepalCharacter from '../../assets/ferrepalCharacter.png';
 export const TicketModal = ({ credit, showProducts, loadingModal }) => {
     const componentRef = useRef(null)
 
-    //console.log(showProducts)
+    console.log(credit)
 
     const arrayProducts = credit.list_products.split(',')
 
@@ -69,10 +70,15 @@ export const TicketModal = ({ credit, showProducts, loadingModal }) => {
                                 <p>---------------Descripcion---------------</p>
                                 <p>---------------------------------------------</p>
                                 <p>{credit.description}</p>
-                                <ul>{showProducts.map((element, index) => {
+                                <ul className='lista_ticket_container'>{showProducts.map((element, index) => {
                                     return (
                                         <li className="lista_ticket" key={index}>
-                                            {element.nombre}----{`(${element.quantity} ${element.unidad_medida})`}-----{`>$${Number(element.buy_price) * Number(element.quantity)} `}
+                                            <p>{element.nombre}</p>
+                                            <p>cantidad: {`${element.quantity}`}</p>
+                                            <p>precio: {`$${Number(element.buy_price) * Number(element.quantity)}`}</p>
+                                            {element.discount_product > 0 && <p>{`%${element.discount_product}`} descuento</p>}
+                                            
+                                            <p>-----------------------------------------</p>
                                         </li>
                                     )
                                 })}</ul>

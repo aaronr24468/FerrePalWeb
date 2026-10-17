@@ -55,7 +55,8 @@ export const CustomerMain = ({ }) => {
         loadingModal,
         loadingMain,
         setDiscount,
-        setDiscountEdit
+        setDiscountEdit,
+        discountEdit
     } = useCustomerHook();
 
 
@@ -136,6 +137,7 @@ export const CustomerMain = ({ }) => {
                         loadingModal={loadingModal}
                         setDiscount={setDiscount}
                         setDiscountEdit={setDiscountEdit}
+                        discountEdit={discountEdit}
                     />
 
                     {/* Modal para imprimir ticket de credito */}
