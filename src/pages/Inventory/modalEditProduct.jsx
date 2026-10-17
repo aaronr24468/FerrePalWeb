@@ -1,5 +1,6 @@
 import upload from '../../assets/upload.svg';
 import trash from '../../assets/trash.svg'
+import noImage from '../../assets/noImage.jpg'
 
 export const ModalEditProduct = ({ setDataProduct, dataProduct, saveChanges, ImagesFile, tempImages, deleteImage }) => {
   
@@ -13,7 +14,7 @@ export const ModalEditProduct = ({ setDataProduct, dataProduct, saveChanges, Ima
 
                         <img className='img_product_gestion_view' src={dataProduct.images || null} alt="" />
 
-                        {dataProduct.images === "/src/assets/noImage.jpg"?
+                        {dataProduct.images === noImage ?
                             <>
                                 <label htmlFor="upload_photo_gestion" className="label_upload_image_gestion"><img src={upload} alt="" /></label>
                                 <input type="file" id="upload_photo_gestion" multiple style={{ display: "none" }} onChange={ImagesFile} />
