@@ -157,7 +157,7 @@ export const useInventoryHook = () => {
                 target: document.getElementById('modal_new_product')
             })
 
-            if (tempImages.length > 0 && response.ok) {
+            if (tempImages.length > 0 ) {
 
                 const formData = new FormData();
 
