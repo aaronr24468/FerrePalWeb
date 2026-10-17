@@ -72,10 +72,10 @@ export const TicketModal = ({ credit, showProducts, loadingModal }) => {
                                     return (
                                         <li className="lista_ticket" key={index}>
                                             <p>{element.nombre}</p>
-                                            <p>cantidad: {`${element.quantity}`}</p>
-                                            <p>precio: {`$${Number(element.buy_price) * Number(element.quantity)}`}</p>
-                                            {element.discount_product > 0 && <p>{`%${element.discount_product}`} descuento</p>}
-                                            
+                                            <p>Cantidad: {`${element.quantity}`}</p>
+                                            <p>Precio: {`$${Number(element.buy_price) * Number(element.quantity)}`}</p>
+                                            {element.discount_product > 0 && <p>Descuento: {`${element.discount_product}%`} </p>}
+
                                             <p>-----------------------------------------</p>
                                         </li>
                                     )
