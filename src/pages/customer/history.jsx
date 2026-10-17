@@ -7,7 +7,6 @@ import dayjs from 'dayjs';
 
 export const CreditHistory = ({ credits, infoCredit, showTicketModal, historyInstallment, statusCredit }) => {
 
-    //console.log(credits)
 
     return (
         <>

@@ -236,7 +236,7 @@ export const useCustomerHook = () => {
         try {
             const creditList = productsCreditEdit
             const discountAmount = discountEdit || 0;
-            console.log(discountAmount)
+            //console.log(discountAmount)
             const data = await get_total_credit_amount(creditList, discountAmount)
             setTotalCreditEdit(String(data.amount))
         } catch (error) {

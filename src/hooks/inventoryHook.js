@@ -148,7 +148,7 @@ export const useInventoryHook = () => {
 
             const response = await uploadNewP(data);
 
-            console.log('data', response)
+            //console.log('data', response)
 
 
             if (!response.ok) return Swal.fire({

@@ -27,7 +27,6 @@ export const ModalEditCredit = ({
     discountEdit
 }) => {
 
-    console.log(productsCreditEdit)
 
     return (
         <>

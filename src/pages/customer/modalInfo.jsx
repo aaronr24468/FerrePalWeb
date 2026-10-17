@@ -52,8 +52,6 @@ export const InfoCredit = ({ selectModal,
 
     const arrayProducts = credit.list_products.split(',')
 
-    console.log(showProducts)
-
     return (
         <dialog id="info_credit" >
 

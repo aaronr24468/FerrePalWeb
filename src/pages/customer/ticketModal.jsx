@@ -9,8 +9,6 @@ import ferrepalCharacter from '../../assets/ferrepalCharacter.png';
 export const TicketModal = ({ credit, showProducts, loadingModal }) => {
     const componentRef = useRef(null)
 
-    console.log(credit)
-
     const arrayProducts = credit.list_products.split(',')
 
     const handlePrint = useReactToPrint({
